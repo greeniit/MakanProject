@@ -402,7 +402,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                                 userDetail.setProfileImage(signInResponse.getUserDetails().get(0).getProfileImage());
 
                                 Gson gson=new Gson();
-                                String userData=gson.toJson(signInResponse.getUserDetails().get(0), User.class);
+                                String userData=gson.toJson(userDetail, User.class);
                                 new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA,userData);
 
 
@@ -500,17 +500,17 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
                         if (socialMediaResponse.getRes() == 1) {
 
-                            if(socialMediaResponse.getUserDetails()!=null&&socialMediaResponse.getUserDetails().size()>0){
+                            if(socialMediaResponse.getUserDetails()!=null){
 
                                 User userDetail=new User();
                                 userDetail.setEmail(socialMediaRequest.getUsername());
-                                userDetail.setName(socialMediaResponse.getUserDetails().get(0).getDisplayName());
-                                userDetail.setId(socialMediaResponse.getUserDetails().get(0).getUId());
-                                userDetail.setPhone(socialMediaResponse.getUserDetails().get(0).getTelephone());
-                                userDetail.setProfileImage(socialMediaResponse.getUserDetails().get(0).getProfileImage());
+                                userDetail.setName(socialMediaResponse.getUserDetails().getDisplayName().toString());
+                                userDetail.setId(socialMediaResponse.getUserDetails().getUId());
+                                userDetail.setPhone(socialMediaResponse.getUserDetails().getTelephone().toString());
+                                userDetail.setProfileImage(socialMediaResponse.getUserDetails().getProfileImage().toString());
 
                                 Gson gson=new Gson();
-                                String userData=gson.toJson(socialMediaResponse.getUserDetails().get(0), User.class);
+                                String userData=gson.toJson(userDetail, User.class);
                                 new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA,userData);
 
 

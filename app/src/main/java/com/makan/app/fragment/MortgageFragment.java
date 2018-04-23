@@ -210,17 +210,16 @@ public class MortgageFragment extends BaseFragment{
 
     private void calculateAmortizationLoanDetails(){
 
-        float interestAmount=0;
 
         float loanAmount=Float.valueOf(etAcLoanAmount.getText().toString());
-        float interestRate=Float.valueOf(etAcRate.getText().toString())/(12*100);
+        final float interestRate=Float.valueOf(etAcRate.getText().toString())/(12*100);
         float duration=Float.valueOf(etAcLoanTerm.getText().toString());;
 
         //[P x R x (1+R)^N]/[(1+R)^N-1]
 
-        float emi = (loanAmount * interestRate * (float) Math.pow((1+interestRate),duration))/((float) Math.pow((1+interestRate),duration)-1);
+        final float emi = (loanAmount * interestRate * (float) Math.pow((1+interestRate),duration))/((float) Math.pow((1+interestRate),duration)-1);
 
-        interestAmount = loanAmount * (interestRate/12);
+        float interestAmount = loanAmount * (interestRate);
         float payment = emi-interestAmount;
         loanAmount = loanAmount-payment;
 
@@ -231,7 +230,7 @@ public class MortgageFragment extends BaseFragment{
 
         for (int i=1;i<duration;i++){
 
-            interestAmount = loanAmount * (interestRate/12);
+            interestAmount = loanAmount * (interestRate);
             payment = emi-interestAmount;
             loanAmount = loanAmount-payment;
             addTableRow(String.valueOf(i+1),String.valueOf(String.format("%.2f",emi)),String.valueOf(String.valueOf(String.format("%.2f",interestAmount))),String.valueOf(String.format("%.2f",payment)),String.valueOf(String.format("%.2f", loanAmount)));
