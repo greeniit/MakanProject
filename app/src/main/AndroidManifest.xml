@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.makan">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name=".app.core.MakanApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".app.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBarInitialScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".app.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".app.activity.PropertyListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.PropertyDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.DealerDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.MapActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".app.activity.SignUpActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.FilterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.FeedbackActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.GalleryActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.SubCategoryActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.activity.SearchActivity"
+            android:screenOrientation="portrait" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!--
+             The API key for Google Maps-based APIs.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDD3isrPsLAni8NKqfkMkWXh9kUGX8vi9w" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+
+    </application>
+
+</manifest>

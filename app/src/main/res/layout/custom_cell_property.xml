@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:paddingBottom="5dp"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_album_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_cover_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivThumbnail"
+                android:layout_toLeftOf="@+id/ivWishList"
+                android:layout_toStartOf="@+id/ivWishList"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:paddingTop="@dimen/album_title_padding"
+                android:text="Luxury Homes"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/album_title" />
+
+            <ImageView
+                android:paddingTop="@dimen/album_title_padding"
+                android:id="@+id/ivWishList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/llLocationHolder"
+                android:layout_alignRight="@+id/llLocationHolder"
+                android:layout_alignTop="@+id/tvTitle"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="13dp"
+                android:src="@drawable/favourite" />
+
+            <RelativeLayout
+                android:layout_marginRight="@dimen/album_title_padding"
+                android:layout_centerInParent="true"
+                android:id="@+id/llLocationHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_below="@id/tvTitle">
+
+                <ImageView
+                    android:layout_toLeftOf="@+id/tvAddress"
+                    android:gravity="left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_place_black_18dp" />
+
+                <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="2dp"
+                    android:gravity="left"
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/songs_count_padding_bottom"
+                    android:text="Um Al Ghawarif St, Salalah Oman"
+                    android:textAppearance="@android:style/TextAppearance.Small" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_margin="@dimen/album_title_padding"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/llLocationHolder"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivArea"
+                        android:src="@drawable/ic_area_18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="3 Bedrooms"
+                        android:textSize="12sp"
+                        android:id="@+id/tvArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivArea" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivPrice"
+                        android:src="@drawable/ic_price_18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="5000 OMR"
+                        android:textSize="12sp"
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivPrice" />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

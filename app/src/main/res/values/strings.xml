@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Makan</string>
+
+    <string name="facebook_app_id">1992052874388335</string>
+    <string name="fb_login_protocol_scheme">fb1992052874388335</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <string name="phone_number">+91 8593848004</string>
+    <string name="email">info@makanreality.com</string>
+
+
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="dealers">Dealers</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="mortgage">Mortgage</string>
+    <string name="settings">Settings</string>
+    <string name="feedback">Feedback</string>
+    <string name="business">Makan for Business</string>
+    <string name="find_deals">Find Deals</string>
+    <string name="news">News</string>
+    <string name="notification">Notification</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="logout">Log Out</string>
+
+
+    <string-array name="nav_item_activity_titles">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+        <item name="logout">Makan</item>
+    </string-array>
+
+    <string name="property_description">
+        <![CDATA[<html>
+ <head></head>
+ <body style="text-align:justify;"><b>Property Description: </b>#</body>
+</html>
+]]>
+    </string>
+
+
+    <string name="image_count_message"># out of $</string>
+
+
+    <!--Error messages-->
+    <string name="error_unexpected">An unexpected error has occurred.</string>
+    <string name="error_network">No internet connectivity.</string>
+    <string name="error_server_conection">Unable to connect to server.</string>
+    <string name="error_invalid_credentials">Invalid email address or password.</string>
+
+    <!--Sign up-->
+    <string name="registration_success">Registration completed successfully.</string>
+
+</resources>

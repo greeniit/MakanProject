@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="@dimen/card_margin"
+    android:layout_marginRight="@dimen/card_margin"
+    android:layout_marginBottom="@dimen/card_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin"
+            android:id="@+id/llDateHolder"
+            android:orientation="vertical"
+            android:background="#FF8F00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="09"
+                android:id="@+id/tvDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="Aug"
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_toLeftOf="@+id/ivThumbnail"
+            android:layout_marginRight="@dimen/card_margin"
+            android:layout_toRightOf="@+id/llDateHolder"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:text="Property news"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="Check out the latest property news, stories and advice from around the world. Check out the latest property news, stories and advice from around the world. Check out the latest property news, stories and advice from around the world. "
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/card_margin"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:paddingTop="@dimen/card_margin"
+                android:paddingBottom="@dimen/card_margin"
+                android:textColor="@android:color/black"
+                android:text="View more >>>"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/card_margin"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:paddingBottom="@dimen/card_margin"
+                android:textColor="@android:color/black"
+                android:text="Posted by: Dealer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/card_margin"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:id="@+id/ivThumbnail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
