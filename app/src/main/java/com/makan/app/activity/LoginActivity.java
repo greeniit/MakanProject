@@ -120,6 +120,9 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                                         System.out.println("Email:" + object.getString("email"));
 
                                         final String email=object.getString("email");
+                                        final String name = object.getString("name");
+                                        final String userId = object.getString("id");
+                                        final String link = "https://graph.facebook.com/" + userId + "/picture?type=large";
 
                                         if(email!=null){
 
@@ -127,7 +130,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                                             socialMediaRequest.setUsername(email);
 
                                             showProgressDialog();
-                                            new SocialMediaSignUpTask(socialMediaRequest).execute();
+                                            new SocialMediaSignUpTask(socialMediaRequest,name,link).execute();
                                         }else{
                                             LoginManager.getInstance().logOut();
                                             dismissProgressDialog();
@@ -150,7 +153,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                             }
                         });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,link");
+                parameters.putString("fields", "id,name,link,email");
                 request.setParameters(parameters);
                 request.executeAsync();
             }
@@ -166,6 +169,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                 // App code
                 System.out.println("Login error");
             }
+
         });
 
         initialiseGoogleSignIn();
@@ -222,6 +226,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             signInRequest.setUsername(etEmail.getText().toString());
             signInRequest.setPass(etPassword.getText().toString());
 
+            new Utility().hideSoftKeyBoard(LoginActivity.this);
             new SignInTask(signInRequest).execute();
         }
     }
@@ -229,24 +234,28 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     @OnClick(R.id.tvSignUp)
     void onSignUpClicked(){
 
+        new Utility().hideSoftKeyBoard(LoginActivity.this);
         new Utility().moveToActivity(this, SignUpActivity.class, null);
     }
 
     @OnClick(R.id.tvForgotPassword)
     void onForgotPasswordClicked(){
 
+        new Utility().hideSoftKeyBoard(LoginActivity.this);
         new Utility().moveToActivity(this, ForgotPasswordActivity.class, null);
     }
 
     @OnClick(R.id.btnSignInWithGoogle)
     void onSignInWithGoogleClicked(){
 
+        new Utility().hideSoftKeyBoard(LoginActivity.this);
         signIn();
     }
 
     @OnClick(R.id.btnSignInWithFB)
     void onFacebookButtonClicked(){
 
+        new Utility().hideSoftKeyBoard(LoginActivity.this);
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email"));
     }
 
@@ -342,7 +351,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                 SocialMediaRequest socialMediaRequest=new SocialMediaRequest();
                 socialMediaRequest.setUsername(email);
 
-                new SocialMediaSignUpTask(socialMediaRequest).execute();
+                new SocialMediaSignUpTask(socialMediaRequest,personName,personPhotoUrl).execute();
 
             }else{
 
@@ -451,6 +460,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             if (result == Codes.SUCCESS) {
 
                 setResult(RESULT_OK);
+                new Utility().hideSoftKeyBoard(LoginActivity.this);
                 finish();
 
             } else {
@@ -471,10 +481,14 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
         SocialMediaRequest socialMediaRequest;
         String errorMessage;
+        String name;
+        String imageLink;
 
-        public SocialMediaSignUpTask(SocialMediaRequest socialMediaRequest) {
+        public SocialMediaSignUpTask(SocialMediaRequest socialMediaRequest,String name,String imageLink) {
 
             this.socialMediaRequest = socialMediaRequest;
+            this.name= name;
+            this.imageLink = imageLink;
         }
 
         @Override
@@ -504,10 +518,25 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
                                 User userDetail=new User();
                                 userDetail.setEmail(socialMediaRequest.getUsername());
-                                userDetail.setName(socialMediaResponse.getUserDetails().getDisplayName().toString());
+
+                                if(socialMediaResponse.getUserDetails().getDisplayName()!=null && socialMediaResponse.getUserDetails().getDisplayName().toString().length()>0){
+                                    userDetail.setName(socialMediaResponse.getUserDetails().getDisplayName().toString());
+                                }else{
+
+                                    userDetail.setName(name);
+                                    userDetail.setProfileImage(imageLink);
+                                }
+
                                 userDetail.setId(socialMediaResponse.getUserDetails().getUId());
-                                userDetail.setPhone(socialMediaResponse.getUserDetails().getTelephone().toString());
-                                userDetail.setProfileImage(socialMediaResponse.getUserDetails().getProfileImage().toString());
+
+                                if(socialMediaResponse.getUserDetails().getTelephone()!=null){
+                                    userDetail.setPhone(socialMediaResponse.getUserDetails().getTelephone().toString());
+                                }
+
+                                if(socialMediaResponse.getUserDetails().getProfileImage()!=null){
+                                    userDetail.setProfileImage(socialMediaResponse.getUserDetails().getProfileImage().toString());
+                                }
+
 
                                 Gson gson=new Gson();
                                 String userData=gson.toJson(userDetail, User.class);
@@ -559,6 +588,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             if (result == Codes.SUCCESS) {
 
                 setResult(RESULT_OK);
+                new Utility().hideSoftKeyBoard(LoginActivity.this);
                 finish();
 
             } else {

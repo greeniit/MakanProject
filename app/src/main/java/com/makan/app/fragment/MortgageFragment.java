@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.makan.R;
 import com.makan.app.util.Utility;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -210,6 +212,28 @@ public class MortgageFragment extends BaseFragment{
 
     private void calculateAmortizationLoanDetails(){
 
+        if(tableLayout.getChildCount()>2){
+
+            int childCount=tableLayout.getChildCount();
+
+            /*for (int i=2;i<=tableLayout.getChildCount();i++){
+                tableLayout.removeView(tableLayout.getChildAt(i));
+            }*/
+
+            ArrayList<View> childList=new ArrayList<>();
+
+            for (int i=2;i<tableLayout.getChildCount();i++){
+
+                childList.add(tableLayout.getChildAt(i));
+            }
+
+            for (int i=0;i<childList.size();i++){
+
+                tableLayout.removeView(childList.get(i));
+            }
+
+
+        }
 
         float loanAmount=Float.valueOf(etAcLoanAmount.getText().toString());
         final float interestRate=Float.valueOf(etAcRate.getText().toString())/(12*100);
@@ -230,10 +254,14 @@ public class MortgageFragment extends BaseFragment{
 
         for (int i=1;i<duration;i++){
 
+            int serialNum=i+1;
             interestAmount = loanAmount * (interestRate);
             payment = emi-interestAmount;
             loanAmount = loanAmount-payment;
-            addTableRow(String.valueOf(i+1),String.valueOf(String.format("%.2f",emi)),String.valueOf(String.valueOf(String.format("%.2f",interestAmount))),String.valueOf(String.format("%.2f",payment)),String.valueOf(String.format("%.2f", loanAmount)));
+
+            String emiTobeDisplayed = String.format("%.2f",emi);
+
+            addTableRow(String.valueOf(serialNum),emiTobeDisplayed,String.valueOf(String.valueOf(String.format("%.2f",interestAmount))),String.valueOf(String.format("%.2f",payment)),String.valueOf(String.format("%.2f", loanAmount)));
         }
 
     }
@@ -284,7 +312,7 @@ public class MortgageFragment extends BaseFragment{
 
         TextView tvFive = new TextView(getActivity());
         tvFive.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        tvFive.setText(balance);
+        tvFive.setText(balance.contains("-")?balance.replace("-",""):balance);
         tvFive.setTextColor(getResources().getColor(R.color.white));
         tvFive.setTypeface(boldTypeface);
         tvFive.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));

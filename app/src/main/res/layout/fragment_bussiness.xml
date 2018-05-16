@@ -13,153 +13,160 @@
         android:background="@drawable/mfb3"
         android:orientation="vertical" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:fillViewport="true"
         android:layout_above="@+id/llBottomBanner"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You can instantly upgrade your existing \npersonal account to makanrealty.com for \nBussiness"
-            android:textAppearance="@android:style/TextAppearance.Small"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical">
 
-
-        <RelativeLayout
-            android:id="@+id/llFirstNameHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
-
-            <EditText
-                android:id="@+id/etFirstName"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/ivEmail"
-                android:background="@null"
-                android:hint="First Name"
-                android:inputType="textCapSentences"
-                android:maxLines="1"
-                android:nextFocusDown="@+id/etLastName"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:gravity="center"
+                android:text="You can instantly upgrade your existing \npersonal account to makanrealty.com for \nBussiness"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="@android:color/white" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignStart="@+id/etFirstName"
-                android:layout_below="@+id/etFirstName"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/white" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/llLastNameHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
-
-            <EditText
-                android:id="@+id/etLastName"
+            <RelativeLayout
+                android:id="@+id/llFirstNameHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/ivEmail"
-                android:background="@null"
-                android:hint="Last Name"
-                android:inputType="textCapSentences"
-                android:maxLines="1"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignStart="@+id/etLastName"
-                android:layout_below="@+id/etLastName"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/white" />
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/etFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/ivEmail"
+                    android:background="@null"
+                    android:hint="First Name"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:nextFocusDown="@+id/etLastName"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_alignStart="@+id/etFirstName"
+                    android:layout_below="@+id/etFirstName"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/white" />
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/llEmailHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
-
-            <EditText
-                android:id="@+id/etEmail"
+            <RelativeLayout
+                android:id="@+id/llLastNameHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/ivEmail"
-                android:background="@null"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <View
+                <EditText
+                    android:id="@+id/etLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/ivEmail"
+                    android:background="@null"
+                    android:hint="Last Name"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_alignStart="@+id/etLastName"
+                    android:layout_below="@+id/etLastName"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/white" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/llEmailHolder"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignStart="@+id/etEmail"
-                android:layout_below="@+id/etEmail"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/white" />
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/ivEmail"
+                    android:background="@null"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_alignStart="@+id/etEmail"
+                    android:layout_below="@+id/etEmail"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/white" />
+            </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/btnSubscribe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="55dp"
-            android:layout_marginRight="55dp"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:background="#FF8F00"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingLeft="35dp"
-            android:paddingRight="35dp"
-            android:paddingTop="10dp"
-            android:text="Subscribe"
-            android:textColor="@android:color/white" />
+            <TextView
+                android:id="@+id/btnSubscribe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="55dp"
+                android:layout_marginRight="55dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="#FF8F00"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="35dp"
+                android:paddingRight="35dp"
+                android:paddingTop="10dp"
+                android:text="Subscribe"
+                android:textColor="@android:color/white" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

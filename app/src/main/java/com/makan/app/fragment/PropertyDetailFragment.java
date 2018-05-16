@@ -83,6 +83,9 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
     @BindView(R.id.tvDescription)
     TextView tvDescription;
 
+    @BindView(R.id.tvPropertyType)
+    TextView tvPropertyType;
+
     @BindView(R.id.tvDealerName)
     TextView tvDealerName;
 
@@ -441,6 +444,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                     tvPrice.setText(" " + propertyDetailResponse.getPropertyList().get(0).getPrice() + " OMR");
                     tvArea.setText(propertyDetailResponse.getPropertyList().get(0).getBuildingArea() + " Sqft");
                     tvDescription.setText(Html.fromHtml(getResources().getString(R.string.property_description).replace("#", propertyDetailResponse.getPropertyList().get(0).getDescription())));
+                    tvPropertyType.setText(Html.fromHtml(getResources().getString(R.string.property_type).replace("#", propertyDetailResponse.getPropertyList().get(0).getSubCategoryName())));
 
 
                     tvDealerName.setText(propertyDetailResponse.getPropertyList().get(0).getAgencyName());

@@ -1,6 +1,5 @@
 package com.makan.app.activity;
 
-import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -83,11 +82,6 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
 
             case R.id.ibClose:
                 finish();
-                break;
-
-            case R.id.btnSort:
-                Dialog dialog = new Utility().onCreateDialogSingleChoice(this);
-                dialog.show();
                 break;
 
             case R.id.btnFilter:
@@ -243,7 +237,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
 
                     if (filterSearchResponse != null) {
 
-                        if (filterSearchResponse.getIsSuccess() == 1 && filterSearchResponse.getPropertyList().size() > 0) {
+                        if (filterSearchResponse.getIsSuccess() == 1) {
 
                             if (filterSearchResponse.getPropertyList() != null && filterSearchResponse.getPropertyList().size() > 0) {
 
@@ -306,7 +300,10 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
 
             if (result == Codes.SUCCESS) {
 
-               setMarker(googleMap);
+                if(properties.size()>0){
+                    setMarker(googleMap);
+                }
+
 
             } else {
 

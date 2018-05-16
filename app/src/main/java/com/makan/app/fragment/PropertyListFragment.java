@@ -19,9 +19,9 @@ import com.makan.app.activity.FilterActivity;
 import com.makan.app.activity.LoginActivity;
 import com.makan.app.activity.MapActivity;
 import com.makan.app.adapter.PropertyListAdapter;
-import com.makan.app.app.AppLog;
 import com.makan.app.app.AppState;
 import com.makan.app.callback.PropertyAdapterWishListOperationCallback;
+import com.makan.app.callback.SortOptionSelectionCallback;
 import com.makan.app.callback.WishListAddDeleteOperationCallback;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
@@ -40,6 +40,8 @@ import com.makan.app.web.pojo.HomeResponse;
 import com.makan.app.web.pojo.PropertyList;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,6 +54,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
     private Button btnFilter, btnMap, btnSort;
     private List<Property> mPropertyList;
     private PropertyListAdapter mPropertyAdapter;
+    private int currentSortSelection = 0;
 
     @BindView(R.id.rlProgressHolder)
     RelativeLayout rlProgressHolder;
@@ -182,7 +185,19 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 break;
 
             case R.id.btnSort:
-                Dialog dialog = new Utility().onCreateDialogSingleChoice(getActivity());
+                Dialog dialog = new Utility().onCreateDialogSingleChoice(getActivity(), new SortOptionSelectionCallback() {
+                    @Override
+                    public void onSortOptionSelected(int choicePosition) {
+
+                        currentSortSelection = choicePosition;
+
+                        if(mPropertyAdapter!=null&&mPropertyAdapter.getAddedItems()!=null&&mPropertyAdapter.getAddedItems().size()>0){
+                            new SortPropertiesTask(mPropertyAdapter.getAddedItems()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        }
+
+                    }
+                });
+
                 dialog.show();
                 break;
         }
@@ -623,8 +638,6 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
             mPropertyList.clear();
 
             FilterSearchRequest filterSearchRequest=(FilterSearchRequest) getArguments().getParcelable("filter_request");
-
-            AppLog.showInfoMessage("============"+String.valueOf(filterSearchRequest.getSubCategoryId()));
         }
 
         @Override
@@ -647,7 +660,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                     if (filterSearchResponse != null) {
 
-                        if (filterSearchResponse.getIsSuccess() == 1 && filterSearchResponse.getPropertyList().size() > 0) {
+                        if (filterSearchResponse.getIsSuccess() == 1) {
 
                             if (filterSearchResponse.getPropertyList() != null && filterSearchResponse.getPropertyList().size() > 0) {
 
@@ -727,6 +740,96 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                 }
             }
+
+
+        }
+    }
+
+
+    private class SortPropertiesTask extends AsyncTask<Void, Void, Void> {
+
+        private ArrayList<Property> properties;
+
+
+        public SortPropertiesTask(ArrayList<Property> properties) {
+
+            this.properties = properties;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            rlProgressHolder.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            if (properties != null && properties.size() > 0) {
+
+                switch (currentSortSelection){
+
+                    case 0:
+
+                        Collections.sort(properties, new Comparator<Property>(){
+                            public int compare(Property obj1, Property obj2) {
+
+                                 return Integer.valueOf(obj1.getPrice()).compareTo(Integer.valueOf(obj2.getPrice()));
+                            }
+                        });
+
+                        break;
+
+                    case 1:
+
+                        Collections.sort(properties, new Comparator<Property>(){
+                            public int compare(Property obj1, Property obj2) {
+
+                                return Integer.valueOf(obj2.getPrice()).compareTo(Integer.valueOf(obj1.getPrice()));
+                            }
+                        });
+
+                        break;
+
+                    case 2:
+
+                        Collections.sort(properties, new Comparator<Property>(){
+                            public int compare(Property obj1, Property obj2) {
+
+                                return Integer.valueOf(obj1.getArea()).compareTo(obj2.getArea());
+                            }
+                        });
+
+                        break;
+
+                    case 3:
+
+
+                        Collections.sort(properties, new Comparator<Property>(){
+                            public int compare(Property obj1, Property obj2) {
+
+                                return Integer.valueOf(obj2.getArea()).compareTo(obj1.getArea());
+                            }
+                        });
+
+                        break;
+                }
+
+            }
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            rlProgressHolder.setVisibility(View.GONE);
+
+            mPropertyAdapter.addItems(properties);
+            mPropertyAdapter.notifyDataSetChanged();
 
 
         }

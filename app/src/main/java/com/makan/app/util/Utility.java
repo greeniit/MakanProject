@@ -17,13 +17,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.makan.R;
 import com.makan.app.callback.DialogCallback;
+import com.makan.app.callback.SortOptionSelectionCallback;
 import com.makan.app.core.Codes;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-/**
- * Created by roykmathew on 27/06/17.
- */
 public class Utility {
 
     public void moveToActivity(Context context, Class className, Bundle bundle) {
@@ -70,7 +68,7 @@ public class Utility {
         alertDialog.show();
     }
 
-    public void showMessageAlertDialog(Context context, String message,final int dialogId, final DialogCallback dialogCallback) {
+    public void showMessageAlertDialog(Context context, String message, final int dialogId, final DialogCallback dialogCallback) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -86,7 +84,7 @@ public class Utility {
         alertDialog.show();
     }
 
-    public String getErrorMessage(Context context,int errorCode) {
+    public String getErrorMessage(Context context, int errorCode) {
 
         switch (errorCode) {
 
@@ -119,7 +117,7 @@ public class Utility {
     public boolean isNetworkConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (cm != null&&cm.getActiveNetworkInfo() !=null) {
+        if (cm != null && cm.getActiveNetworkInfo() != null) {
 
             return true;
         }
@@ -127,9 +125,9 @@ public class Utility {
         return false;
     }
 
-    public static String getMonth(int month){
+    public static String getMonth(int month) {
 
-        switch (month){
+        switch (month) {
 
             case 1:
                 return "Jan";
@@ -172,23 +170,30 @@ public class Utility {
         return "";
     }
 
-    public Dialog onCreateDialogSingleChoice(Context context) {
+    public Dialog onCreateDialogSingleChoice(Context context, final SortOptionSelectionCallback sortOptionSelectionCallback) {
 
+        final int[] selectedChoice = {0};
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        CharSequence[] array = {"Relevance","Recently Added","Price: Low to High","Price: High to Low","Area: Low to High", "Area: High to Low"};
+        CharSequence[] array = {"Price: Low to High", "Price: High to Low", "Area: Low to High", "Area: High to Low"};
         builder.setTitle("Sort By")
                 .setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
+                        selectedChoice[0] = which;
 
-            }
-        })
+                    }
+
+                })
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        sortOptionSelectionCallback.onSortOptionSelected(selectedChoice[0]);
+                    }
+                })
+
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -203,7 +208,7 @@ public class Utility {
 
         InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
 
-        if(imm.isAcceptingText()) { // verify if the soft keyboard is open
+        if (imm.isAcceptingText()) { // verify if the soft keyboard is open
             imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), 0);
         }
     }

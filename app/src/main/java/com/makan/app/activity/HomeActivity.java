@@ -29,6 +29,8 @@ import com.makan.app.fragment.NewsFragment;
 import com.makan.app.fragment.NotificationFragment;
 import com.makan.app.fragment.SettingsFragment;
 import com.makan.app.fragment.WishListFragment;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 
 public class HomeActivity extends BaseActivity {
@@ -81,7 +83,7 @@ public class HomeActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles_logged_in);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,8 +283,18 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.nav_logout:
+
+                        showProgressDialog();
+                        new PreferenceManager().setValue(HomeActivity.this, PrefKey.USER_DATA,null);
+                        AppState.getInstance().setLoginStatus(false);
+                        AppState.getInstance().setUserId(null);
+                        navigationView.getMenu().clear();
+                        navigationView.inflateMenu(R.menu.home_nav_drawer_non_logged_in);
+
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
+
+                        dismissProgressDialog();
 
 
                     default:
@@ -361,5 +373,20 @@ public class HomeActivity extends BaseActivity {
             fab.show();
         else
             fab.hide();*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        navigationView.getMenu().clear();
+
+        if(AppState.getInstance().isLoginStatus()){
+            navigationView.inflateMenu(R.menu.home_nav_drawer);
+        }else{
+            navigationView.inflateMenu(R.menu.home_nav_drawer_non_logged_in);
+        }
+
+
     }
 }

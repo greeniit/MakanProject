@@ -14,7 +14,6 @@
     <string name="email">info@makanreality.com</string>
 
 
-
     <!-- Navigation Drawer menu labels -->
     <string name="home">Home</string>
     <string name="category">Category</string>
@@ -31,7 +30,7 @@
     <string name="logout">Log Out</string>
 
 
-    <string-array name="nav_item_activity_titles">
+    <string-array name="nav_item_activity_titles_logged_in">
         <item name="home">Makan</item>
         <item name="category">Category</item>
         <item name="dealers">Dealers</item>
@@ -47,10 +46,34 @@
         <item name="logout">Makan</item>
     </string-array>
 
+    <string-array name="nav_item_activity_titles_non_logged_in">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+
+    </string-array>
+
     <string name="property_description">
         <![CDATA[<html>
  <head></head>
  <body style="text-align:justify;"><b>Property Description: </b>#</body>
+</html>
+]]>
+    </string>
+
+    <string name="property_type">
+        <![CDATA[<html>
+ <head></head>
+ <body style="text-align:justify;"><b>Property Type: </b>#</body>
 </html>
 ]]>
     </string>

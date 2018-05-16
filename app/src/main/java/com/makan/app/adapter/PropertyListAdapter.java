@@ -8,7 +8,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +20,7 @@ import com.makan.app.callback.PropertyAdapterWishListOperationCallback;
 import com.makan.app.model.Property;
 import com.makan.app.util.Utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -213,4 +213,8 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
+    public ArrayList<Property> getAddedItems(){
+
+        return (ArrayList<Property>) propertyList;
+    }
 }
