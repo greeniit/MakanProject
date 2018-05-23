@@ -1,18 +1,21 @@
 package com.makan.app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.makan.R;
+import com.makan.app.activity.NewsDetailActivity;
 import com.makan.app.app.WebConstant;
 import com.makan.app.util.Utility;
-import com.makan.app.web.pojo.HomeResponse;
 import com.makan.app.web.pojo.NewsResponse;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public TextView tvTitle, tvDesc,tvDay,tvMonth;
         public ImageView ivThumbnail;
+        public LinearLayout llNewsHolder;
 
         public CellViewHolder(View view) {
 
@@ -38,6 +42,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvDay = (TextView) view.findViewById(R.id.tvDay);
             tvMonth = (TextView) view.findViewById(R.id.tvMonth);
             ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
+            llNewsHolder = (LinearLayout)view.findViewById(R.id.llNewsHolder);
 
         }
     }
@@ -85,13 +90,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        NewsResponse.News news;
+        final NewsResponse.News news;
 
         switch (holder.getItemViewType()) {
 
             case CELL:
 
-                CellViewHolder cellViewHolder=(CellViewHolder)holder;
+                final CellViewHolder cellViewHolder=(CellViewHolder)holder;
                 news = newsList.get(position);
                 cellViewHolder.tvTitle.setText(news.getNewsTitle());
                 cellViewHolder.tvDesc.setText(news.getNewsDescription());
@@ -109,8 +114,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     @Override
                     public void onClick(View v) {
 
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title",news.getNewsTitle());
+                        bundle.putString("description",news.getNewsDescription());
+                        bundle.putString("imageUrl",WebConstant.BASE_IMAGE_URL+news.getNewsImageName());
+
+                        Intent intent = new Intent();
+                        intent.putExtras(bundle);
+                        intent.setClass(mContext, NewsDetailActivity.class);
+                        mContext.startActivity(intent);
+
                     }
                 });
+
 
                 break;
         }

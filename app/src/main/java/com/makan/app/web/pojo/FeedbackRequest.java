@@ -18,6 +18,10 @@ public class FeedbackRequest {
     @Expose
     private String reviewPrice;
 
+    @SerializedName("description")
+    @Expose
+    private String description;
+
     public String getUserId() {
         return userId;
     }
@@ -48,5 +52,13 @@ public class FeedbackRequest {
 
     public void setReviewPrice(String reviewPrice) {
         this.reviewPrice = reviewPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

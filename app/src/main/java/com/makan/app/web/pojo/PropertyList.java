@@ -35,6 +35,11 @@ public class PropertyList {
     @SerializedName("price")
     @Expose
     private String price;
+
+    @SerializedName("main_category_name")
+    @Expose
+    private String mainCategoryName;
+
     @SerializedName("sub_category_id")
     @Expose
     private String subCategoryId;
@@ -248,4 +253,11 @@ public class PropertyList {
         this._long = _long;
     }
 
+    public String getMainCategoryName() {
+        return mainCategoryName;
+    }
+
+    public void setMainCategoryName(String mainCategoryName) {
+        this.mainCategoryName = mainCategoryName;
+    }
 }

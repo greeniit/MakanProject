@@ -46,6 +46,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Response;
 
 public class PropertyDetailFragment extends BaseFragment implements View.OnClickListener {
@@ -82,6 +83,9 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
 
     @BindView(R.id.tvDescription)
     TextView tvDescription;
+
+    @BindView(R.id.tvDescriptionFull)
+    TextView tvDescriptionFull;
 
     @BindView(R.id.tvPropertyType)
     TextView tvPropertyType;
@@ -140,6 +144,9 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
     @BindView(R.id.llMapView)
     LinearLayout llMapView;
 
+    @BindView(R.id.btnMore)
+    Button btnMore;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -172,6 +179,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
         llDealerSummaryHolder = (LinearLayout) view.findViewById(R.id.llDealerSummaryHolder);
         ivGallery = (ImageView) view.findViewById(R.id.ivGallery);
         tvDescription.setText(Html.fromHtml(getResources().getString(R.string.property_description)));
+        tvDescriptionFull.setText(Html.fromHtml(getResources().getString(R.string.property_description)));
     }
 
     protected void setToolBar() {
@@ -201,6 +209,23 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
         }
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @OnClick(R.id.btnMore)
+    void onMoreClicked() {
+
+        if(tvDescriptionFull.getVisibility()!=View.VISIBLE){
+
+            tvDescriptionFull.setVisibility(View.VISIBLE);
+            tvDescription.setVisibility(View.GONE);
+            btnMore.setText("LESS");
+        }else{
+
+            tvDescriptionFull.setVisibility(View.GONE);
+            tvDescription.setVisibility(View.VISIBLE);
+            btnMore.setText("MORE");
+        }
     }
 
     @Override
@@ -444,7 +469,8 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                     tvPrice.setText(" " + propertyDetailResponse.getPropertyList().get(0).getPrice() + " OMR");
                     tvArea.setText(propertyDetailResponse.getPropertyList().get(0).getBuildingArea() + " Sqft");
                     tvDescription.setText(Html.fromHtml(getResources().getString(R.string.property_description).replace("#", propertyDetailResponse.getPropertyList().get(0).getDescription())));
-                    tvPropertyType.setText(Html.fromHtml(getResources().getString(R.string.property_type).replace("#", propertyDetailResponse.getPropertyList().get(0).getSubCategoryName())));
+                    tvDescriptionFull.setText(Html.fromHtml(getResources().getString(R.string.property_description).replace("#", propertyDetailResponse.getPropertyList().get(0).getDescription())));
+                    tvPropertyType.setText(Html.fromHtml(getResources().getString(R.string.property_type).replace("#", propertyDetailResponse.getPropertyList().get(0).getMainCategoryName())));
 
 
                     tvDealerName.setText(propertyDetailResponse.getPropertyList().get(0).getAgencyName());

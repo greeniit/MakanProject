@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.ornolfr.ratingview.RatingView;
@@ -18,7 +19,6 @@ import com.makan.app.app.AppState;
 import com.makan.app.core.Codes;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
-import com.makan.app.web.pojo.DealerResponse;
 import com.makan.app.web.pojo.FeedbackRequest;
 import com.makan.app.web.pojo.FeedbackResponse;
 
@@ -51,6 +51,9 @@ public class FeedbackFragment extends BaseFragment {
 
     @BindView(R.id.tvThree)
     TextView tvThree;
+
+    @BindView(R.id.etDescription)
+    EditText etDescription;
 
     @Nullable
     @Override
@@ -110,6 +113,7 @@ public class FeedbackFragment extends BaseFragment {
         feedbackRequest.setReviewOffer(getRatings((int)rvTwo.getRating()));
         feedbackRequest.setReviewPrice(getRatings((int)rvThree.getRating()));
         feedbackRequest.setUserId(AppState.getInstance().getUserId());
+        feedbackRequest.setDescription(etDescription.getText().toString());
 
         new SubmitFeedbackTask(feedbackRequest).execute();
     }
@@ -150,7 +154,7 @@ public class FeedbackFragment extends BaseFragment {
     private class SubmitFeedbackTask extends AsyncTask<Void, Void, Integer> {
 
         private String errorMessage;
-        FeedbackRequest feedbackRequest;
+        private FeedbackRequest feedbackRequest;
         private FeedbackResponse feedbackResponse;
 
         public SubmitFeedbackTask(FeedbackRequest feedbackRequest){
