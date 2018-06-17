@@ -40,6 +40,8 @@ import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.PropertyDetailRequest;
 import com.makan.app.web.pojo.PropertyDetailResponse;
 import com.makan.app.web.pojo.PropertyList;
+import com.makan.app.web.pojo.WishListRequest;
+import com.makan.app.web.pojo.WishListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
     private ArrayList<String> imagesUrls = new ArrayList<>();
     private Property property;
     private boolean isLoadingCompleted = false;
-    private boolean isAddedToWishList = false;
+    public static boolean isAddedToWishList = false;
 
     @BindView(R.id.rlProgressHolder)
     RelativeLayout rlProgressHolder;
@@ -287,32 +289,6 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
      */
     private void preparePropertyList() {
 
-        /*int[] featuredProperty = new int[]{
-                R.drawable.image_1,
-                R.drawable.image_2,
-                R.drawable.image_3,
-                R.drawable.image_4};
-
-        Property property=new Property();
-
-        property.setThumbnail(featuredProperty[0]);
-        mSimilarPropertyList.add(property);
-
-        property=new Property();
-        property.setThumbnail(featuredProperty[1]);
-        mSimilarPropertyList.add(property);
-
-        property=new Property();
-        property.setThumbnail(featuredProperty[2]);
-        mSimilarPropertyList.add(property);
-
-        property=new Property();
-        property.setThumbnail(featuredProperty[3]);
-        mSimilarPropertyList.add(property);
-
-        mSimilarPropertyListAdapter.notifyDataSetChanged();
-        rvSimilarProperty.smoothScrollToPosition(0);*/
-
         if (getArguments().containsKey("property_id")) {
             new GetPropertyDetail().execute();
         }
@@ -373,6 +349,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            isAddedToWishList = false;
             rlProgressHolder.setVisibility(View.VISIBLE);
         }
 
@@ -447,6 +424,61 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                 statusCode = Codes.ERROR_NETWORK;
             }
 
+
+            if(statusCode==Codes.SUCCESS){
+
+
+                if (new Utility().isNetworkConnected(getActivity())) {
+
+                    WishListRequest wishListRequest=new WishListRequest();
+                    wishListRequest.setUserId(AppState.getInstance().getUserId());
+
+                    Response<WishListResponse> response = WebServiceManager.getInstance().getWishList(wishListRequest);
+
+                    if (response != null && response.isSuccessful() && response.raw().code() == 200) {
+
+                        WishListResponse wishListResponse = response.body();
+
+                        if (wishListResponse != null) {
+
+                            if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()>0) {
+
+                                if(wishListResponse.getPropertyList()!=null&&wishListResponse.getPropertyList().size()>0){
+
+                                    for (WishListResponse.PropertyList propertyList:wishListResponse.getPropertyList()){
+
+
+                                        if (propertyList.getPropertyId().equals(String.valueOf(property.getId()))){
+
+                                            isAddedToWishList = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                statusCode = Codes.SUCCESS;
+
+                            } else if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()==0){
+
+                                statusCode = Codes.ERROR_NO_RECORDS;
+
+                            } else {
+                                statusCode = Codes.ERROR_UNEXPECTED;
+                            }
+
+                        } else {
+                            statusCode = Codes.ERROR_UNEXPECTED;
+                        }
+
+
+                    } else {
+                        statusCode = Codes.ERROR_UNABLE_CONNECT_TO_SERVER;
+                    }
+
+                } else {
+                    statusCode = Codes.ERROR_NETWORK;
+                }
+            }
 
             return statusCode;
         }
