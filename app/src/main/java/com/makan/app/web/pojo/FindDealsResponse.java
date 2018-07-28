@@ -114,6 +114,10 @@ public class FindDealsResponse {
         @Expose
         private String _long;
 
+        @SerializedName("favourite")
+        @Expose
+        private String favourite;
+
         public String getPropertyId() {
             return propertyId;
         }
@@ -242,5 +246,13 @@ public class FindDealsResponse {
             this._long = _long;
         }
 
+
+        public String getFavourite() {
+            return favourite;
+        }
+
+        public void setFavourite(String favourite) {
+            this.favourite = favourite;
+        }
     }
 }

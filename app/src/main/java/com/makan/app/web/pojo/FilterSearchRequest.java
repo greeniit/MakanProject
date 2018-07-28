@@ -12,6 +12,10 @@ import java.util.List;
 
 public class FilterSearchRequest implements Parcelable {
 
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
+
     @SerializedName("selectedType")
     @Expose
     private Integer selectedType;
@@ -123,6 +127,14 @@ public class FilterSearchRequest implements Parcelable {
         this.maxprice = maxprice;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -130,6 +142,7 @@ public class FilterSearchRequest implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.userId);
         dest.writeValue(this.selectedType);
         dest.writeList(this.subCategoryId);
         dest.writeString(this.location);
@@ -146,6 +159,7 @@ public class FilterSearchRequest implements Parcelable {
     }
 
     protected FilterSearchRequest(Parcel in) {
+        this.userId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.selectedType = (Integer) in.readValue(Integer.class.getClassLoader());
         this.subCategoryId = new ArrayList<Integer>();
         in.readList(this.subCategoryId, Integer.class.getClassLoader());

@@ -13,7 +13,7 @@ public class SignUpRequest {
     private String pass;
     @SerializedName("phone")
     @Expose
-    private Integer phone;
+    private Long phone;
     @SerializedName("device_type")
     @Expose
     private Integer deviceType;
@@ -37,11 +37,11 @@ public class SignUpRequest {
         this.pass = pass;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

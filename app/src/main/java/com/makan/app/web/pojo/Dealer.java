@@ -3,9 +3,6 @@ package com.makan.app.web.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by roykmathew on 18/02/18.
- */
 public class Dealer {
 
     @SerializedName("agency_id")

@@ -2,6 +2,8 @@ package com.makan.app.web;
 
 import com.makan.app.app.WebConstant;
 import com.makan.app.web.pojo.AdvertisementResponse;
+import com.makan.app.web.pojo.BookPropertyRequest;
+import com.makan.app.web.pojo.BookPropertyResponse;
 import com.makan.app.web.pojo.DealerDetailRequest;
 import com.makan.app.web.pojo.DealerDetailResponse;
 import com.makan.app.web.pojo.DealerResponse;
@@ -10,6 +12,8 @@ import com.makan.app.web.pojo.FeedbackResponse;
 import com.makan.app.web.pojo.FilterSearchRequest;
 import com.makan.app.web.pojo.FilterSearchResponse;
 import com.makan.app.web.pojo.FindDealsResponse;
+import com.makan.app.web.pojo.ForgotPasswordRequest;
+import com.makan.app.web.pojo.ForgotPasswordResponse;
 import com.makan.app.web.pojo.GetCategoryPropertyRequest;
 import com.makan.app.web.pojo.GetCategoryPropertyResponse;
 import com.makan.app.web.pojo.GetCategoryResponse;
@@ -17,10 +21,13 @@ import com.makan.app.web.pojo.GetPropertiesByTypeResponse;
 import com.makan.app.web.pojo.GetPropertyByPlaceRequest;
 import com.makan.app.web.pojo.GetPropertyByPlaceResponse;
 import com.makan.app.web.pojo.GetPropertyByTypeRequest;
+import com.makan.app.web.pojo.HomeRequest;
 import com.makan.app.web.pojo.HomeResponse;
 import com.makan.app.web.pojo.NewsResponse;
 import com.makan.app.web.pojo.PropertyDetailRequest;
 import com.makan.app.web.pojo.PropertyDetailResponse;
+import com.makan.app.web.pojo.SearchByNameRequest;
+import com.makan.app.web.pojo.SearchByNameResponse;
 import com.makan.app.web.pojo.SignInRequest;
 import com.makan.app.web.pojo.SignInResponse;
 import com.makan.app.web.pojo.SignUpRequest;
@@ -29,6 +36,8 @@ import com.makan.app.web.pojo.SocialMediaRequest;
 import com.makan.app.web.pojo.SocialMediaResponse;
 import com.makan.app.web.pojo.SubscribeBusinessRequest;
 import com.makan.app.web.pojo.SubscribeBusinessResponse;
+import com.makan.app.web.pojo.UploadImageRequest;
+import com.makan.app.web.pojo.UploadImageResponse;
 import com.makan.app.web.pojo.WishListOperationRequest;
 import com.makan.app.web.pojo.WishListOperationResponse;
 import com.makan.app.web.pojo.WishListRequest;
@@ -48,7 +57,7 @@ public interface RestApi {
     Call<SignInResponse> callSignInWebService(@Body SignInRequest signInRequest);
 
     @POST(WebConstant.HOME)
-    Call<HomeResponse> callHomeWebService();
+    Call<HomeResponse> callHomeWebService(@Body HomeRequest homeRequest);
 
     @POST(WebConstant.AGENCY)
     Call<DealerResponse> callDealerService();
@@ -100,5 +109,18 @@ public interface RestApi {
 
     @POST(WebConstant.BUSINESS)
     Call<SubscribeBusinessResponse> subscribeForMakanBusiness(@Body SubscribeBusinessRequest subscribeBusinessRequest);
+
+    @POST(WebConstant.BOOK_PROPERTY)
+    Call<BookPropertyResponse> callBookProperty(@Body BookPropertyRequest bookPropertyRequest);
+
+    @POST(WebConstant.SEARCH_BY_NAME)
+    Call<SearchByNameResponse> callSearchByName(@Body SearchByNameRequest searchByNameRequest);
+
+    @POST(WebConstant.FORGOT_PASSWORD)
+    Call<ForgotPasswordResponse> requestPassword(@Body ForgotPasswordRequest forgotPasswordRequest);
+
+    @POST(WebConstant.UPLOAD_IMAGE)
+
+    Call<UploadImageResponse> uploadImage(@Body UploadImageRequest uploadImageRequest);
 
 }

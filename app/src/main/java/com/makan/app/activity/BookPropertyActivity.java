@@ -5,32 +5,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 
 import com.makan.R;
-import com.makan.app.fragment.PropertyDetailFragment;
+import com.makan.app.fragment.BookPropertyFragment;
 
-public class PropertyDetailActivity extends BaseActivity{
-
-
-    private PropertyDetailFragment propertyDetailFragment;
+public class BookPropertyActivity extends BaseActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_fragment_holder);
-
         setFragment();
     }
 
     private void setFragment(){
 
-        propertyDetailFragment = new PropertyDetailFragment();
-        propertyDetailFragment.setArguments(getIntent().getExtras());
+        BookPropertyFragment bookPropertyFragment = new BookPropertyFragment();
+        bookPropertyFragment.setArguments(getIntent().getExtras());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.frame, propertyDetailFragment);
+        transaction.add(R.id.frame, bookPropertyFragment);
         transaction.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        propertyDetailFragment.setResult();
     }
 }

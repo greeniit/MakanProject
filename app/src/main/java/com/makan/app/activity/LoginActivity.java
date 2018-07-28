@@ -116,7 +116,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                                 Log.i("Makan",object.toString());
                                 if (object.has("email")) {
                                     try {
-                                        System.out.println("=======================");
+
                                         System.out.println("Email:" + object.getString("email"));
 
                                         final String email=object.getString("email");
@@ -167,7 +167,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                System.out.println("Login error");
+                System.out.println("Login error"+exception);
             }
 
         });

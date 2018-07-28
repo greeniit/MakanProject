@@ -77,6 +77,10 @@ public class PropertyList {
     @Expose
     private String _long;
 
+    @SerializedName("favourite")
+    @Expose
+    private String favourite;
+
     public String getPropertyId() {
         return propertyId;
     }
@@ -259,5 +263,13 @@ public class PropertyList {
 
     public void setMainCategoryName(String mainCategoryName) {
         this.mainCategoryName = mainCategoryName;
+    }
+
+    public String getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(String favourite) {
+        this.favourite = favourite;
     }
 }

@@ -135,13 +135,27 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
     public void onWishListClicked(final Property property, final int pos) {
 
         showProgressDialog();
-        new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), !property.isAddedToWishList(), new WishListAddDeleteOperationCallback() {
+
+        boolean isAddedToWishList = false;
+
+        if(property.getFavourite().equalsIgnoreCase("1")){
+            isAddedToWishList = false;
+        }else{
+            isAddedToWishList = true;
+        }
+
+        new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), isAddedToWishList, new WishListAddDeleteOperationCallback() {
             @Override
             public void AddToWishListTaskSuccess() {
 
                 dismissProgressDialog();
 
-                property.setAddedToWishList(!property.isAddedToWishList());
+                if(property.getFavourite().equalsIgnoreCase("1")){
+                    property.setFavourite("0");
+                }else{
+                    property.setFavourite("1");
+                }
+
                 mPropertyAdapter.updateItem(property,pos);
 
             }
@@ -189,7 +203,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                     if (wishListResponse != null) {
 
-                        if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()>0) {
+                        if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList()!=null && wishListResponse.getPropertyList().size()>0) {
 
                             if(wishListResponse.getPropertyList()!=null&&wishListResponse.getPropertyList().size()>0){
 
@@ -200,12 +214,19 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                                     property.setId(Integer.parseInt(propertyList.getPropertyId()));
                                     property.setTitle(propertyList.getPropertyName());
                                     property.setAddress(propertyList.getLocation());
-                                    property.setBedCount(Integer.parseInt(propertyList.getRooms()));
-                                    property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+
+                                    if(propertyList.getRooms()!=null&&propertyList.getRooms().length()>0){
+                                        property.setBedCount(Integer.parseInt(propertyList.getRooms()));
+                                    }
+
+                                    if(propertyList.getBuildingArea()!=null&&propertyList.getBuildingArea().length()>0){
+                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                    }
+
                                     property.setPrice(propertyList.getPrice());
                                     property.setImage(propertyList.getImage());
                                     property.setDescription(propertyList.getDescription());
-                                    property.setAddedToWishList(true);
+                                    property.setFavourite("1");
 
                                     mPropertyList.add(property);
                                 }
@@ -213,9 +234,9 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()==0){
+                        } else if (wishListResponse.getIsSuccess() == 1 && (wishListResponse.getPropertyList()==null||wishListResponse.getPropertyList().size()==0)){
 
-                            statusCode = Codes.ERROR_NO_RECORDS;
+                            statusCode = Codes.SUCCESS;
 
                         } else {
                             statusCode = Codes.ERROR_UNEXPECTED;

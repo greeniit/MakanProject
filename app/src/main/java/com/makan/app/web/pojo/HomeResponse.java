@@ -171,6 +171,10 @@ public class HomeResponse {
         @Expose
         private String _long;
 
+        @SerializedName("favourite")
+        @Expose
+        private String favourite;
+
         public String getPropertyId() {
             return propertyId;
         }
@@ -291,6 +295,13 @@ public class HomeResponse {
             this._long = _long;
         }
 
+        public String getFavourite() {
+            return favourite;
+        }
+
+        public void setFavourite(String favourite) {
+            this.favourite = favourite;
+        }
 
         @Override
         public int describeContents() {
@@ -314,6 +325,7 @@ public class HomeResponse {
             dest.writeString(this.propertyType);
             dest.writeString(this.lat);
             dest.writeString(this._long);
+            dest.writeString(this.favourite);
         }
 
         public RecentProperty() {
@@ -335,6 +347,7 @@ public class HomeResponse {
             this.propertyType = in.readString();
             this.lat = in.readString();
             this._long = in.readString();
+            this.favourite = in.readString();
         }
 
         public static final Parcelable.Creator<RecentProperty> CREATOR = new Parcelable.Creator<RecentProperty>() {

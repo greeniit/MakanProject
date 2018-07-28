@@ -1,6 +1,6 @@
 package com.makan.app.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +29,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int STYLE_HORIZONTAL_LIST_CELL=101;
 
 
-    private Context mContext;
+    private Activity activity;
     private List<Property> propertyList;
     private PropertyAdapterWishListOperationCallback propertyAdapterWishListOperationCallback;
     private int mStyle;
@@ -73,8 +73,8 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
 
-    public PropertyListAdapter(Context mContext, List<Property> propertList,int style,PropertyAdapterWishListOperationCallback propertyAdapterWishListOperationCallback) {
-        this.mContext = mContext;
+    public PropertyListAdapter(Activity activity, List<Property> propertList,int style,PropertyAdapterWishListOperationCallback propertyAdapterWishListOperationCallback) {
+        this.activity = activity;
         this.propertyList = propertList;
         this.mStyle=style;
         this.propertyAdapterWishListOperationCallback = propertyAdapterWishListOperationCallback;
@@ -125,21 +125,21 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 if(propertyList!=null&&propertyList.size()==1){
 
-                    DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+                    DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
                     int height = displayMetrics.heightPixels;
                     int width = displayMetrics.widthPixels;
 
                     horizontalCellViewHolder.cardView.setLayoutParams(new LinearLayout.LayoutParams((int)width, LinearLayout.LayoutParams.MATCH_PARENT));
                 }
 
-                Glide.with(mContext).load(WebConstant.BASE_IMAGE_URL+property.getImage()).into(horizontalCellViewHolder.ivThumbnail);
+                Glide.with(activity).load(WebConstant.BASE_IMAGE_URL+property.getImage()).into(horizontalCellViewHolder.ivThumbnail);
 
                 horizontalCellViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Bundle bundle=new Bundle();
                         bundle.putInt("property_id",property.getId());
-                        new Utility().moveToActivity(mContext, PropertyDetailActivity.class,bundle);
+                        new Utility().moveToActivityForResult(activity, PropertyDetailActivity.class,bundle);
                     }
                 });
 
@@ -156,14 +156,14 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 verticalCellViewHolder.tvArea.setText(property.getArea()+" Sqft");
                 //verticalCellViewHolder.tvDescription.setText(property.getDescription());
 
-                if(property.isAddedToWishList()){
-                    verticalCellViewHolder.ivWishList.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_fav_filled));
+                if(property.getFavourite().equalsIgnoreCase("1")){
+                    verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_fav_filled));
                 }else{
-                    verticalCellViewHolder.ivWishList.setImageDrawable(mContext.getResources().getDrawable(R.drawable.favourite));
+                    verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.favourite));
                 }
 
 
-                Glide.with(mContext).load(WebConstant.BASE_IMAGE_URL+property.getImage()).into(verticalCellViewHolder.ivThumbnail);
+                Glide.with(activity).load(WebConstant.BASE_IMAGE_URL+property.getImage()).into(verticalCellViewHolder.ivThumbnail);
 
                 verticalCellViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -171,7 +171,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                         Bundle bundle=new Bundle();
                         bundle.putInt("property_id",property.getId());
-                        new Utility().moveToActivity(mContext, PropertyDetailActivity.class,bundle);
+                        new Utility().moveToActivityForResult(activity, PropertyDetailActivity.class,bundle);
                     }
                 });
 

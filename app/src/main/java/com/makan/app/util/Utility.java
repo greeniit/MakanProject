@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +32,18 @@ public class Utility {
         }
 
         context.startActivity(intent);
+    }
+
+    public void moveToActivityForResult(Activity activity, Class className, Bundle bundle) {
+
+        Intent intent = new Intent();
+        intent.setClass(activity, className);
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+
+        activity.startActivityForResult(intent,100);
     }
 
     public void openShareIntent(Context context, String message) {
@@ -71,10 +81,9 @@ public class Utility {
     public void showMessageAlertDialog(Context context, String message, final int dialogId, final DialogCallback dialogCallback) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setTitle(context.getResources().getString(R.string.app_name));
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

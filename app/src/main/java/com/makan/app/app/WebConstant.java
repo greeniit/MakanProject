@@ -24,4 +24,8 @@ public interface WebConstant {
     String GET_SEARCH_RESULT_BY_FILTER ="get_filter";
     String SOCIAL_MEDIA_SIGN_UP="social_sign_up";
     String BUSINESS ="business";
+    String BOOK_PROPERTY = "property_booking";
+    String SEARCH_BY_NAME = "search";
+    String FORGOT_PASSWORD = "forget_password";
+    String UPLOAD_IMAGE = "signup_update";
 }

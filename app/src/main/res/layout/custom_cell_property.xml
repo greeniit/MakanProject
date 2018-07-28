@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:visibility="invisible"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:orientation="horizontal"

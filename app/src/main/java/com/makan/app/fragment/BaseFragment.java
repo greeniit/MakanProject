@@ -8,9 +8,6 @@ import android.view.View;
 
 import com.makan.R;
 
-/**
- * Created by roykmathew on 27/06/17.
- */
 public class BaseFragment extends Fragment{
 
     protected AlertDialog progressDialog;

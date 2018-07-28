@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.makan.app"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -70,6 +70,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.facebook.android:facebook-login:[4,5)'
+    implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.github.jkwiecien:EasyImage:2.1.0'
 
 }
 /*

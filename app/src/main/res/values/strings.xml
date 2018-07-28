@@ -91,4 +91,9 @@
     <!--Sign up-->
     <string name="registration_success">Registration completed successfully.</string>
 
+
+    <string name="permission_phone_not_granted">Call permission not granted. Enable permission from app settings.</string>
+    <string name="permission_camera_not_granted">Camera permission not granted. Enable permission from app settings.</string>
+    <string name="permission_gallery_not_granted">Gallery permission not granted. Enable permission from app settings.</string>
+
 </resources>

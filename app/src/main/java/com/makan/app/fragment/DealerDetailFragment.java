@@ -192,7 +192,7 @@ public class DealerDetailFragment extends BaseFragment implements OnMapReadyCall
             if (new Utility().isNetworkConnected(getActivity())) {
 
                 DealerDetailRequest dealerDetailRequest=new DealerDetailRequest();
-                dealerDetailRequest.setAgencyId("134");
+                dealerDetailRequest.setAgencyId(getActivity().getIntent().getExtras().getString("dealer_id"));
 
                 Response<DealerDetailResponse> response = WebServiceManager.getInstance().getDealerDetail(dealerDetailRequest);
 

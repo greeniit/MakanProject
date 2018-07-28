@@ -62,9 +62,9 @@
 
 
                             <ImageView
-                                android:id="@+id/ivCamera"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/ivPickImage"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 android:layout_below="@+id/tvTitle"
                                 android:layout_centerInParent="true"
                                 android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -74,7 +74,7 @@
                                 android:id="@+id/llNameHolder"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/ivCamera"
+                                android:layout_below="@+id/ivPickImage"
                                 android:layout_centerInParent="true"
                                 android:layout_marginTop="@dimen/activity_vertical_margin"
                                 android:orientation="vertical">
@@ -183,7 +183,7 @@
                                     android:layout_toRightOf="@id/ivPhone"
                                     android:background="@null"
                                     android:hint="Phone"
-                                    android:inputType="textPassword"
+                                    android:inputType="phone"
                                     android:paddingBottom="5dp"
                                     android:paddingTop="5dp"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"

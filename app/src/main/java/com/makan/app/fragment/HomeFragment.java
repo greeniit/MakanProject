@@ -17,25 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.makan.R;
 import com.makan.app.activity.FilterActivity;
-import com.makan.app.activity.LoginActivity;
 import com.makan.app.activity.PropertyListActivity;
 import com.makan.app.activity.SearchActivity;
 import com.makan.app.adapter.HomeViewPagerAdapter;
-import com.makan.app.adapter.PropertyListAdapter;
 import com.makan.app.adapter.RecentPropertyListAdapter;
 import com.makan.app.app.AppState;
 import com.makan.app.core.Codes;
-import com.makan.app.model.Property;
-import com.makan.app.preference.PrefKey;
-import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
+import com.makan.app.web.pojo.HomeRequest;
 import com.makan.app.web.pojo.HomeResponse;
-import com.makan.app.web.pojo.SignInRequest;
-import com.makan.app.web.pojo.SignInResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -248,7 +241,13 @@ public class HomeFragment extends BaseFragment {
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<HomeResponse> response = WebServiceManager.getInstance().homeData();
+                HomeRequest homeRequest = new HomeRequest();
+
+                if(AppState.getInstance().getUserId()!=null){
+                    homeRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+                }
+
+                Response<HomeResponse> response = WebServiceManager.getInstance().homeData(homeRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

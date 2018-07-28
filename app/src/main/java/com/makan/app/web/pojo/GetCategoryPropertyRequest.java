@@ -9,11 +9,23 @@ public class GetCategoryPropertyRequest {
     @Expose
     private String subCategoryId;
 
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
+
     public String getSubCategoryId() {
         return subCategoryId;
     }
 
     public void setSubCategoryId(String subCategoryId) {
         this.subCategoryId = subCategoryId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

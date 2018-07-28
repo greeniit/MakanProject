@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 
 public class Property implements Parcelable {
 
@@ -21,7 +20,7 @@ public class Property implements Parcelable {
     private LatLng latLng;
     private String offerPrice;
     private String offerPercentage;
-    private boolean isAddedToWishList;
+    private String favourite;
 
     public int getId() {
         return id;
@@ -96,9 +95,6 @@ public class Property implements Parcelable {
         this.image = image;
     }
 
-    public boolean isAddedToWishList() {
-        return isAddedToWishList;
-    }
 
     public String getPropertyType() {
         return propertyType;
@@ -114,10 +110,6 @@ public class Property implements Parcelable {
 
     public void setLatLng(LatLng latLng) {
         this.latLng = latLng;
-    }
-
-    public void setAddedToWishList(boolean addedToWishList) {
-        isAddedToWishList = addedToWishList;
     }
 
     public String getOfferPrice() {
@@ -136,6 +128,13 @@ public class Property implements Parcelable {
         this.offerPercentage = offerPercentage;
     }
 
+    public String getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(String favourite) {
+        this.favourite = favourite;
+    }
 
     @Override
     public int describeContents() {
@@ -157,7 +156,7 @@ public class Property implements Parcelable {
         dest.writeParcelable(this.latLng, flags);
         dest.writeString(this.offerPrice);
         dest.writeString(this.offerPercentage);
-        dest.writeByte(this.isAddedToWishList ? (byte) 1 : (byte) 0);
+        dest.writeString(this.favourite);
     }
 
     public Property() {
@@ -177,7 +176,7 @@ public class Property implements Parcelable {
         this.latLng = in.readParcelable(LatLng.class.getClassLoader());
         this.offerPrice = in.readString();
         this.offerPercentage = in.readString();
-        this.isAddedToWishList = in.readByte() != 0;
+        this.favourite = in.readString();
     }
 
     public static final Parcelable.Creator<Property> CREATOR = new Parcelable.Creator<Property>() {

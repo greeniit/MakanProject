@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetPropertyByTypeRequest {
 
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
+
     @SerializedName("selectedType")
     @Expose
     private Integer selectedType;
@@ -14,6 +18,14 @@ public class GetPropertyByTypeRequest {
     @SerializedName("currentPageno")
     @Expose
     private Integer currentPageno;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public Integer getSelectedType() {
         return selectedType;

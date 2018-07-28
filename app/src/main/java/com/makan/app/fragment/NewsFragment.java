@@ -98,12 +98,12 @@ public class NewsFragment extends BaseFragment{
 
                     if (newsResponse != null) {
 
-                        if (newsResponse.getIsSuccess() == 1 && newsResponse.getNews().size()>0) {
+                        if (newsResponse.getIsSuccess() == 1 && newsResponse.getNews()!=null&&newsResponse.getNews().size()>0) {
 
                             mNewsList= newsResponse.getNews();
                             statusCode = Codes.SUCCESS;
 
-                        } else if (newsResponse.getIsSuccess() == 1 && newsResponse.getNews().size()==0){
+                        } else if (newsResponse.getIsSuccess() == 1 && (newsResponse.getNews()==null||newsResponse.getNews().size()==0)){
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 

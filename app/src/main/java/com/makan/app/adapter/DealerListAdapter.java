@@ -2,6 +2,7 @@ package com.makan.app.adapter;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class DealerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        Dealer dealer;
+        final Dealer dealer;
 
         switch (holder.getItemViewType()) {
 
@@ -103,7 +104,10 @@ public class DealerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     @Override
                     public void onClick(View v) {
 
-                        new Utility().moveToActivity(mContext, DealerDetailActivity.class,null);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("dealer_id",dealer.getAgencyId());
+
+                        new Utility().moveToActivity(mContext, DealerDetailActivity.class,bundle);
                     }
                 });
 

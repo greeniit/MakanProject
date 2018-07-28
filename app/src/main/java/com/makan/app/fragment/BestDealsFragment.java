@@ -14,8 +14,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.makan.R;
 import com.makan.app.adapter.AdvertisementAdapter;
 import com.makan.app.adapter.BestDealAdapter;
-import com.makan.app.adapter.FeaturedDealerAdapter;
-import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
 import com.makan.app.util.Utility;
@@ -25,7 +23,6 @@ import com.makan.app.web.pojo.FindDealsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -145,7 +142,7 @@ public class BestDealsFragment extends BaseFragment {
 
                     if (findDealsResponse != null) {
 
-                        if (findDealsResponse.getIsSuccess() == 1 && findDealsResponse.getOfferProperty().size()>0) {
+                        if (findDealsResponse.getIsSuccess() == 1 && findDealsResponse.getOfferProperty()!=null&& findDealsResponse.getOfferProperty().size()>0) {
 
                             if(findDealsResponse.getOfferProperty()!=null&& findDealsResponse.getOfferProperty().size()>0){
 
@@ -172,6 +169,7 @@ public class BestDealsFragment extends BaseFragment {
                                     property.setImage(offerProperty.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(offerProperty.getLat()),Double.valueOf(offerProperty.getLong())));
                                     property.setDescription("");
+                                    property.setFavourite(offerProperty.getFavourite());
 
                                     int discount=Integer.parseInt(offerProperty.getPrice())*(Integer.parseInt(offerProperty.getOffer()));
 
@@ -188,7 +186,7 @@ public class BestDealsFragment extends BaseFragment {
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (findDealsResponse.getIsSuccess() == 1 && findDealsResponse.getOfferProperty().size()==0){
+                        } else if (findDealsResponse.getIsSuccess() == 1 && (findDealsResponse.getOfferProperty()==null||findDealsResponse.getOfferProperty().size()==0)){
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 
@@ -223,7 +221,7 @@ public class BestDealsFragment extends BaseFragment {
 
                         if (advertisementResponse != null) {
 
-                            if (advertisementResponse.getIsSuccess() == 1 && advertisementResponse.getAdds().size()>0) {
+                            if (advertisementResponse.getIsSuccess() == 1 && advertisementResponse!=null&& advertisementResponse.getAdds().size()>0) {
 
                                 if(advertisementResponse.getAdds()!=null&& advertisementResponse.getAdds().size()>0){
 
@@ -234,7 +232,7 @@ public class BestDealsFragment extends BaseFragment {
 
                                 statusCode = Codes.SUCCESS;
 
-                            } else if (advertisementResponse.getIsSuccess() == 1 && advertisementResponse.getAdds().size()==0){
+                            } else if (advertisementResponse.getIsSuccess() == 1 && (advertisementResponse.getAdds()==null||advertisementResponse.getAdds().size()==0)){
 
                                 statusCode = Codes.ERROR_NO_RECORDS;
 

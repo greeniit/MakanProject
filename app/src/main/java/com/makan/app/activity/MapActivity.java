@@ -191,10 +191,12 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
 
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
-        int padding = (int) (height * 0.25);
+        int padding = (int) (width * 0.25);
 
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
         googleMap.moveCamera(cu);
+
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo( 5.0f ));
 
         googleMap.setOnMarkerClickListener(this);
     }
@@ -262,6 +264,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
+                                    property.setFavourite(propertyList.getFavourite());
 
                                     properties.add(property);
                                 }

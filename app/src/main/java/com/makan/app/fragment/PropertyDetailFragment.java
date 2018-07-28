@@ -1,5 +1,6 @@
 package com.makan.app.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.model.LatLng;
 import com.makan.R;
-import com.makan.app.activity.DealerDetailActivity;
+import com.makan.app.activity.BookPropertyActivity;
 import com.makan.app.activity.GalleryActivity;
 import com.makan.app.activity.LoginActivity;
 import com.makan.app.activity.MapActivity;
@@ -51,6 +52,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class PropertyDetailFragment extends BaseFragment implements View.OnClickListener {
 
     private Toolbar toolbar;
@@ -67,6 +70,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
     private Property property;
     private boolean isLoadingCompleted = false;
     public static boolean isAddedToWishList = false;
+    public static boolean wishListInitialStatus = false;
 
     @BindView(R.id.rlProgressHolder)
     RelativeLayout rlProgressHolder;
@@ -244,11 +248,11 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                 if (AppState.getInstance().getUserId() != null && AppState.getInstance().getUserId().length() > 0) {
 
                     showProgressDialog();
-                    new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), !property.isAddedToWishList(), new WishListAddDeleteOperationCallback() {
+                    new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), !isAddedToWishList, new WishListAddDeleteOperationCallback() {
                         @Override
                         public void AddToWishListTaskSuccess() {
 
-                            isAddedToWishList=property.isAddedToWishList();
+                            isAddedToWishList=!isAddedToWishList;
                             getActivity().invalidateOptionsMenu();
                             dismissProgressDialog();
 
@@ -313,12 +317,25 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                 break;
 
             case R.id.btnBookNow:
-                new Utility().moveToActivity(getActivity(), LoginActivity.class, null);
+
+                if (AppState.getInstance().isLoginStatus()){
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("property_id",property.getId());
+
+                    new Utility().moveToActivity(getActivity(), BookPropertyActivity.class,bundle);
+                }else{
+
+                    new Utility().moveToActivity(getActivity(), LoginActivity.class, null);
+                }
+
                 break;
 
-            case R.id.llDealerSummaryHolder:
+            /*case R.id.llDealerSummaryHolder:
+
+
                 new Utility().moveToActivity(getActivity(), DealerDetailActivity.class, null);
-                break;
+                break;*/
 
             case R.id.ivGallery:
 
@@ -397,13 +414,29 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                                 property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                             }
 
-                            if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                            if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                property.setArea(Integer.parseInt(propertyList.getPlotArea()));
                             }
                             property.setPrice(propertyList.getPrice());
                             property.setImage(propertyList.getImage());
                             property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                             property.setDescription("");
+                            property.setFavourite(propertyList.getFavourite());
+
+
+                            if(AppState.getInstance().isLoginStatus()){
+
+                                if(property.getFavourite()!=null){
+
+                                    if(property.getFavourite().equalsIgnoreCase("1")){
+                                        isAddedToWishList = true;
+                                    }else{
+                                        isAddedToWishList = false;
+                                    }
+                                }
+
+
+                            }
 
                             statusCode = Codes.SUCCESS;
 
@@ -425,60 +458,70 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
             }
 
 
-            if(statusCode==Codes.SUCCESS){
+            if(statusCode==Codes.SUCCESS&&AppState.getInstance().isLoginStatus()){
+
+                if(property.getFavourite()==null){
+
+                    int wishListApiStatusCode = 0;
+                    
+                    if (new Utility().isNetworkConnected(getActivity())) {
+
+                        WishListRequest wishListRequest=new WishListRequest();
+                        wishListRequest.setUserId(AppState.getInstance().getUserId());
+
+                        Response<WishListResponse> response = WebServiceManager.getInstance().getWishList(wishListRequest);
+
+                        if (response != null && response.isSuccessful() && response.raw().code() == 200) {
+
+                            WishListResponse wishListResponse = response.body();
+
+                            if (wishListResponse != null) {
+
+                                if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList()!=null && wishListResponse.getPropertyList().size()>0) {
+
+                                    if(wishListResponse.getPropertyList()!=null&&wishListResponse.getPropertyList().size()>0){
+
+                                        for (WishListResponse.PropertyList propertyList:wishListResponse.getPropertyList()){
 
 
-                if (new Utility().isNetworkConnected(getActivity())) {
+                                            if (propertyList.getPropertyId().equals(String.valueOf(property.getId()))){
 
-                    WishListRequest wishListRequest=new WishListRequest();
-                    wishListRequest.setUserId(AppState.getInstance().getUserId());
-
-                    Response<WishListResponse> response = WebServiceManager.getInstance().getWishList(wishListRequest);
-
-                    if (response != null && response.isSuccessful() && response.raw().code() == 200) {
-
-                        WishListResponse wishListResponse = response.body();
-
-                        if (wishListResponse != null) {
-
-                            if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()>0) {
-
-                                if(wishListResponse.getPropertyList()!=null&&wishListResponse.getPropertyList().size()>0){
-
-                                    for (WishListResponse.PropertyList propertyList:wishListResponse.getPropertyList()){
-
-
-                                        if (propertyList.getPropertyId().equals(String.valueOf(property.getId()))){
-
-                                            isAddedToWishList = true;
-                                            break;
+                                                isAddedToWishList = true;
+                                                break;
+                                            }
                                         }
                                     }
+
+                                    wishListApiStatusCode = Codes.SUCCESS;
+
+                                } else if (wishListResponse.getIsSuccess() == 1 && (wishListResponse.getPropertyList()==null|| wishListResponse.getPropertyList().size()==0)){
+
+                                    wishListApiStatusCode = Codes.SUCCESS;
+
+                                    isAddedToWishList = false;
+
+                                } else {
+                                    wishListApiStatusCode = Codes.ERROR_UNEXPECTED;
                                 }
 
-                                statusCode = Codes.SUCCESS;
-
-                            } else if (wishListResponse.getIsSuccess() == 1 && wishListResponse.getPropertyList().size()==0){
-
-                                statusCode = Codes.ERROR_NO_RECORDS;
-
                             } else {
-                                statusCode = Codes.ERROR_UNEXPECTED;
+                                wishListApiStatusCode = Codes.ERROR_UNEXPECTED;
                             }
 
+
                         } else {
-                            statusCode = Codes.ERROR_UNEXPECTED;
+                            wishListApiStatusCode = Codes.ERROR_UNABLE_CONNECT_TO_SERVER;
                         }
 
-
                     } else {
-                        statusCode = Codes.ERROR_UNABLE_CONNECT_TO_SERVER;
+                        wishListApiStatusCode = Codes.ERROR_NETWORK;
                     }
-
-                } else {
-                    statusCode = Codes.ERROR_NETWORK;
                 }
+
+
             }
+
+            wishListInitialStatus = isAddedToWishList;
 
             return statusCode;
         }
@@ -499,7 +542,7 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
                     tvTitle.setText(propertyDetailResponse.getPropertyList().get(0).getPropertyName());
                     tvAddress.setText(propertyDetailResponse.getPropertyList().get(0).getLocation());
                     tvPrice.setText(" " + propertyDetailResponse.getPropertyList().get(0).getPrice() + " OMR");
-                    tvArea.setText(propertyDetailResponse.getPropertyList().get(0).getBuildingArea() + " Sqft");
+                    tvArea.setText(propertyDetailResponse.getPropertyList().get(0).getPlotArea() + " Sqft");
                     tvDescription.setText(Html.fromHtml(getResources().getString(R.string.property_description).replace("#", propertyDetailResponse.getPropertyList().get(0).getDescription())));
                     tvDescriptionFull.setText(Html.fromHtml(getResources().getString(R.string.property_description).replace("#", propertyDetailResponse.getPropertyList().get(0).getDescription())));
                     tvPropertyType.setText(Html.fromHtml(getResources().getString(R.string.property_type).replace("#", propertyDetailResponse.getPropertyList().get(0).getMainCategoryName())));
@@ -601,5 +644,28 @@ public class PropertyDetailFragment extends BaseFragment implements View.OnClick
 
 
         }
+
+
+    }
+
+    public void setResult(){
+
+        if(isAdded()){
+            Intent resultIntent = new Intent();
+
+            if(property!=null){
+
+                if(isAddedToWishList!=wishListInitialStatus){
+                    resultIntent.putExtra("isRefreshRequired",true);
+                }
+
+            }else{
+                resultIntent.putExtra("isRefreshRequired",false);
+            }
+
+            getActivity().setResult(RESULT_OK, resultIntent);
+            getActivity().finish();
+        }
+
     }
 }

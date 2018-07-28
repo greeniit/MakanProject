@@ -5,9 +5,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetPropertyByPlaceRequest {
 
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
+
     @SerializedName("place")
     @Expose
     private String place;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getPlace() {
         return place;

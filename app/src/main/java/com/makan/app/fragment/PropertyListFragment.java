@@ -38,6 +38,8 @@ import com.makan.app.web.pojo.GetPropertyByPlaceResponse;
 import com.makan.app.web.pojo.GetPropertyByTypeRequest;
 import com.makan.app.web.pojo.HomeResponse;
 import com.makan.app.web.pojo.PropertyList;
+import com.makan.app.web.pojo.SearchByNameRequest;
+import com.makan.app.web.pojo.SearchByNameResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,13 +96,18 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 if(AppState.getInstance().getUserId()!=null&&AppState.getInstance().getUserId().length()>0){
 
                     showProgressDialog();
-                    new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), !property.isAddedToWishList(), new WishListAddDeleteOperationCallback() {
+                    new WishListAddDeleteOperationTask(getActivity(), String.valueOf(property.getId()), property.getFavourite().equalsIgnoreCase("1")?false:true, new WishListAddDeleteOperationCallback() {
                         @Override
                         public void AddToWishListTaskSuccess() {
 
                             dismissProgressDialog();
 
-                            property.setAddedToWishList(!property.isAddedToWishList());
+                            if(property.getFavourite().equalsIgnoreCase("1")){
+                                property.setFavourite("0");
+                            }else{
+                                property.setFavourite("1");
+                            }
+
                             mPropertyAdapter.updateItem(property,position);
 
                         }
@@ -128,7 +135,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
     }
 
 
-    private void preparePropertyList() {
+    public void preparePropertyList() {
 
         if (getArguments().containsKey("subcategory_id")) {
             new PropertyListDataFetchTask().execute();
@@ -144,6 +151,8 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
             new GetPropertyByPlaceTask().execute();
         } else if (getArguments().containsKey("filter_request")) {
             new PropertyListByFilterTask().execute();
+        }else if (getArguments().containsKey("search_key")) {
+            new SearchByNameTask().execute();
         }
 
     }
@@ -230,6 +239,9 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 GetCategoryPropertyRequest getCategoryPropertyRequest = new GetCategoryPropertyRequest();
                 getCategoryPropertyRequest.setSubCategoryId(getArguments().getString("subcategory_id"));
 
+                if(AppState.getInstance().getUserId()!=null){
+                    getCategoryPropertyRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+                }
 
                 Response<GetCategoryPropertyResponse> response = WebServiceManager.getInstance().getPropertiesByCategory(getCategoryPropertyRequest);
 
@@ -239,7 +251,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                     if (getCategoryPropertyResponse != null) {
 
-                        if (getCategoryPropertyResponse.getIsSuccess() == 1 && getCategoryPropertyResponse.getPropertyList().size() > 0) {
+                        if (getCategoryPropertyResponse.getIsSuccess() == 1 && getCategoryPropertyResponse.getPropertyList()!=null&& getCategoryPropertyResponse.getPropertyList().size() > 0) {
 
                             if (getCategoryPropertyResponse.getPropertyList() != null && getCategoryPropertyResponse.getPropertyList().size() > 0) {
 
@@ -264,6 +276,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
+                                    property.setFavourite(propertyList.getFavourite());
 
                                     mPropertyList.add(property);
                                 }
@@ -271,7 +284,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (getCategoryPropertyResponse.getIsSuccess() == 1 && getCategoryPropertyResponse.getPropertyList().size() == 0) {
+                        } else if (getCategoryPropertyResponse.getIsSuccess() == 1 && (getCategoryPropertyResponse.getPropertyList()==null||getCategoryPropertyResponse.getPropertyList().size() == 0)) {
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 
@@ -350,6 +363,10 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 getPropertyByTypeRequest.setCurrentPageno(1);
                 getPropertyByTypeRequest.setPerPage(50);
 
+                if(AppState.getInstance().getUserId()!=null){
+                    getPropertyByTypeRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+                }
+
 
                 Response<GetPropertiesByTypeResponse> response = WebServiceManager.getInstance().getPropertiesByType(getPropertyByTypeRequest);
 
@@ -359,7 +376,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                     if (getPropertiesByType != null) {
 
-                        if (getPropertiesByType.getIsSuccess() == 1 && getPropertiesByType.getPropertyList().size() > 0) {
+                        if (getPropertiesByType.getIsSuccess() == 1 &&getPropertiesByType.getPropertyList()!=null&&getPropertiesByType.getPropertyList().size() > 0) {
 
                             if (getPropertiesByType.getPropertyList() != null && getPropertiesByType.getPropertyList().size() > 0) {
 
@@ -383,6 +400,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
+                                    property.setFavourite(propertyList.getFavourite());
 
                                     mPropertyList.add(property);
                                 }
@@ -390,7 +408,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (getPropertiesByType.getIsSuccess() == 1 && getPropertiesByType.getPropertyList().size() == 0) {
+                        } else if (getPropertiesByType.getIsSuccess() == 1 && (getPropertiesByType.getPropertyList()==null||getPropertiesByType.getPropertyList().size() == 0)) {
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 
@@ -464,6 +482,11 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 GetPropertyByPlaceRequest getPropertyByPlaceRequest = new GetPropertyByPlaceRequest();
                 getPropertyByPlaceRequest.setPlace(getArguments().getString("place_name"));
 
+                if(AppState.getInstance().getUserId()!=null){
+                    getPropertyByPlaceRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+                }
+
+
                 Response<GetPropertyByPlaceResponse> response = WebServiceManager.getInstance().getPropertyByPlace(getPropertyByPlaceRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
@@ -472,7 +495,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                     if (getPropertiesByType != null) {
 
-                        if (getPropertiesByType.getIsSuccess() == 1 && getPropertiesByType.getPropertyList().size() > 0) {
+                        if (getPropertiesByType.getIsSuccess() == 1 && getPropertiesByType.getPropertyList()!=null&&getPropertiesByType.getPropertyList().size() > 0) {
 
                             if (getPropertiesByType.getPropertyList() != null && getPropertiesByType.getPropertyList().size() > 0) {
 
@@ -496,6 +519,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
+                                    property.setFavourite(propertyList.getFavourite());
 
                                     mPropertyList.add(property);
                                 }
@@ -503,7 +527,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (getPropertiesByType.getIsSuccess() == 1 && getPropertiesByType.getPropertyList().size() == 0) {
+                        } else if (getPropertiesByType.getIsSuccess() == 1 && (getPropertiesByType.getPropertyList()==null||getPropertiesByType.getPropertyList().size() == 0)) {
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 
@@ -599,6 +623,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                         property.setImage(propertyList.getImage());
                         property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                         property.setDescription("");
+                        property.setFavourite(propertyList.getFavourite());
 
                         mPropertyList.add(property);
                     }
@@ -629,6 +654,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
     private class PropertyListByFilterTask extends AsyncTask<Void, Void, Integer> {
 
         private String errorMessage;
+        private FilterSearchRequest filterSearchRequest;
         private FilterSearchResponse filterSearchResponse;
 
         @Override
@@ -637,7 +663,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
             rlProgressHolder.setVisibility(View.VISIBLE);
             mPropertyList.clear();
 
-            FilterSearchRequest filterSearchRequest=(FilterSearchRequest) getArguments().getParcelable("filter_request");
+            filterSearchRequest=(FilterSearchRequest) getArguments().getParcelable("filter_request");
         }
 
         @Override
@@ -652,7 +678,11 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<FilterSearchResponse> response = WebServiceManager.getInstance().getFilterSearchResult((FilterSearchRequest) getArguments().getParcelable("filter_request"));
+                if(AppState.getInstance().getUserId()!=null){
+                    filterSearchRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+                }
+
+                Response<FilterSearchResponse> response = WebServiceManager.getInstance().getFilterSearchResult(filterSearchRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 
@@ -662,7 +692,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                         if (filterSearchResponse.getIsSuccess() == 1) {
 
-                            if (filterSearchResponse.getPropertyList() != null && filterSearchResponse.getPropertyList().size() > 0) {
+                            if (filterSearchResponse.getPropertyList() != null && filterSearchResponse.getPropertyList()!=null&&filterSearchResponse.getPropertyList().size() > 0) {
 
                                 for (PropertyList propertyList : filterSearchResponse.getPropertyList()) {
 
@@ -685,6 +715,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
+                                    property.setFavourite(propertyList.getFavourite());
 
                                     mPropertyList.add(property);
                                 }
@@ -692,7 +723,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                             statusCode = Codes.SUCCESS;
 
-                        } else if (filterSearchResponse.getIsSuccess() == 1 && filterSearchResponse.getPropertyList().size() == 0) {
+                        } else if (filterSearchResponse.getIsSuccess() == 1 && (filterSearchResponse.getPropertyList()==null||filterSearchResponse.getPropertyList().size() == 0)) {
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 
@@ -831,6 +862,126 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
             mPropertyAdapter.addItems(properties);
             mPropertyAdapter.notifyDataSetChanged();
 
+
+        }
+    }
+
+    private class SearchByNameTask extends AsyncTask<Void, Void, Integer> {
+
+
+        private String errorMessage;
+        private SearchByNameResponse searchByNameResponse;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            rlProgressHolder.setVisibility(View.VISIBLE);
+            mPropertyList.clear();
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+
+
+            int statusCode = 0;
+
+            if (new Utility().isNetworkConnected(getActivity())) {
+
+                SearchByNameRequest searchByNameRequest = new SearchByNameRequest();
+
+                if(AppState.getInstance().getUserId()!=null){
+                    searchByNameRequest.setUserId(AppState.getInstance().getUserId());
+                }
+
+                searchByNameRequest.setKeyword(getActivity().getIntent().getExtras().getString("search_key"));
+
+                Response<SearchByNameResponse> response = WebServiceManager.getInstance().searchByName(searchByNameRequest);
+
+                if (response != null && response.isSuccessful() && response.raw().code() == 200) {
+
+                    searchByNameResponse = response.body();
+
+                    if (searchByNameResponse != null) {
+
+                        if (searchByNameResponse.getIsSuccess() == 1 && searchByNameResponse.getPropertyList()!=null&&searchByNameResponse.getPropertyList().size()>0) {
+
+                            for (PropertyList propertyList : searchByNameResponse.getPropertyList()) {
+
+                                Property property = new Property();
+
+                                property.setId(Integer.parseInt(propertyList.getPropertyId()));
+                                property.setTitle(propertyList.getPropertyName());
+                                property.setAddress(propertyList.getLocation());
+
+                                if (propertyList.getRooms() != null && propertyList.getRooms().length() > 0) {
+                                    property.setBedCount(Integer.parseInt(propertyList.getRooms()));
+                                }
+
+                                if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
+                                    property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                }
+
+                                property.setPropertyType(propertyList.getSubCategoryName());
+                                property.setPrice(propertyList.getPrice());
+                                property.setImage(propertyList.getImage());
+                                property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
+                                property.setDescription(propertyList.getDescription());
+                                property.setFavourite(propertyList.getFavourite());
+
+                                mPropertyList.add(property);
+                            }
+
+                            statusCode = Codes.SUCCESS;
+
+                        } else if (searchByNameResponse.getIsSuccess() == 1 && (searchByNameResponse.getPropertyList() ==null || searchByNameResponse.getPropertyList().size()==0)){
+
+                            statusCode = Codes.ERROR_NO_RECORDS;
+
+                        } else {
+                            statusCode = Codes.ERROR_UNEXPECTED;
+                        }
+
+                    } else {
+                        statusCode = Codes.ERROR_UNEXPECTED;
+                    }
+
+
+                } else {
+                    statusCode = Codes.ERROR_UNABLE_CONNECT_TO_SERVER;
+                }
+
+            } else {
+                statusCode = Codes.ERROR_NETWORK;
+            }
+
+
+            return statusCode;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+            if(isAdded()){
+
+                rlProgressHolder.setVisibility(View.GONE);
+
+                if (result == Codes.SUCCESS) {
+
+                    mPropertyAdapter.addItems(mPropertyList);
+                    mPropertyAdapter.notifyDataSetChanged();
+
+                } else {
+
+                    if (errorMessage != null && errorMessage.length() > 0) {
+                        new Utility().showMessageAlertDialog(getActivity(), errorMessage);
+                    } else {
+                        new Utility().showMessageAlertDialog(getActivity(), new Utility().getErrorMessage(getActivity(), result));
+                    }
+
+                }
+            }
 
         }
     }

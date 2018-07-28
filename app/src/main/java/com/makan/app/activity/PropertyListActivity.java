@@ -1,5 +1,7 @@
 package com.makan.app.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +14,7 @@ public class PropertyListActivity extends BaseActivity{
 
 
     private Toolbar toolbar;
+    private PropertyListFragment propertyListFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class PropertyListActivity extends BaseActivity{
 
                 getSupportActionBar().setTitle("City Properties");
 
-            }else if(getIntent().getExtras()!=null&&getIntent().getExtras().containsKey("search_properties")){
+            }else if(getIntent().getExtras()!=null&&(getIntent().getExtras().containsKey("search_properties")||getIntent().getExtras().containsKey("search_key"))){
 
                 getSupportActionBar().setTitle("Search Property");
 
@@ -63,7 +66,7 @@ public class PropertyListActivity extends BaseActivity{
 
     private void setFragment(){
 
-        PropertyListFragment propertyListFragment = new PropertyListFragment();
+        propertyListFragment = new PropertyListFragment();
         propertyListFragment.setArguments(getIntent().getExtras());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frame, propertyListFragment);
@@ -74,6 +77,25 @@ public class PropertyListActivity extends BaseActivity{
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (100) : {
+
+                if (resultCode == Activity.RESULT_OK) {
+
+                    if(data.getExtras()!=null&&data.getExtras().getBoolean("isRefreshRequired")){
+                        propertyListFragment.preparePropertyList();
+                    }
+
+                }
+
+                break;
+            }
+        }
     }
 
 }

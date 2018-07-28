@@ -89,12 +89,12 @@ public class DealersFragment extends BaseFragment{
 
                     if (dealerResponse != null) {
 
-                        if (dealerResponse.getIsSuccess() == 1 && dealerResponse.getDealerList().size()>0) {
+                        if (dealerResponse.getIsSuccess() == 1 && dealerResponse.getDealerList()!=null&&dealerResponse.getDealerList().size()>0) {
 
                             statusCode = Codes.SUCCESS;
                             mDealerList=dealerResponse.getDealerList();
 
-                        } else if (dealerResponse.getIsSuccess() == 1 && dealerResponse.getDealerList().size()==0){
+                        } else if (dealerResponse.getIsSuccess() == 1 && (dealerResponse.getDealerList()==null||dealerResponse.getDealerList().size()==0)){
 
                             statusCode = Codes.ERROR_NO_RECORDS;
 

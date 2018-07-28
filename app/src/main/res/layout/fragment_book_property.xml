@@ -42,6 +42,9 @@
                 android:layout_height="wrap_content" />
 
             <Switch
+                android:thumbTint="@color/colorAccent"
+                android:trackTint="@color/colorAccent"
+                android:theme="@style/SCBSwitch"
                 android:id="@+id/swUserType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -64,6 +67,8 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:inputType="textPersonName|textCapSentences"
+                android:maxLines="1"
                 android:hint="Name"
                 android:id="@+id/etName"
                 android:padding="10dp"
@@ -72,6 +77,8 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
                 android:hint="Email"
                 android:layout_marginTop="15dp"
                 android:id="@+id/etEmail"
@@ -81,6 +88,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:inputType="phone"
                 android:hint="Oman ( +981)"
                 android:layout_marginTop="15dp"
                 android:id="@+id/etMob"
@@ -90,6 +98,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:inputType="phone"
                 android:hint="Phone No"
                 android:layout_marginTop="15dp"
                 android:id="@+id/etPhone"
@@ -99,7 +108,28 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:inputType="textMultiLine"
+                android:inputType="number"
+                android:hint="Payment"
+                android:layout_marginTop="15dp"
+                android:id="@+id/etPayment"
+                android:padding="10dp"
+                android:background="@drawable/et_background_rounded_corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:inputType="number"
+                android:hint="Loan"
+                android:layout_marginTop="15dp"
+                android:id="@+id/etLoan"
+                android:padding="10dp"
+                android:background="@drawable/et_background_rounded_corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine|textCapSentences"
                 android:hint="Message"
                 android:layout_marginTop="15dp"
                 android:id="@+id/etMessage"
