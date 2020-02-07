@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:rsb="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.Toolbar
+        app:titleTextColor="@android:color/white"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/card_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/calculate_and_view_the_monthly_mortgage"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_1dp"
+                android:background="@color/black"
+                android:layout_marginStart="@dimen/marginstart_50dp"
+                android:layout_marginEnd="@dimen/marginend_50dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/totalprice"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:weightSum="2">
+
+                <SeekBar
+                    android:id="@+id/sb_totalprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/marginend_8dp"
+                    android:layout_marginStart="@dimen/marginstart_8dp"
+                    android:layout_marginTop="@dimen/margintop_8dp"
+                    android:max="91200"
+                    android:min="0"
+                    android:thumbTint="#888888"
+                    android:padding="@dimen/card_margin"
+                    android:progressTint="#888888"
+                    android:progressBackgroundTint="@color/black"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/et_totalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50dp"
+                    android:textColor="@color/black"
+                    android:text="0 OMR"
+                    android:imeOptions="actionDone"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize22sp"
+                    android:inputType="numberDecimal"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/marginstart_30dp"
+                    android:layout_marginEnd="@dimen/marginend_30dp"
+                    android:background="@drawable/fillterborder"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loanperiod"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:weightSum="2">
+
+                <SeekBar
+                    android:id="@+id/sb_loanPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/marginend_8dp"
+                    android:layout_marginStart="@dimen/marginstart_8dp"
+                    android:layout_marginTop="@dimen/margintop_8dp"
+                    android:padding="@dimen/card_margin"
+                    android:max="31"
+                    android:min="1"
+                    android:thumbTint="#888888"
+                    android:progressTint="#888888"
+                    android:progressBackgroundTint="@color/black"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/et_loanPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50dp"
+                    android:textColor="@color/black"
+                    android:text="1 Years"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize22sp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/marginstart_30dp"
+                    android:layout_marginEnd="@dimen/marginstart_30dp"
+                    android:background="@drawable/fillterborder"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/downpayment"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+            <SeekBar
+                android:id="@+id/sb_downPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/margintop_10dp"
+                android:padding="@dimen/card_margin"
+                android:max="80"
+                android:min="0"
+                android:thumbTint="#888888"
+                android:progressTint="#888888"
+                android:progressBackgroundTint="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/padding_10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_downPaymentPercentage"
+                android:layout_width="@dimen/width_100dp"
+                android:layout_height="@dimen/height_50dp"
+                android:textColor="@color/black"
+                android:text="0 %"
+                android:gravity="center"
+                android:textSize="@dimen/textSize22sp"
+                android:layout_marginStart="@dimen/marginstart_30dp"
+                android:layout_marginEnd="@dimen/marginend_10dp"
+                android:background="@drawable/fillterborder"/>
+
+
+            <EditText
+                android:id="@+id/et_downPaymentAmount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp"
+                android:textColor="@color/black"
+                android:text="0.000 OMR"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                android:gravity="center"
+                android:textSize="@dimen/textSize22sp"
+                android:layout_marginStart="@dimen/marginstart_10dp"
+                android:layout_marginEnd="@dimen/marginend_30dp"
+                android:background="@drawable/fillterborder"/>
+
+
+        </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rateofinterset"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:weightSum="2">
+
+                <SeekBar
+                    android:id="@+id/sb_rateOfInterest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/marginend_8dp"
+                    android:layout_marginStart="@dimen/marginstart_8dp"
+                    android:layout_marginTop="@dimen/margintop_8dp"
+                    android:padding="@dimen/card_margin"
+                    android:max="20"
+                    android:min="1"
+                    android:thumbTint="#888888"
+                    android:progressTint="#888888"
+                    android:progressBackgroundTint="@color/black"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/et_rateOfInterest"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50dp"
+                    android:textColor="@color/black"
+                    android:text="1 %"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/textSize22sp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/marginstart_30dp"
+                    android:layout_marginEnd="@dimen/marginend_30dp"
+                    android:background="@drawable/fillterborder"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="5 Years"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize22sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/marginstart_2dp"
+                    android:layout_marginEnd="@dimen/marginend_2dp"
+                    android:background="@drawable/fillterborder"
+                    android:weightSum="4"
+                    android:padding="@dimen/padding_10dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/totalpayable"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding_10dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_3dp"
+                        android:background="#88444141"
+                        android:layout_marginStart="@dimen/marginstart_10dp"
+                        android:layout_marginEnd="@dimen/marginend_10dp"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="OMR"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/card_margin"/>
+
+                    <TextView
+                        android:id="@+id/tv_totalPaybleAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="0.000"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/card_margin"/>
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="5 Years"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize22sp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/marginstart_2dp"
+                    android:layout_marginEnd="@dimen/marginend_2dp"
+                    android:background="@drawable/fillterborder"
+                    android:weightSum="4"
+                    android:padding="@dimen/padding_10dp">
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/monthlyPayment"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding_10dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_3dp"
+                        android:background="#88444141"
+                        android:layout_marginStart="@dimen/marginstart_10dp"
+                        android:layout_marginEnd="@dimen/marginend_10dp"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="OMR"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/card_margin"/>
+
+                    <TextView
+                        android:id="@+id/tv_monthlyPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="0.000"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/card_margin"/>
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/paymentbreakedown"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/marginbottom_10dp"
+                android:textSize="@dimen/textSize18sp"
+                android:textColor="@color/black"/>
+
+
+            <ProgressBar
+                android:id="@+id/pb_breakDown"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/height_40dp"
+                android:indeterminate="false"
+                android:maxHeight="10dip"
+                android:minHeight="10dip"
+                android:max="1000"
+                android:layout_marginStart="@dimen/marginstart_20dp"
+                android:layout_marginEnd="@dimen/marginend_20dp"
+                android:progressDrawable="@drawable/progressbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/marginstart_20dp"
+            android:layout_marginEnd="@dimen/marginend_20dp"
+            android:layout_marginBottom="@dimen/marginbottom_20dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/interest"
+                android:gravity="start"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/principal"
+                android:gravity="end"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

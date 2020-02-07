@@ -13,10 +13,14 @@ import android.widget.RelativeLayout;
 
 import com.makan.R;
 import com.makan.app.adapter.DealerListAdapter;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.Dealer;
+import com.makan.app.web.pojo.DealerRequest;
 import com.makan.app.web.pojo.DealerResponse;
 
 import java.util.ArrayList;
@@ -66,6 +70,7 @@ public class DealersFragment extends BaseFragment{
 
         private String errorMessage;
         private DealerResponse dealerResponse;
+        private DealerRequest dealerRequest;
 
         @Override
         protected void onPreExecute() {
@@ -81,7 +86,10 @@ public class DealersFragment extends BaseFragment{
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<DealerResponse> response = WebServiceManager.getInstance().getDealers();
+                dealerRequest = new DealerRequest();
+                dealerRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
+                Response<DealerResponse> response = WebServiceManager.getInstance().getDealers(dealerRequest);
+
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

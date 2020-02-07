@@ -1,5 +1,6 @@
 package com.makan.app.fragment;
 
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,12 +20,16 @@ import android.widget.TextView;
 
 import com.makan.R;
 import com.makan.app.activity.FilterActivity;
+import com.makan.app.activity.HomeActivity;
 import com.makan.app.activity.PropertyListActivity;
 import com.makan.app.activity.SearchActivity;
 import com.makan.app.adapter.HomeViewPagerAdapter;
 import com.makan.app.adapter.RecentPropertyListAdapter;
 import com.makan.app.app.AppState;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.HomeRequest;
@@ -32,6 +37,7 @@ import com.makan.app.web.pojo.HomeResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,6 +48,8 @@ import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Response;
 
 public class HomeFragment extends BaseFragment {
+
+
 
     @BindView(R.id.tvShowAllFeaturedProperty)
     TextView tvShowAllFeaturedProperty;
@@ -92,6 +100,7 @@ public class HomeFragment extends BaseFragment {
     private RecentPropertyListAdapter mFeaturedPropertyListAdapter, mRecentlyAddedPropertyListAdapter;
     private HomeViewPagerAdapter homeViewPagerAdapter;
 
+
     Handler handler = new Handler();
     int currentPage=0;
 
@@ -111,6 +120,7 @@ public class HomeFragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
         setRecycleView();
+
         new HomeDataFetchTask().execute();
 
         return rootView;
@@ -245,7 +255,9 @@ public class HomeFragment extends BaseFragment {
 
                 if(AppState.getInstance().getUserId()!=null){
                     homeRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
+
                 }
+                homeRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
 
                 Response<HomeResponse> response = WebServiceManager.getInstance().homeData(homeRequest);
 
@@ -370,6 +382,7 @@ public class HomeFragment extends BaseFragment {
 
         }
     };
+
 
     @Override
     public void onStop() {

@@ -14,6 +14,7 @@ public class PreferenceManager {
         SharedPreferences.Editor editor = context.getSharedPreferences(APP_PREFERENCE, MODE_PRIVATE).edit();
         editor.putString(key, value);
         editor.apply();
+        editor.commit();
     }
 
     public String getValue(Context context,String key){

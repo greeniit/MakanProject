@@ -19,6 +19,10 @@ public class GetPropertyByTypeRequest {
     @Expose
     private Integer currentPageno;
 
+    @SerializedName("language")
+    @Expose
+    private String language;
+
     public int getUserId() {
         return userId;
     }
@@ -49,5 +53,13 @@ public class GetPropertyByTypeRequest {
 
     public void setCurrentPageno(Integer currentPageno) {
         this.currentPageno = currentPageno;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

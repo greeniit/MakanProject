@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,12 +28,10 @@ import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.FilterSearchRequest;
 import com.makan.app.web.pojo.FilterSearchResponse;
 import com.makan.app.web.pojo.PropertyList;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import retrofit2.Response;
 
 public class MapActivity extends BaseActivity implements View.OnClickListener,OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
@@ -88,7 +85,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                 if(getIntent().getExtras()!=null&&getIntent().getExtras().containsKey("filter_request")){
                     finish();
                 }else{
-                    new Utility().moveToActivity(this,FilterActivity.class,null);
+                    new Utility().moveToActivity(this,NewSearchActivity.class,null);
                 }
 
                 break;
@@ -125,6 +122,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
 
         if(getIntent().getExtras()!=null&&getIntent().getExtras().containsKey("properties")){
 
+            properties.clear();
             properties=getIntent().getExtras().getParcelableArrayList("properties");
             setMarker(googleMap);
             rlProgressHolder.setVisibility(View.GONE);
@@ -154,7 +152,6 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                     .title(property.getTitle())
                     .snippet("Price: "+property.getPrice()+"OMR"));
 
-            propertyMarkerMap.put(marker,pos);
 
 
             if(property.getPropertyType()!=null){
@@ -173,6 +170,9 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_twin_villa));
                 }else if(property.getPropertyType().equalsIgnoreCase("office")){
                     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_office));
+                }else {
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_single_appartment));
+
                 }
 
             }else{
@@ -180,7 +180,7 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_single_appartment));
             }
 
-
+            propertyMarkerMap.put(marker,pos);
             builder.include(marker.getPosition());
 
             pos++;
@@ -260,12 +260,15 @@ public class MapActivity extends BaseActivity implements View.OnClickListener,On
                                     }
 
                                     property.setPropertyType(propertyList.getSubCategoryName());
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
-                                    property.setFavourite(propertyList.getFavourite());
+                                    property.setFavourite("");
+                                    property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
+                                    property.setBedCount(Integer.parseInt(propertyList.getRooms()));
 
+                                    properties.clear();
                                     properties.add(property);
                                 }
                             }

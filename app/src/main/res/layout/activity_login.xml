@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@drawable/login_bg">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/slideeer">
 
 
     <android.support.v7.widget.Toolbar
@@ -18,20 +20,25 @@
 
         <LinearLayout
 
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/margintop_8dp"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-            <ImageView
+            <TextView
+                android:id="@+id/tv_heading"
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:layout_gravity="center"
                 android:src="@drawable/logo"
-                android:layout_width="wrap_content"
+                android:text="@string/makan"
+                android:textColor="#FFB40C"
+                android:textSize="50dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RelativeLayout
@@ -47,7 +54,7 @@
                     android:id="@+id/ivEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/mail" />
 
@@ -56,21 +63,21 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@id/ivEmail"
+                    android:layout_marginStart="@dimen/marginstart_10dp"
+                    android:layout_marginEnd="@dimen/marginend_10dp"
+                    android:layout_toEndOf="@id/ivEmail"
                     android:background="@null"
                     android:hint="Email"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="@dimen/paddingbottom_5dp"
+                    android:paddingTop="@dimen/paddingtop_5dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
 
                 <View
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="@dimen/marginend_10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="@dimen/height_2dp"
                     android:layout_alignStart="@+id/etEmail"
                     android:layout_below="@+id/etEmail"
                     android:background="@android:color/white" />
@@ -90,7 +97,7 @@
                     android:id="@+id/ivPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/password" />
 
@@ -99,49 +106,84 @@
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@id/ivPassword"
+                    android:layout_marginStart="@dimen/marginend_10dp"
+                    android:layout_marginEnd="@dimen/marginend_10dp"
+                    android:layout_toEndOf="@id/ivPassword"
                     android:background="@null"
                     android:hint="Password"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="@dimen/paddingbottom_5dp"
+                    android:paddingTop="@dimen/paddingtop_5dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
 
                 <View
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="@dimen/marginend_10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="@dimen/height_2dp"
                     android:layout_alignStart="@+id/etPassword"
                     android:layout_below="@+id/etPassword"
                     android:background="@android:color/white" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvForgotPassword"
-                android:textColor="@android:color/white"
-                android:layout_gravity="right"
-                android:textStyle="bold"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="Forgot Password?"
-                android:textAppearance="@android:style/TextAppearance.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
 
             <Button
                 android:layout_below="@+id/tvInstruction"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/et_background_rounded_cornergold"
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
                 android:text="Sign In"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="15dp"
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:textColor="@android:color/white"
+                android:layout_gravity="end"
+                android:textStyle="bold"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:gravity="center"
+                android:text="Forgot Password?"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+            <RelativeLayout
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/tvOrLbl"
+                    android:background="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_2dp"/>
+                <TextView
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:id="@+id/tvOrLbl"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_marginStart="@dimen/card_margin"
+                    android:textColor="@android:color/white"
+                    android:text="OR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/tvOrLbl"
+                    android:background="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_2dp"/>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tvSignUp"
@@ -154,85 +196,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <RelativeLayout
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <Button-->
 
-                <View
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/tvOrLbl"
-                    android:background="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"/>
-                <TextView
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:id="@+id/tvOrLbl"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/card_margin"
-                    android:layout_marginLeft="@dimen/card_margin"
-                    android:textColor="@android:color/white"
-                    android:text="OR"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+<!--                android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--                android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--                android:layout_below="@+id/tvInstruction"-->
+<!--                android:layout_marginBottom="@dimen/marginbottom_5dp"-->
+<!--                android:layout_marginTop="@dimen/margintop_5dp"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:text="Sign In With Facebook"-->
+<!--                android:id="@+id/login_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
 
-                <View
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/tvOrLbl"
-                    android:background="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"/>
-            </RelativeLayout>
-
-            <Button
-
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_below="@+id/tvInstruction"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textAllCaps="false"
-                android:text="Sign In With Facebook"
-                android:id="@+id/btnSignInWithFB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-           <!-- <com.facebook.login.widget.LoginButton
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_below="@+id/tvInstruction"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                style="@style/FacebookLoginButton"
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>-->
-
-            <Button
-                android:layout_below="@+id/tvInstruction"
-                android:layout_marginBottom="5dp"
-                android:background="#D84B37"
-                android:textColor="@android:color/white"
-                android:textAllCaps="false"
-                android:text="@string/common_signin_button_text_long"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+            <com.google.android.gms.common.SignInButton
                 android:id="@+id/btnSignInWithGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-           <!-- <com.google.android.gms.common.SignInButton
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"/>
--->
+
+
+           <com.facebook.login.widget.LoginButton
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                style="@style/FacebookLoginButton"
+                android:id="@+id/btnSignInWithFB"
+                android:layout_width="match_parent"
+                android:paddingTop="15dp"
+               android:paddingBottom="15dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
+
+<!--            <Button-->
+<!--                android:layout_below="@+id/tvInstruction"-->
+<!--                android:layout_marginBottom="@dimen/marginbottom_5dp"-->
+<!--                android:background="#D84B37"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:text="@string/common_signin_button_text_long"-->
+<!--                android:layout_marginTop="@dimen/margintop_8dp"-->
+<!--                android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+<!--                android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+<!--                android:id="@+id/btnSignInWithGoogle"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+
         </LinearLayout>
 
 

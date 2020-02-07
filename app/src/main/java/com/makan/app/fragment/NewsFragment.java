@@ -13,7 +13,10 @@ import android.widget.RelativeLayout;
 
 import com.makan.R;
 import com.makan.app.adapter.NewsListAdapter;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.NewsResponse;
@@ -75,6 +78,7 @@ public class NewsFragment extends BaseFragment{
 
         private String errorMessage;
         private NewsResponse newsResponse;
+        private BestDealsRequest bestDealsRequest;
 
         @Override
         protected void onPreExecute() {
@@ -90,7 +94,10 @@ public class NewsFragment extends BaseFragment{
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<NewsResponse> response = WebServiceManager.getInstance().getNews();
+                bestDealsRequest = new BestDealsRequest();
+                bestDealsRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
+
+                Response<NewsResponse> response = WebServiceManager.getInstance().getNews(bestDealsRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

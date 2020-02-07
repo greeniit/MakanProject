@@ -1,76 +1,44 @@
 {
   "project_info": {
-    "project_number": "650901887083",
-    "project_id": "makan-157206"
+    "project_number": "933991405929",
+    "firebase_url": "https://makan-f9b7b.firebaseio.com",
+    "project_id": "makan-f9b7b",
+    "storage_bucket": "makan-f9b7b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650901887083:android:df96253c5ac5c852",
-        "android_client_info": {
-          "package_name": "com.makan"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "650901887083-njugbk9qha469803vsr2pnhfcs2fiit6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB2dzp3sMxgCFO-kOTobbhDCVEDlg9AwB0"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:650901887083:android:874b9b4ad71b0f15",
+        "mobilesdk_app_id": "1:933991405929:android:6447889bfdb516d14cc5f8",
         "android_client_info": {
           "package_name": "com.makan.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "650901887083-hgl062dneoguunjr4sitkgknslvhruhn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.makan.app",
-            "certificate_hash": "cbfde9bd979b13dc494593ea029e7d2a5aabc91d"
-          }
-        },
-        {
-          "client_id": "650901887083-njugbk9qha469803vsr2pnhfcs2fiit6.apps.googleusercontent.com",
+          "client_id": "933991405929-4ul0g0gv27oukfori4t13okaupki5in9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2dzp3sMxgCFO-kOTobbhDCVEDlg9AwB0"
+          "current_key": "AIzaSyAXZjwCpEBSqR6ckCfuYb7Njdd8q2iPPVQ"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933991405929-4ul0g0gv27oukfori4t13okaupki5in9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933991405929-fg40vf10qu0vqp8jtmdibt3jild3mhcp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.makan.greeniit"
+              }
+            }
+          ]
         }
       }
     }

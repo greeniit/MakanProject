@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:paddingBottom="@dimen/paddingbottom_5dp"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="@dimen/elevation_3dp"
+        card_view:cardCornerRadius="@dimen/radiuscorner_10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_250dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY" />
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_2dp"
+                android:background="@drawable/home_button_background"
+                android:gravity="bottom"
+                android:layout_marginTop="220dp"
+                android:layout_marginStart="@dimen/marginstart_10dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_20dp">
+
+                <ImageView
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginEnd="@dimen/marginend_5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ivPrice"
+                    android:src="@drawable/cashh"
+                    android:layout_width="@dimen/width_15dp"
+                    android:layout_height="@dimen/height_15dp" />
+                <TextView
+                    android:gravity="center"
+                    android:text="5000 OMR"
+                    android:id="@+id/tvPrice"
+                    android:layout_marginEnd="@dimen/marginend_5dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/ivPrice" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llDtails"
+                android:layout_marginStart="@dimen/album_title_padding"
+                android:layout_marginEnd="@dimen/album_title_padding"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/ivThumbnail"
+                android:weightSum="3"
+                android:paddingTop="@dimen/paddingtop_2dp"
+                android:paddingBottom="@dimen/paddingbottom_2dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivBed"
+                        android:src="@drawable/bedroomhome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="3 Bedrooms"
+                        android:id="@+id/tvBed"
+                        android:singleLine="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivBed" />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivBathroom"
+                        android:src="@drawable/bathroomhome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="5000 OMR"
+                        android:singleLine="true"
+                        android:id="@+id/tvBathrrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivBathroom" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivArea"
+                        android:src="@drawable/areahome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="6000 Sqft"
+                        android:id="@+id/tvArea"
+                        android:singleLine="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivArea" />
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llData"
+                android:layout_marginStart="@dimen/album_title_padding"
+                android:layout_marginEnd="@dimen/album_title_padding"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/llDtails"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivBeds"
+                        android:visibility="gone"
+                        android:src="@drawable/bedroomhome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/bedroom"
+                        android:id="@+id/tvBeds"
+                        android:singleLine="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivBeds" />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivBathrooms"
+                        android:visibility="gone"
+                        android:src="@drawable/bathroomhome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/bathroom"
+                        android:singleLine="true"
+                        android:id="@+id/tvBathrroms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivBathrooms" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivAreas"
+                        android:visibility="gone"
+                        android:src="@drawable/areahome"
+                        android:layout_width="@dimen/width_15dp"
+                        android:layout_height="@dimen/height_15dp" />
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/Sqft"
+                        android:id="@+id/tvAreas"
+                        android:singleLine="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivAreas" />
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/llLocationHolder"
+                android:layout_marginStart="@dimen/album_title_padding"
+                android:paddingTop="@dimen/paddingtop_2dp"
+                android:paddingBottom="@dimen/marginbottom_2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llData">
+
+                <ImageView
+                    android:id="@+id/ivStart"
+                    android:gravity="start"
+                    android:layout_width="@dimen/width_20dp"
+                    android:layout_height="@dimen/height_20dp"
+                    android:src="@drawable/ic_place_black_18dp" />
+
+                <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_toEndOf="@+id/ivStart"
+                    android:gravity="center"
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vatakara villiyapppay mayya"
+                    android:textAppearance="@android:style/TextAppearance.Small" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llLocationHolder"
+                android:layout_marginBottom="@dimen/marginbottom_2dp"
+                android:textSize="@dimen/textSize16sp"
+                android:layout_marginStart="@dimen/marginstart_10dp"
+                android:layout_marginEnd="@dimen/album_title_padding"
+                android:text="Luxury Homes"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/black" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

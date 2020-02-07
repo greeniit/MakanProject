@@ -53,7 +53,7 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         AdvertisementAdapter.ViewHolder viewHolder = (AdvertisementAdapter.ViewHolder) holder;
         AdvertisementResponse.Advertisement advertisement = advertisements.get(position);
-        viewHolder.tvDealerWebsite.setText(advertisement.getAddsWebsite());
+        viewHolder.tvDealerWebsite.setText(advertisement.getAddsDescription());
         Glide.with(mContext).load(WebConstant.BASE_IMAGE_URL+advertisement.getAddsPhoto()).into(viewHolder.ivAdvertisement);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

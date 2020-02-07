@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="@dimen/card_margin"
+    android:elevation="@dimen/elevation_3dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40dp"
+            android:padding="@dimen/padding_5dp"
+            android:gravity="center"
+            android:text="@string/selectLocation"
+            android:textColor="#000000"
+            android:textSize="12dp"
+            android:visibility="visible"
+            android:background="@drawable/new_home_button_background"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

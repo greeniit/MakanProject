@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cvDealerListHolder"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/card_margin">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -28,10 +28,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
+                android:paddingBottom="@dimen/paddingbottom_8dp"
+                android:paddingTop="@dimen/paddingtop_8dp"
+                android:paddingEnd="@dimen/paddingend_5dp"
+                android:paddingStart="@dimen/paddingstart_5dp"
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 android:textColor="@android:color/white" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/tvTitle"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/image_3" />
 
             <LinearLayout
@@ -56,7 +56,7 @@
                     android:id="@+id/llLocationHolder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="@dimen/marginbottom_5dp">
 
                     <ImageView
                         android:id="@+id/ivLocation"
@@ -69,8 +69,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginRight="2dp"
-                        android:layout_toRightOf="@+id/ivLocation"
+                        android:layout_marginEnd="@dimen/marginend_2dp"
+                        android:layout_toEndOf="@+id/ivLocation"
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:paddingBottom="@dimen/songs_count_padding_bottom"
@@ -97,8 +97,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginStart="@dimen/marginstart_5dp"
+                            android:layout_marginEnd="@dimen/marginend_5dp"
                             android:src="@drawable/price_white_18dp" />
 
 
@@ -111,11 +111,11 @@
                             android:gravity="center"
                             android:text="5000 OMR"
                             android:textColor="@android:color/white"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/textSize16sp" />
 
                         <View
                             android:layout_width="wrap_content"
-                            android:layout_height="2dp"
+                            android:layout_height="@dimen/height_2dp"
                             android:layout_alignEnd="@+id/tvPrevPrice"
                             android:layout_alignStart="@+id/tvPrevPrice"
                             android:layout_alignTop="@+id/tvPrevPrice"
@@ -127,7 +127,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_marginLeft="@dimen/card_margin"
+                        android:layout_marginStart="@dimen/card_margin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -138,8 +138,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
                             android:src="@drawable/price_white_18dp" />
 
                         <TextView
@@ -151,7 +151,7 @@
                             android:gravity="center"
                             android:text="4000 OMR"
                             android:textColor="@android:color/white"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/textSize12sp" />
 
                     </RelativeLayout>
 
@@ -190,5 +190,7 @@
         </LinearLayout>
 
     </FrameLayout>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

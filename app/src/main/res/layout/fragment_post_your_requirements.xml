@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="#ffff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_16dp">
+
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/nameheader"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:paddingStart="@dimen/paddingstart_5dp"
+            android:background="@drawable/fillterborder"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/emailheader"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:paddingStart="@dimen/paddingstart_5dp"
+            android:background="@drawable/fillterborder"
+            android:inputType="textPersonName" />
+
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/mobileheader"/>
+
+        <EditText
+            android:id="@+id/etMobile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:paddingStart="@dimen/paddingstart_5dp"
+            android:background="@drawable/fillterborder"/>
+
+
+        <TextView
+            android:id="@+id/tvTransType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/transactionTypeHeader"/>
+
+        <Spinner
+            android:id="@+id/spTransType"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:background="@drawable/fillterborder"/>
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/categoryHeader"/>
+
+        <Spinner
+            android:id="@+id/spCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:background="@drawable/fillterborder"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp">
+
+        <TextView
+            android:id="@+id/tvGov"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/govheader"/>
+
+        <Spinner
+            android:id="@+id/spGov"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:paddingStart="@dimen/paddingstart_5dp"
+            android:background="@drawable/fillterborder"
+            android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp">
+
+
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/stateheader"/>
+
+        <Spinner
+            android:id="@+id/spState"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:background="@drawable/fillterborder"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvAreaRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/arearange"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Spinner
+                android:id="@+id/spAreaMin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp"/>
+
+
+            <Spinner
+                android:id="@+id/spAreaMax"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/marginstart_5dp"/>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPriceRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/priceRangeHeader"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Spinner
+                android:id="@+id/spPriceMin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp"/>
+
+
+            <Spinner
+                android:id="@+id/spPriceMax"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/marginstart_5dp"/>
+
+
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginEnd="@dimen/marginend_5dp">
+
+        <TextView
+            android:id="@+id/tvBedRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/bedroomheader"/>
+
+        <Spinner
+            android:id="@+id/spBedRoom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_45dp"
+            android:background="@drawable/fillterborder" />
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/marginstart_5dp">
+
+            <TextView
+                android:id="@+id/tvBathRooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#023D61"
+                android:padding="@dimen/padding_4dp"
+                android:textSize="@dimen/textSize14sp"
+                android:textAllCaps="true"
+                android:text="@string/bathroom"/>
+
+            <Spinner
+                android:id="@+id/spBathEooms"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvFloornumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/floornumberheader"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Spinner
+                android:id="@+id/spFloorFrom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp"/>
+
+
+            <Spinner
+                android:id="@+id/spFloorTo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45dp"
+                android:background="@drawable/fillterborder"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/marginstart_5dp"/>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/marginend_5dp">
+
+                <TextView
+                    android:id="@+id/tvFreqOfAlerts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#023D61"
+                    android:padding="@dimen/padding_5dp"
+                    android:textSize="@dimen/textSize14sp"
+                    android:text="@string/freqOfAlert"/>
+
+                <Spinner
+                    android:id="@+id/spFreqOfAlerts"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_45dp"
+                    android:background="@drawable/fillterborder" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/marginstart_5dp">
+
+                <TextView
+                    android:id="@+id/tvAgeOfConstruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#023D61"
+                    android:padding="@dimen/padding_5dp"
+                    android:textSize="@dimen/textSize14sp"
+                    android:text="@string/ageOfConstructionHeader"/>
+
+                <Spinner
+                    android:id="@+id/spAgeOfConstruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_45dp"
+                    android:background="@drawable/fillterborder" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPropertyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#023D61"
+            android:padding="@dimen/padding_5dp"
+            android:textSize="@dimen/textSize14sp"
+            android:text="@string/propertyDesc"/>
+
+        <EditText
+             android:layout_width="fill_parent"
+             android:layout_height="150dp"
+             android:gravity="top"
+             android:id="@+id/et_dis"
+             android:paddingStart="@dimen/paddingstart_5dp"
+             android:background="@drawable/fillterborder"
+             android:fitsSystemWindows="true"
+             android:breakStrategy="balanced"
+             android:inputType="textMultiLine"
+             android:singleLine="false"
+             android:padding="@dimen/padding_5dp" />
+
+
+        <Button
+            android:id="@+id/bt_postYourRequirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimary"
+            android:elevation="@dimen/elevation_4dp"
+            android:paddingStart="@dimen/paddingstart_70dp"
+            android:paddingEnd="@dimen/paddingend_70dp"
+            android:layout_marginTop="@dimen/margintop_10dp"
+            android:text="@string/postyourrequirements"
+            android:textColor="#fff" />
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

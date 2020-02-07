@@ -2,6 +2,7 @@ package com.makan.app.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,20 +12,31 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.Auth;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.makan.R;
 import com.makan.app.app.AppState;
@@ -43,8 +55,6 @@ import com.makan.app.web.pojo.SocialMediaResponse;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -73,13 +83,6 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     @BindView(R.id.tvForgotPassword)
     TextView tvForgotPassword;
-
-    @BindView(R.id.btnSignInWithGoogle)
-    Button btnGoogleSignIn;
-
-    @BindView(R.id.btnSignInWithFB)
-    Button btnSignInWithFB;
-
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
     private static final int GOOGLE_SIGN_IN = 01;
@@ -87,14 +90,26 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     private static final String EMAIL = "email";
     private CallbackManager callbackManager;
+    GoogleSignInClient mGoogleSignInClient;
+    private TextView tv_heading;
+    private SignInButton btnSignInWithGoogle;
+    private LoginButton btnSignInWithFB;
+
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
         setContentView(R.layout.activity_login);
+        FirebaseApp.initializeApp(this);
         ButterKnife.bind(this);
-
+        tv_heading = (TextView) findViewById(R.id.tv_heading);
+        btnSignInWithGoogle = findViewById(R.id.btnSignInWithGoogle);
+        btnSignInWithFB = (LoginButton) findViewById(R.id.btnSignInWithFB);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/chalkduster.ttf");
+        tv_heading.setTypeface(custom_font);
+        auth = FirebaseAuth.getInstance();
         callbackManager = CallbackManager.Factory.create();
 
         // Callback registration
@@ -103,59 +118,59 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 System.out.println("Login success");
+                handleFacebookToken(loginResult.getAccessToken());
 
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(
-                                    JSONObject object,
-                                    GraphResponse response) {
-
-                                Log.i("Makan",response.toString());
-                                Log.i("Makan",object.toString());
-                                if (object.has("email")) {
-                                    try {
-
-                                        System.out.println("Email:" + object.getString("email"));
-
-                                        final String email=object.getString("email");
-                                        final String name = object.getString("name");
-                                        final String userId = object.getString("id");
-                                        final String link = "https://graph.facebook.com/" + userId + "/picture?type=large";
-
-                                        if(email!=null){
-
-                                            final SocialMediaRequest socialMediaRequest=new SocialMediaRequest();
-                                            socialMediaRequest.setUsername(email);
-
-                                            showProgressDialog();
-                                            new SocialMediaSignUpTask(socialMediaRequest,name,link).execute();
-                                        }else{
-                                            LoginManager.getInstance().logOut();
-                                            dismissProgressDialog();
-                                            new Utility().showMessageAlertDialog(LoginActivity.this,"Make sure your email address is associated and confirmed with Facebook.");
-                                        }
-
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }else{
-
-                                    LoginManager.getInstance().logOut();
-                                    dismissProgressDialog();
-                                    new Utility().showMessageAlertDialog(LoginActivity.this,"Make sure your email address is associated and confirmed with Facebook.");
-                                }
-
-
-
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,link,email");
-                request.setParameters(parameters);
-                request.executeAsync();
+//                GraphRequest request = GraphRequest.newMeRequest(
+//                        loginResult.getAccessToken(),
+//                        new GraphRequest.GraphJSONObjectCallback() {
+//                            @Override
+//                            public void onCompleted(
+//                                    JSONObject object,
+//                                    GraphResponse response) {
+//
+//                                Log.i("Makan", response.toString());
+//                                Log.i("Makan", object.toString());
+//                                if (object.has("email")) {
+//                                    try {
+//
+//                                        System.out.println("Email:" + object.getString("email"));
+//
+//                                        final String email = object.getString("email");
+//                                        final String name = object.getString("name");
+//                                        final String userId = object.getString("id");
+//                                        final String link = "https://graph.facebook.com/" + userId + "/picture?type=large";
+//
+//                                        if (email != null) {
+//
+//                                            final SocialMediaRequest socialMediaRequest = new SocialMediaRequest();
+//                                            socialMediaRequest.setEmail(email);
+//
+//                                            showProgressDialog();
+//                                            new SocialMediaSignUpTask(socialMediaRequest, name, link).execute();
+//                                        } else {
+//                                            LoginManager.getInstance().logOut();
+//                                            dismissProgressDialog();
+//                                            new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+//                                        }
+//
+//
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                } else {
+//
+//                                    LoginManager.getInstance().logOut();
+//                                    dismissProgressDialog();
+//                                    new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+//                                }
+//
+//
+//                            }
+//                        });
+//                Bundle parameters = new Bundle();
+//                parameters.putString("fields", "id,name,link,email");
+//                request.setParameters(parameters);
+//                request.executeAsync();
             }
 
             @Override
@@ -167,13 +182,119 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                System.out.println("Login error"+exception);
+                System.out.println("Login error" + exception);
             }
 
         });
 
         initialiseGoogleSignIn();
         setToolBar();
+    }
+
+    private void handleFacebookToken(AccessToken accessToken) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+
+        auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()){
+                    FirebaseUser myuserobj = auth.getCurrentUser();
+                    updateUi(myuserobj);
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Could not register to firebase",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void updateUi(final FirebaseUser myuserobj) {
+
+
+        if (myuserobj.getEmail()!=null){
+
+            final String email = myuserobj.getEmail();
+            final String name = myuserobj.getDisplayName();
+            final String userId = myuserobj.getUid();
+            final String link = "https://graph.facebook.com/" + userId + "/picture?type=large";
+
+            if (email != null) {
+
+                final SocialMediaRequest socialMediaRequest = new SocialMediaRequest();
+                socialMediaRequest.setEmail(email);
+                socialMediaRequest.setDisplayName(name);
+
+                showProgressDialog();
+                new SocialMediaSignUpTask(socialMediaRequest, name, link).execute();
+            } else {
+                LoginManager.getInstance().logOut();
+                dismissProgressDialog();
+                new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+            }
+
+        }
+        else {
+
+            LoginManager.getInstance().logOut();
+            dismissProgressDialog();
+            new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+        }
+
+        /*GraphRequest request = GraphRequest.newMeRequest(
+                loginResult.getAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+
+                        Log.i("Makan", response.toString());
+                        Log.i("Makan", myuserobj.);
+                        if (object.has("email")) {
+                            try {
+
+                                System.out.println("Email:" + object.getString("email"));
+
+                                final String email = object.getString("email");
+                                final String name = object.getString("name");
+                                final String userId = object.getString("id");
+                                final String link = "https://graph.facebook.com/" + userId + "/picture?type=large";
+
+                                if (email != null) {
+
+                                    final SocialMediaRequest socialMediaRequest = new SocialMediaRequest();
+                                    socialMediaRequest.setEmail(email);
+
+                                    showProgressDialog();
+                                    new SocialMediaSignUpTask(socialMediaRequest, name, link).execute();
+                                } else {
+                                    LoginManager.getInstance().logOut();
+                                    dismissProgressDialog();
+                                    new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                            LoginManager.getInstance().logOut();
+                            dismissProgressDialog();
+                            new Utility().showMessageAlertDialog(LoginActivity.this, "Make sure your email address is associated and confirmed with Facebook.");
+                        }
+
+
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link,email");
+        request.setParameters(parameters);
+        request.executeAsync();*/
     }
 
     @Override
@@ -194,35 +315,41 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     private void initialiseGoogleSignIn() {
 
+        FirebaseApp.initializeApp(this);
+
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this, this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
 
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
     }
 
     @OnClick(R.id.btnLogin)
-    void onSignInClicked(){
+    void onSignInClicked() {
 
-        if(etEmail.getText().length()==0){
+        if (etEmail.getText().length() == 0) {
 
-            new Utility().showMessageAlertDialog(this,"Specify email.");
+            new Utility().showMessageAlertDialog(this, getString(R.string.specifyemail));
 
-        }else if(etPassword.getText().length()==0){
+        } else if (etPassword.getText().length() == 0) {
 
-            new Utility().showMessageAlertDialog(this,"Specify password.");
-        }else{
+            new Utility().showMessageAlertDialog(this, getString(R.string.specifyPassword));
+        } else {
 
-            SignInRequest signInRequest=new SignInRequest();
+            SignInRequest signInRequest = new SignInRequest();
             signInRequest.setUsername(etEmail.getText().toString());
             signInRequest.setPass(etPassword.getText().toString());
 
@@ -232,29 +359,28 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     }
 
     @OnClick(R.id.tvSignUp)
-    void onSignUpClicked(){
+    void onSignUpClicked() {
 
         new Utility().hideSoftKeyBoard(LoginActivity.this);
         new Utility().moveToActivity(this, SignUpActivity.class, null);
     }
 
     @OnClick(R.id.tvForgotPassword)
-    void onForgotPasswordClicked(){
+    void onForgotPasswordClicked() {
 
         new Utility().hideSoftKeyBoard(LoginActivity.this);
         new Utility().moveToActivity(this, ForgotPasswordActivity.class, null);
     }
 
     @OnClick(R.id.btnSignInWithGoogle)
-    void onSignInWithGoogleClicked(){
+    void onSignInWithGoogleClicked() {
 
         new Utility().hideSoftKeyBoard(LoginActivity.this);
         signIn();
     }
 
     @OnClick(R.id.btnSignInWithFB)
-    void onFacebookButtonClicked(){
-
+    void onFacebookButtonClicked() {
         new Utility().hideSoftKeyBoard(LoginActivity.this);
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email"));
     }
@@ -263,7 +389,6 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle("");
@@ -276,16 +401,30 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
         if (requestCode == GOOGLE_SIGN_IN) {
-            super.onActivityResult(requestCode, resultCode, data);
-            showProgressDialog();
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }else{
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+//        if (requestCode == GOOGLE_SIGN_IN) {
+//            super.onActivityResult(requestCode, resultCode, data);
+//            showProgressDialog();
+////            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+////            int statusCode = result.getStatus().getStatusCode();
+////            handleSignInResult(result);
+//
+//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            handleSignInResult(task);
+//        }else{
+//            callbackManager.onActivityResult(requestCode, resultCode, data);
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+
     }
 
 
@@ -319,42 +458,43 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         System.out.println("Google sign in failed");
     }
 
 
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        Log.d(TAG, "handleSignInResult:" + completedTask.isSuccessful());
+        if (completedTask.isComplete()) {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
+            GoogleSignInAccount acct = completedTask.getResult();
 
-            if(acct!=null){
+            if (acct != null) {
 
                 Log.e(TAG, "display name: " + acct.getDisplayName());
 
                 String personName = acct.getDisplayName();
 
-                String personPhotoUrl="";
+                String personPhotoUrl = "";
 
-                if(acct.getPhotoUrl()!=null){
+                if (acct.getPhotoUrl() != null) {
                     personPhotoUrl = String.valueOf(acct.getPhotoUrl());
                 }
 
                 String email = acct.getEmail();
+                String name = acct.getDisplayName();
 
-                System.out.println("==========="+email);
+                System.out.println("===========" + email);
 
-                SocialMediaRequest socialMediaRequest=new SocialMediaRequest();
-                socialMediaRequest.setUsername(email);
+                SocialMediaRequest socialMediaRequest = new SocialMediaRequest();
+                socialMediaRequest.setEmail(email);
+                socialMediaRequest.setDisplayName(name);
+                socialMediaRequest.setTelephone("");
 
-                new SocialMediaSignUpTask(socialMediaRequest,personName,personPhotoUrl).execute();
+                new SocialMediaSignUpTask(socialMediaRequest, personName, personPhotoUrl).execute();
 
-            }else{
-
+            } else {
+                System.out.println("Google sign in failed");
                 dismissProgressDialog();
             }
 
@@ -365,6 +505,20 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         }
     }
 
+
+//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+//        try {
+//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+//
+//            // Signed in successfully, show authenticated UI.
+//            Log.w(TAG, "XHDVKFAJHSDBVFKJHAVBSDKJFHVAKSJDFVKJASVFJK");
+//        } catch (ApiException e) {
+//            // The ApiException status code indicates the detailed failure reason.
+//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+//
+//        }
+//    }
 
 
     private class SignInTask extends AsyncTask<Void, Void, Integer> {
@@ -401,27 +555,27 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
                         if (signInResponse.getRes() == 1) {
 
-                            if(signInResponse.getUserDetails()!=null&&signInResponse.getUserDetails().size()>0){
+                            if (signInResponse.getUserDetails() != null && signInResponse.getUserDetails().size() > 0) {
 
-                                User userDetail=new User();
+                                User userDetail = new User();
                                 userDetail.setEmail(etEmail.getText().toString());
                                 userDetail.setName(signInResponse.getUserDetails().get(0).getDisplayName());
                                 userDetail.setId(signInResponse.getUserDetails().get(0).getUId());
                                 userDetail.setPhone(signInResponse.getUserDetails().get(0).getTelephone());
                                 userDetail.setProfileImage(signInResponse.getUserDetails().get(0).getProfileImage());
 
-                                Gson gson=new Gson();
-                                String userData=gson.toJson(userDetail, User.class);
-                                new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA,userData);
-
-
+                                Gson gson = new Gson();
+                                String userData = gson.toJson(userDetail, User.class);
+                                new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA, userData);
                                 AppState.getInstance().setUserId(userDetail.getId());
-
                                 AppState.getInstance().setLoginStatus(true);
 
+
                                 statusCode = Codes.SUCCESS;
-                            }else{
-                                statusCode=Codes.ERROR_INVALID_CREDENTIALS;
+
+
+                            } else {
+                                statusCode = Codes.ERROR_INVALID_CREDENTIALS;
                             }
 
 
@@ -451,12 +605,10 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         }
 
         @Override
-        protected void onPostExecute(Integer result) {
+        protected void onPostExecute(Integer result)
+        {
             super.onPostExecute(result);
-
-
             dismissProgressDialog();
-
             if (result == Codes.SUCCESS) {
 
                 setResult(RESULT_OK);
@@ -470,10 +622,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                 } else {
                     new Utility().showMessageAlertDialog(LoginActivity.this, new Utility().getErrorMessage(LoginActivity.this, result));
                 }
-
             }
-
-
         }
     }
 
@@ -484,10 +633,10 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         String name;
         String imageLink;
 
-        public SocialMediaSignUpTask(SocialMediaRequest socialMediaRequest,String name,String imageLink) {
+        public SocialMediaSignUpTask(SocialMediaRequest socialMediaRequest, String name, String imageLink) {
 
             this.socialMediaRequest = socialMediaRequest;
-            this.name= name;
+            this.name = name;
             this.imageLink = imageLink;
         }
 
@@ -514,45 +663,41 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
                         if (socialMediaResponse.getRes() == 1) {
 
-                            if(socialMediaResponse.getUserDetails()!=null){
+                            if (socialMediaResponse.getUserDetails() != null) {
 
-                                User userDetail=new User();
-                                userDetail.setEmail(socialMediaRequest.getUsername());
+                                User userDetail = new User();
+                                userDetail.setEmail(socialMediaRequest.getEmail());
 
-                                if(socialMediaResponse.getUserDetails().getDisplayName()!=null && socialMediaResponse.getUserDetails().getDisplayName().toString().length()>0){
-                                    userDetail.setName(socialMediaResponse.getUserDetails().getDisplayName().toString());
-                                }else{
+                                if (socialMediaResponse.getUserDetails().get(0).getDisplayName() != null && socialMediaResponse.getUserDetails().get(0).getDisplayName().length() > 0) {
+                                    userDetail.setName(socialMediaResponse.getUserDetails().get(0).getDisplayName());
+                                } else {
 
                                     userDetail.setName(name);
                                     userDetail.setProfileImage(imageLink);
                                 }
 
-                                userDetail.setId(socialMediaResponse.getUserDetails().getUId());
+                                userDetail.setId(socialMediaResponse.getUserDetails().get(0).getUId());
 
-                                if(socialMediaResponse.getUserDetails().getTelephone()!=null){
-                                    userDetail.setPhone(socialMediaResponse.getUserDetails().getTelephone().toString());
+                                if (socialMediaResponse.getUserDetails().get(0).getTelephone() != null) {
+                                    userDetail.setPhone(socialMediaResponse.getUserDetails().get(0).getTelephone());
                                 }
 
-                                if(socialMediaResponse.getUserDetails().getProfileImage()!=null){
-                                    userDetail.setProfileImage(socialMediaResponse.getUserDetails().getProfileImage().toString());
+                                if (socialMediaResponse.getUserDetails().get(0).getProfileImage() != null) {
+                                    userDetail.setProfileImage(String.valueOf(socialMediaResponse.getUserDetails().get(0).getProfileImage()));
                                 }
 
 
-                                Gson gson=new Gson();
-                                String userData=gson.toJson(userDetail, User.class);
-                                new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA,userData);
+                                Gson gson = new Gson();
+                                String userData = gson.toJson(userDetail, User.class);
+                                new PreferenceManager().setValue(LoginActivity.this, PrefKey.USER_DATA, userData);
 
 
                                 AppState.getInstance().setUserId(userDetail.getId());
-
                                 AppState.getInstance().setLoginStatus(true);
-
                                 statusCode = Codes.SUCCESS;
-                            }else{
-                                statusCode=Codes.ERROR_INVALID_CREDENTIALS;
+                            } else {
+                                statusCode = Codes.ERROR_INVALID_CREDENTIALS;
                             }
-
-
                         } else if (socialMediaResponse.getRes() == 0) {
                             errorMessage = socialMediaResponse.getMsg();
                             statusCode = Codes.ERROR_USER_ALREADY_EXISTS;
@@ -573,16 +718,13 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             } else {
                 statusCode = Codes.ERROR_NETWORK;
             }
-
-
             return statusCode;
         }
 
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-
-
+            
             dismissProgressDialog();
 
             if (result == Codes.SUCCESS) {

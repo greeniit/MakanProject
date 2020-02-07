@@ -16,9 +16,13 @@ public class HomeResponse {
     @SerializedName("total_rent_items_count")
     @Expose
     private Integer totalRentItemsCount;
-    @SerializedName("featured_property")
+    @SerializedName("featured_property_sell")
     @Expose
     private List<RecentProperty> featuredProperty;
+
+    @SerializedName("featured_property_rent")
+    @Expose
+    private List<RecentProperty> featuredPropertyRent;
 
     @SerializedName("slider_images")
     @Expose
@@ -43,6 +47,8 @@ public class HomeResponse {
     @Expose
     private String sessionToken;
 
+
+
     public Integer getTotalBuyItemsCount() {
         return totalBuyItemsCount;
     }
@@ -63,8 +69,19 @@ public class HomeResponse {
         return featuredProperty;
     }
 
+
+
     public void setFeaturedProperty(List<RecentProperty> featuredProperty) {
         this.featuredProperty = featuredProperty;
+    }
+
+
+    public List<RecentProperty> getFeaturedPropertyRent() {
+        return featuredPropertyRent;
+    }
+
+    public void setFeaturedPropertyRent(List<RecentProperty> featuredPropertyRent) {
+        this.featuredPropertyRent = featuredPropertyRent;
     }
 
     public Integer getTotalFeaturedPropertyCount() {
@@ -174,6 +191,14 @@ public class HomeResponse {
         @SerializedName("favourite")
         @Expose
         private String favourite;
+
+        @SerializedName("bathroom_count")
+        @Expose
+        private String bathroom_count;
+
+        @SerializedName("bed_count")
+        @Expose
+        private String bed_count;
 
         public String getPropertyId() {
             return propertyId;
@@ -303,6 +328,22 @@ public class HomeResponse {
             this.favourite = favourite;
         }
 
+        public String getBathroom_count() {
+            return bathroom_count;
+        }
+
+        public void setBathroom_count(String bathroom_count) {
+            this.bathroom_count = bathroom_count;
+        }
+
+        public String getBed_count() {
+            return bed_count;
+        }
+
+        public void setBed_count(String bed_count) {
+            this.bed_count = bed_count;
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -326,6 +367,8 @@ public class HomeResponse {
             dest.writeString(this.lat);
             dest.writeString(this._long);
             dest.writeString(this.favourite);
+            dest.writeString(this.bathroom_count);
+            dest.writeString(this.bed_count);
         }
 
         public RecentProperty() {
@@ -348,6 +391,8 @@ public class HomeResponse {
             this.lat = in.readString();
             this._long = in.readString();
             this.favourite = in.readString();
+            this.bathroom_count = in.readString();
+            this.bed_count = in.readString();
         }
 
         public static final Parcelable.Creator<RecentProperty> CREATOR = new Parcelable.Creator<RecentProperty>() {
@@ -365,18 +410,20 @@ public class HomeResponse {
 
     public class SliderImage {
 
-        @SerializedName("prefer_cities_id")
+        @SerializedName("adds_id")
         @Expose
         private String preferCitiesId;
-        @SerializedName("image")
+        @SerializedName("adds_img")
         @Expose
         private String image;
-        @SerializedName("citie_name")
+        @SerializedName("image_title")
         @Expose
         private String citieName;
-        @SerializedName("count")
+        @SerializedName("adds_img_id")
         @Expose
         private String count;
+
+
 
         public String getPreferCitiesId() {
             return preferCitiesId;

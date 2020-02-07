@@ -8,4 +8,7 @@
     <color name="semi_transparent_black">#80000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="gold">#FFB40C</color>
+
+    <color name="buttoncolor">#EAECEE</color>
 </resources>

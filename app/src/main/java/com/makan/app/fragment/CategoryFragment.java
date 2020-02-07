@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.makan.R;
 import com.makan.app.adapter.CategoryAdapter;
 import com.makan.app.adapter.SubCategoryAdapter;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.GetCategoryResponse;
@@ -65,6 +68,7 @@ public class CategoryFragment extends BaseFragment {
 
         private String errorMessage;
         private GetCategoryResponse categoryResponse;
+        private BestDealsRequest bestDealsRequest;
 
         @Override
         protected void onPreExecute() {
@@ -80,7 +84,10 @@ public class CategoryFragment extends BaseFragment {
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<GetCategoryResponse> response = WebServiceManager.getInstance().getCategories();
+                bestDealsRequest = new BestDealsRequest();
+                bestDealsRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
+
+                Response<GetCategoryResponse> response = WebServiceManager.getInstance().getCategories(bestDealsRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

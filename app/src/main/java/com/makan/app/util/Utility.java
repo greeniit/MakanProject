@@ -58,8 +58,7 @@ public class Utility {
     public void loadImage(Context context, String url, ImageView imageView) {
 
         Glide.with(context).load(url)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .into(imageView);
     }
 
@@ -114,6 +113,15 @@ public class Utility {
             case Codes.ERROR_INVALID_CREDENTIALS:
 
                 return context.getResources().getString(R.string.error_invalid_credentials);
+
+            case Codes.ERROR_NO_RECORDS:
+
+                return context.getResources().getString(R.string.error_no_records);
+
+
+            case Codes.ALERT_FOR_SUCESS:
+
+                return context.getResources().getString(R.string.thankyoufoyourrating);
 
 
             default:

@@ -1,14 +1,20 @@
 package com.makan.app.web;
 
 import com.makan.app.app.WebConstant;
+import com.makan.app.fragment.BestDealsRequest;
 import com.makan.app.web.pojo.AdvertisementResponse;
+import com.makan.app.web.pojo.AgencyPackageRequest;
+import com.makan.app.web.pojo.AgencyPackageResponse;
 import com.makan.app.web.pojo.BookPropertyRequest;
 import com.makan.app.web.pojo.BookPropertyResponse;
 import com.makan.app.web.pojo.DealerDetailRequest;
 import com.makan.app.web.pojo.DealerDetailResponse;
+import com.makan.app.web.pojo.DealerRequest;
 import com.makan.app.web.pojo.DealerResponse;
 import com.makan.app.web.pojo.FeedbackRequest;
 import com.makan.app.web.pojo.FeedbackResponse;
+import com.makan.app.web.pojo.FillterCategoryResponse;
+import com.makan.app.web.pojo.FilterCategoryRequest;
 import com.makan.app.web.pojo.FilterSearchRequest;
 import com.makan.app.web.pojo.FilterSearchResponse;
 import com.makan.app.web.pojo.FindDealsResponse;
@@ -23,7 +29,21 @@ import com.makan.app.web.pojo.GetPropertyByPlaceResponse;
 import com.makan.app.web.pojo.GetPropertyByTypeRequest;
 import com.makan.app.web.pojo.HomeRequest;
 import com.makan.app.web.pojo.HomeResponse;
+import com.makan.app.web.pojo.NewFilterRequest;
+import com.makan.app.web.pojo.NewFilterResponse;
 import com.makan.app.web.pojo.NewsResponse;
+import com.makan.app.web.pojo.PostYourReqRequest;
+import com.makan.app.web.pojo.PostYourReqResponse;
+import com.makan.app.web.pojo.ProfesionalServiceRequest;
+import com.makan.app.web.pojo.ProfesionalServiceRespose;
+import com.makan.app.web.pojo.ProfessionalDetailsRequest;
+import com.makan.app.web.pojo.ProfessionalDetailsResponse;
+import com.makan.app.web.pojo.ProfessionalRatingRequest;
+import com.makan.app.web.pojo.ProfessionalRatingResponse;
+import com.makan.app.web.pojo.ProfessionalSearchRequest;
+import com.makan.app.web.pojo.ProfessionalSerachResponse;
+import com.makan.app.web.pojo.ProffesionalPackageRequest;
+import com.makan.app.web.pojo.ProffesionalPackageResponse;
 import com.makan.app.web.pojo.PropertyDetailRequest;
 import com.makan.app.web.pojo.PropertyDetailResponse;
 import com.makan.app.web.pojo.SearchByNameRequest;
@@ -32,6 +52,8 @@ import com.makan.app.web.pojo.SignInRequest;
 import com.makan.app.web.pojo.SignInResponse;
 import com.makan.app.web.pojo.SignUpRequest;
 import com.makan.app.web.pojo.SignUpResponse;
+import com.makan.app.web.pojo.SimilarDataRequest;
+import com.makan.app.web.pojo.SimilarDataResponse;
 import com.makan.app.web.pojo.SocialMediaRequest;
 import com.makan.app.web.pojo.SocialMediaResponse;
 import com.makan.app.web.pojo.SubscribeBusinessRequest;
@@ -43,10 +65,13 @@ import com.makan.app.web.pojo.WishListOperationResponse;
 import com.makan.app.web.pojo.WishListRequest;
 import com.makan.app.web.pojo.WishListResponse;
 
+import java.util.concurrent.Executor;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RestApi {
 
@@ -60,16 +85,32 @@ public interface RestApi {
     Call<HomeResponse> callHomeWebService(@Body HomeRequest homeRequest);
 
     @POST(WebConstant.AGENCY)
-    Call<DealerResponse> callDealerService();
+    Call<DealerResponse> callDealerService(@Body DealerRequest dealerRequest);
 
     @POST(WebConstant.CATEGORY)
-    Call<GetCategoryResponse> callGetCategoryService();
+    Call<GetCategoryResponse> callGetCategoryService(@Body BestDealsRequest bestDealsRequest);
 
     @POST(WebConstant.NEWS)
-    Call<NewsResponse> callNewsWebService();
+    Call<NewsResponse> callNewsWebService(@Body BestDealsRequest bestDealsRequest);
+
+    @POST(WebConstant.PROFESIONAL_SERVICE_LIST)
+    Call<ProfesionalServiceRespose> callProfessionalServiceWebService(@Body ProfesionalServiceRequest profesionalServiceRequest);
+
+    @POST(WebConstant.PROFESIONAL_SEARCHBYID)
+    Call<ProfessionalSerachResponse> callProfessionalSearchWebService(@Body ProfessionalSearchRequest professionalSearchRequest);
+
+    @POST(WebConstant.PROFESIONAL_DETAIL)
+    Call<ProfessionalDetailsResponse> callProfessionaDetailsWebService(@Body ProfessionalDetailsRequest professionalDetailsRequest);
+
+    @POST(WebConstant.PROFESIONAL_RATING)
+    Call<ProfessionalRatingResponse> sendProfessionalRating(@Body ProfessionalRatingRequest professionalRatingRequest);
+
 
     @POST(WebConstant.PROPERTY_DETAIL)
     Call<PropertyDetailResponse> callPropertyDetail(@Body PropertyDetailRequest propertyDetailRequest);
+
+    @POST(WebConstant.POST_YOUR_REQ)
+    Call<PostYourReqResponse> postYourReq(@Body PostYourReqRequest postYourReqRequest);
 
     @POST(WebConstant.WISH_LIST)
     Call<WishListResponse> callWishList(@Body WishListRequest wishListRequest);
@@ -92,14 +133,14 @@ public interface RestApi {
     @POST(WebConstant.PROPERTY_BY_TYPE)
     Call<GetPropertiesByTypeResponse> getPropertyByType(@Body GetPropertyByTypeRequest getPropertyByTypeRequest);
 
-    @GET(WebConstant.FIND_DEALS)
-    Call<FindDealsResponse> findDeals();
+    @POST(WebConstant.FIND_DEALS)
+    Call<FindDealsResponse> findDeals(@Body BestDealsRequest bestDealsRequest);
 
     @POST(WebConstant.GET_PROPERTY_BY_PLACE)
     Call<GetPropertyByPlaceResponse> getPropertiesByPlace(@Body GetPropertyByPlaceRequest getPropertyByPlaceRequest);
 
-    @GET(WebConstant.GET_ADVERTISEMENTS)
-    Call<AdvertisementResponse> callAdds();
+    @POST(WebConstant.GET_ADVERTISEMENTS)
+    Call<AdvertisementResponse> callAdds(@Body BestDealsRequest bestDealsRequest);
 
     @POST(WebConstant.GET_SEARCH_RESULT_BY_FILTER)
     Call<FilterSearchResponse> getSearchResultByFilter(@Body FilterSearchRequest filterSearchRequest);
@@ -120,7 +161,20 @@ public interface RestApi {
     Call<ForgotPasswordResponse> requestPassword(@Body ForgotPasswordRequest forgotPasswordRequest);
 
     @POST(WebConstant.UPLOAD_IMAGE)
-
     Call<UploadImageResponse> uploadImage(@Body UploadImageRequest uploadImageRequest);
 
+    @POST(WebConstant.FILTER_CATEGORY)
+    Call<FillterCategoryResponse> getfilterCategories(@Body FilterCategoryRequest filterCategoryRequest);
+
+    @POST(WebConstant.FILTER_DATA)
+    Call<NewFilterResponse> getFilterData(@Body NewFilterRequest newFilterRequest);
+
+    @POST(WebConstant.SIMLIAR_PROPERTY)
+    Call<SimilarDataResponse> getSimilarData(@Body SimilarDataRequest similarDataRequest);
+
+    @POST(WebConstant.PACKAGE_DATA)
+    Call<ProffesionalPackageResponse> getPackageData(@Body ProffesionalPackageRequest proffesionalPackageRequest);
+
+    @POST(WebConstant.AGENCY_DATA)
+    Call<AgencyPackageResponse> getAgencyData(@Body AgencyPackageRequest agencyPackageRequest);
 }

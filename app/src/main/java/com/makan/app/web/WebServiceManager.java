@@ -1,14 +1,20 @@
 package com.makan.app.web;
 
 import com.makan.app.app.AppLog;
+import com.makan.app.fragment.BestDealsRequest;
 import com.makan.app.web.pojo.AdvertisementResponse;
+import com.makan.app.web.pojo.AgencyPackageRequest;
+import com.makan.app.web.pojo.AgencyPackageResponse;
 import com.makan.app.web.pojo.BookPropertyRequest;
 import com.makan.app.web.pojo.BookPropertyResponse;
 import com.makan.app.web.pojo.DealerDetailRequest;
 import com.makan.app.web.pojo.DealerDetailResponse;
+import com.makan.app.web.pojo.DealerRequest;
 import com.makan.app.web.pojo.DealerResponse;
 import com.makan.app.web.pojo.FeedbackRequest;
 import com.makan.app.web.pojo.FeedbackResponse;
+import com.makan.app.web.pojo.FillterCategoryResponse;
+import com.makan.app.web.pojo.FilterCategoryRequest;
 import com.makan.app.web.pojo.FilterSearchRequest;
 import com.makan.app.web.pojo.FilterSearchResponse;
 import com.makan.app.web.pojo.FindDealsResponse;
@@ -23,7 +29,21 @@ import com.makan.app.web.pojo.GetPropertyByPlaceResponse;
 import com.makan.app.web.pojo.GetPropertyByTypeRequest;
 import com.makan.app.web.pojo.HomeRequest;
 import com.makan.app.web.pojo.HomeResponse;
+import com.makan.app.web.pojo.NewFilterRequest;
+import com.makan.app.web.pojo.NewFilterResponse;
 import com.makan.app.web.pojo.NewsResponse;
+import com.makan.app.web.pojo.PostYourReqRequest;
+import com.makan.app.web.pojo.PostYourReqResponse;
+import com.makan.app.web.pojo.ProfesionalServiceRequest;
+import com.makan.app.web.pojo.ProfesionalServiceRespose;
+import com.makan.app.web.pojo.ProfessionalDetailsRequest;
+import com.makan.app.web.pojo.ProfessionalDetailsResponse;
+import com.makan.app.web.pojo.ProfessionalRatingRequest;
+import com.makan.app.web.pojo.ProfessionalRatingResponse;
+import com.makan.app.web.pojo.ProfessionalSearchRequest;
+import com.makan.app.web.pojo.ProfessionalSerachResponse;
+import com.makan.app.web.pojo.ProffesionalPackageRequest;
+import com.makan.app.web.pojo.ProffesionalPackageResponse;
 import com.makan.app.web.pojo.PropertyDetailRequest;
 import com.makan.app.web.pojo.PropertyDetailResponse;
 import com.makan.app.web.pojo.SearchByNameRequest;
@@ -32,6 +52,8 @@ import com.makan.app.web.pojo.SignInRequest;
 import com.makan.app.web.pojo.SignInResponse;
 import com.makan.app.web.pojo.SignUpRequest;
 import com.makan.app.web.pojo.SignUpResponse;
+import com.makan.app.web.pojo.SimilarDataRequest;
+import com.makan.app.web.pojo.SimilarDataResponse;
 import com.makan.app.web.pojo.SocialMediaRequest;
 import com.makan.app.web.pojo.SocialMediaResponse;
 import com.makan.app.web.pojo.SubscribeBusinessRequest;
@@ -100,10 +122,10 @@ public class WebServiceManager {
         return null;
     }
 
-    public Response<DealerResponse> getDealers() {
+    public Response<ProfessionalDetailsResponse> getProesionalDetails(ProfessionalDetailsRequest  professionalDetailsRequest) {
 
         try {
-            return service.callDealerService().execute();
+            return service.callProfessionaDetailsWebService(professionalDetailsRequest).execute();
 
         } catch (Exception e) {
             AppLog.showErrorMessage(e.toString());
@@ -111,10 +133,11 @@ public class WebServiceManager {
         return null;
     }
 
-    public Response<NewsResponse> getNews() {
+
+    public Response<ProfessionalRatingResponse> sendProfessionalRating(ProfessionalRatingRequest professionalRatingRequest) {
 
         try {
-            return service.callNewsWebService().execute();
+            return service.sendProfessionalRating(professionalRatingRequest).execute();
 
         } catch (Exception e) {
             AppLog.showErrorMessage(e.toString());
@@ -122,10 +145,65 @@ public class WebServiceManager {
         return null;
     }
 
-    public Response<GetCategoryResponse> getCategories() {
+    public Response<DealerResponse> getDealers(DealerRequest dealerRequest) {
 
         try {
-            return service.callGetCategoryService().execute();
+            return service.callDealerService(dealerRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+        return null;
+    }
+
+    public Response<NewsResponse> getNews(BestDealsRequest bestDealsRequest) {
+
+        try {
+            return service.callNewsWebService(bestDealsRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+        return null;
+    }
+
+    public Response<ProfesionalServiceRespose> getProfessionalServiceList(ProfesionalServiceRequest profesionalServiceRequest) {
+
+        try {
+            return service.callProfessionalServiceWebService(profesionalServiceRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+        return null;
+    }
+
+    public Response<PostYourReqResponse> postYourReq(PostYourReqRequest postYourReqRequest) {
+
+        try {
+            return service.postYourReq(postYourReqRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+        return null;
+    }
+
+    public Response<ProfessionalSerachResponse> getProfessionalServicesbyId(ProfessionalSearchRequest professionalSearchRequest) {
+
+        try {
+            return service.callProfessionalSearchWebService(professionalSearchRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+        return null;
+    }
+
+    public Response<GetCategoryResponse> getCategories(BestDealsRequest bestDealsRequest) {
+
+        try {
+            return service.callGetCategoryService(bestDealsRequest).execute();
 
         } catch (Exception e) {
             AppLog.showErrorMessage(e.toString());
@@ -222,10 +300,10 @@ public class WebServiceManager {
         return null;
     }
 
-    public Response<FindDealsResponse> findDeals() {
+    public Response<FindDealsResponse> findDeals(BestDealsRequest bestDealsRequest) {
 
         try {
-            return service.findDeals().execute();
+            return service.findDeals(bestDealsRequest).execute();
 
         } catch (Exception e) {
             AppLog.showErrorMessage(e.toString());
@@ -245,10 +323,10 @@ public class WebServiceManager {
         return null;
     }
 
-    public Response<AdvertisementResponse> getAdds() {
+    public Response<AdvertisementResponse> getAdds(BestDealsRequest bestDealsRequest) {
 
         try {
-            return service.callAdds().execute();
+            return service.callAdds(bestDealsRequest).execute();
 
         } catch (Exception e) {
             AppLog.showErrorMessage(e.toString());
@@ -333,5 +411,64 @@ public class WebServiceManager {
         return null;
     }
 
+    public Response<FillterCategoryResponse> getFilterCategories(FilterCategoryRequest filterCategoryRequest) {
 
+        try {
+            return service.getfilterCategories(filterCategoryRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+
+        return null;
+    }
+
+    public Response<NewFilterResponse> getFilterData(NewFilterRequest newFilterRequest) {
+
+        try {
+            return service.getFilterData(newFilterRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+
+
+        return null;
+    }
+
+    public Response<SimilarDataResponse> getSimilarData(SimilarDataRequest similarDataRequest) {
+        try {
+            return service.getSimilarData(similarDataRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+
+
+        return null;
+    }
+
+    public Response<ProffesionalPackageResponse> getPackageData(ProffesionalPackageRequest proffesionalPackageRequest) {
+        try {
+            return service.getPackageData(proffesionalPackageRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+
+
+        return null;
+    }
+
+    public Response<AgencyPackageResponse> getAgencyData(AgencyPackageRequest agencyPackageRequest) {
+        try {
+            return service.getAgencyData(agencyPackageRequest).execute();
+
+        } catch (Exception e) {
+            AppLog.showErrorMessage(e.toString());
+        }
+
+
+        return null;
+    }
 }

@@ -99,7 +99,7 @@ public class FeedbackFragment extends BaseFragment {
 
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Feedback");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.feedback));
 
         }
 
@@ -124,25 +124,25 @@ public class FeedbackFragment extends BaseFragment {
 
             case 5:
 
-                return "Very Good";
+                return getResources().getString(R.string.VeryGood);
 
             case 4:
 
-                return "Good";
+                return getResources().getString(R.string.good);
 
             case 3:
 
-                return "Fair";
+                return getResources().getString(R.string.fair);
 
 
             case 2:
 
-                return "Average";
+                return getResources().getString(R.string.average);
 
 
             case 1:
 
-                return "Bad";
+                return getResources().getString(R.string.Bad);
 
 
 
@@ -215,7 +215,7 @@ public class FeedbackFragment extends BaseFragment {
 
             dismissProgressDialog();
             if (result == Codes.SUCCESS) {
-                new Utility().showMessageAlertDialog(getActivity(), "Successfully submitted feedback.");
+                new Utility().showMessageAlertDialog(getActivity(), getResources().getString(R.string.sucessfully));
             } else {
 
                 if (errorMessage != null && errorMessage.length() > 0) {

@@ -3,12 +3,14 @@ package com.makan.app.web.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class SocialMediaResponse {
 
 
     @SerializedName("user_details")
     @Expose
-    private UserDetails userDetails;
+    private List<UserDetails> userDetails = null;
     @SerializedName("res")
     @Expose
     private Integer res;
@@ -22,11 +24,11 @@ public class SocialMediaResponse {
     @Expose
     private String sessionToken;
 
-    public UserDetails getUserDetails() {
+    public List<UserDetails> getUserDetails() {
         return userDetails;
     }
 
-    public void setUserDetails(UserDetails userDetails) {
+    public void setUserDetails(List<UserDetails> userDetails) {
         this.userDetails = userDetails;
     }
 
@@ -62,6 +64,7 @@ public class SocialMediaResponse {
         this.sessionToken = sessionToken;
     }
 
+
     public class UserDetails {
 
         @SerializedName("U_id")
@@ -72,7 +75,7 @@ public class SocialMediaResponse {
         private Object profileImage;
         @SerializedName("display_name")
         @Expose
-        private Object displayName;
+        private String displayName;
         @SerializedName("age_group")
         @Expose
         private Object ageGroup;
@@ -87,10 +90,10 @@ public class SocialMediaResponse {
         private Object uLname;
         @SerializedName("email")
         @Expose
-        private Object email;
+        private String email;
         @SerializedName("telephone")
         @Expose
-        private Object telephone;
+        private String telephone;
         @SerializedName("home_address")
         @Expose
         private Object homeAddress;
@@ -111,11 +114,11 @@ public class SocialMediaResponse {
             this.profileImage = profileImage;
         }
 
-        public Object getDisplayName() {
+        public String getDisplayName() {
             return displayName;
         }
 
-        public void setDisplayName(Object displayName) {
+        public void setDisplayName(String displayName) {
             this.displayName = displayName;
         }
 
@@ -151,19 +154,19 @@ public class SocialMediaResponse {
             this.uLname = uLname;
         }
 
-        public Object getEmail() {
+        public String getEmail() {
             return email;
         }
 
-        public void setEmail(Object email) {
+        public void setEmail(String email) {
             this.email = email;
         }
 
-        public Object getTelephone() {
+        public String getTelephone() {
             return telephone;
         }
 
-        public void setTelephone(Object telephone) {
+        public void setTelephone(String telephone) {
             this.telephone = telephone;
         }
 
@@ -174,6 +177,8 @@ public class SocialMediaResponse {
         public void setHomeAddress(Object homeAddress) {
             this.homeAddress = homeAddress;
         }
+
+
 
     }
 }

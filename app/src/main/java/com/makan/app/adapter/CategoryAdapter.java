@@ -76,7 +76,7 @@ public class CategoryAdapter extends BaseAdapter {
             int itemCount = Integer.parseInt(mainCategory.getSubCategoryCount());
 
 
-            count.setText(String.valueOf(itemCount)+(itemCount==0||itemCount==1?" ITEM ":" ITEMS"));
+            count.setText(String.valueOf(itemCount)+(itemCount==0||itemCount==1? mContext.getResources().getString(R.string.item):mContext.getResources().getString(R.string.items)));
 
         } else {
             grid = (View) convertView;

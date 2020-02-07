@@ -25,14 +25,14 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/homeViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_height="@dimen/height_190dp"
+                    android:layout_marginBottom="@dimen/marginbottom_8dp"/>
 
                 <me.relex.circleindicator.CircleIndicator
                     android:layout_gravity="top"
                     android:id="@+id/indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"/>
+                    android:layout_height="@dimen/height_48dp"/>
 
             </FrameLayout>
 
@@ -40,17 +40,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/marginbottom_8dp"
+                android:layout_marginTop="@dimen/margintop_8dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/rlSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/marginbottom_8dp"
                     android:background="@drawable/rounded_corner_edit_text"
                     android:orientation="horizontal">
 
@@ -61,13 +59,13 @@
                         android:focusableInTouchMode="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/ivFilter"
+                        android:layout_toStartOf="@+id/ivFilter"
                         android:background="@null"
                         android:hint="Search Property"
                         android:imeOptions="actionSearch"
                         android:inputType="textCapSentences"
                         android:maxLines="1"
-                        android:padding="15dp"
+                        android:padding="@dimen/padding_15dp"
                         android:textAppearance="@android:style/TextAppearance.Small" />
 
                     <ImageView
@@ -75,12 +73,12 @@
                         android:id="@+id/ivFilter"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
+                        android:paddingBottom="@dimen/marginbottom_5dp"
+                        android:paddingStart="@dimen/paddingstart_10dp"
+                        android:paddingEnd="@dimen/paddingend_10dp"
+                        android:paddingTop="@dimen/paddingtop_5dp"
                         android:src="@drawable/filter" />
                 </RelativeLayout>
 
@@ -102,8 +100,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginBottom="@dimen/marginbottom_4dp"
                             android:text="Buy"
+                            android:textSize="@dimen/textSize22sp"
                             android:textAppearance="@android:style/TextAppearance.Large"
                             android:textStyle="bold" />
 
@@ -111,15 +110,16 @@
                             android:id="@+id/tvBuyPropertyCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="@dimen/margintop_4dp"
                             android:text="25 ITEMS"
+                            android:textSize="@dimen/textSize18sp"
                             android:textAppearance="@android:style/TextAppearance.Small" />
 
                         <LinearLayout
-                            android:layout_width="15dp"
-                            android:layout_height="5dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_width="@dimen/width_15dp"
+                            android:layout_height="@dimen/height_5dp"
+                            android:layout_marginBottom="@dimen/marginbottom_8dp"
+                            android:layout_marginTop="@dimen/margintop_8dp"
                             android:background="@color/colorAccent" />
                     </LinearLayout>
 
@@ -135,8 +135,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginBottom="@dimen/marginbottom_4dp"
                             android:text="Rent"
+                            android:textSize="@dimen/textSize22sp"
                             android:textAppearance="@android:style/TextAppearance.Large"
                             android:textStyle="bold" />
 
@@ -144,15 +145,16 @@
                             android:id="@+id/tvRentPropertyCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="@dimen/margintop_4dp"
+                            android:textSize="@dimen/textSize18sp"
                             android:text="20 ITEMS"
                             android:textAppearance="@android:style/TextAppearance.Small" />
 
                         <LinearLayout
-                            android:layout_width="15dp"
-                            android:layout_height="5dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_width="@dimen/width_15dp"
+                            android:layout_height="@dimen/height_5dp"
+                            android:layout_marginBottom="@dimen/marginbottom_8dp"
+                            android:layout_marginTop="@dimen/margintop_8dp"
                             android:background="@color/colorAccent" />
                     </LinearLayout>
 
@@ -169,15 +171,16 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginTop="4dp">
+                        android:layout_marginBottom="@dimen/marginbottom_4dp"
+                        android:layout_marginTop="@dimen/margintop_4dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:text="Featured Property"
+                            android:textSize="@dimen/textSize14sp"
                             android:textAppearance="@android:style/TextAppearance.Small"
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
@@ -186,9 +189,10 @@
                             android:id="@+id/tvShowAllFeaturedProperty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:paddingBottom="2dp"
-                            android:paddingTop="2dp"
+                            android:layout_alignParentEnd="true"
+                            android:paddingBottom="@dimen/paddingbottom_2dp"
+                            android:paddingTop="@dimen/paddingtop_2dp"
+                            android:textSize="@dimen/textSize14sp"
                             android:text="Show All"
                             android:textAppearance="@android:style/TextAppearance.Small"
                             android:textColor="@color/colorAccent" />
@@ -196,8 +200,8 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_height="@dimen/height_2dp"
+                        android:layout_marginBottom="@dimen/marginbottom_4dp"
                         android:background="#FCE4EC" />
 
                     <android.support.v7.widget.RecyclerView
@@ -216,14 +220,15 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginTop="12dp">
+                        android:layout_marginBottom="@dimen/marginbottom_4dp"
+                        android:layout_marginTop="@dimen/margintop_12dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
+                            android:textSize="@dimen/textSize14sp"
                             android:text="Recently Added Property"
                             android:textAppearance="@android:style/TextAppearance.Small"
                             android:textColor="@android:color/black"
@@ -233,9 +238,10 @@
                             android:id="@+id/tvShowAllRecentlyAddedProperty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:paddingBottom="2dp"
-                            android:paddingTop="2dp"
+                            android:layout_alignParentEnd="true"
+                            android:paddingBottom="@dimen/paddingbottom_2dp"
+                            android:textSize="@dimen/textSize14sp"
+                            android:paddingTop="@dimen/paddingtop_2dp"
                             android:text="Show All"
                             android:textAppearance="@android:style/TextAppearance.Small"
                             android:textColor="@color/colorAccent" />
@@ -243,8 +249,8 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_height="@dimen/height_2dp"
+                        android:layout_marginBottom="@dimen/marginbottom_4dp"
                         android:background="#FCE4EC" />
 
                     <android.support.v7.widget.RecyclerView

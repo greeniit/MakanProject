@@ -12,19 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.makan.R;
 import com.makan.app.activity.FilterActivity;
 import com.makan.app.activity.LoginActivity;
 import com.makan.app.activity.MapActivity;
+import com.makan.app.activity.NewSearchActivity;
+import com.makan.app.activity.SearchActivity;
 import com.makan.app.adapter.PropertyListAdapter;
 import com.makan.app.app.AppState;
+import com.makan.app.app.WebConstant;
 import com.makan.app.callback.PropertyAdapterWishListOperationCallback;
 import com.makan.app.callback.SortOptionSelectionCallback;
 import com.makan.app.callback.WishListAddDeleteOperationCallback;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.task.WishListAddDeleteOperationTask;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
@@ -153,6 +159,8 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
             new PropertyListByFilterTask().execute();
         }else if (getArguments().containsKey("search_key")) {
             new SearchByNameTask().execute();
+        }else if(getArguments().containsKey("new_filter")) {
+            new getSearchItems(getArguments().<HomeResponse.RecentProperty>getParcelableArrayList("new_filter")).execute();
         }
 
     }
@@ -188,7 +196,8 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 if(getArguments().containsKey("filter_request")){
                     getActivity().finish();
                 }else{
-                    new Utility().moveToActivity(getActivity(), FilterActivity.class, null);
+//                    new Utility().moveToActivity(getActivity(), FilterActivity.class, null);
+                    new Utility().moveToActivity(getActivity(), NewSearchActivity.class, null);
                 }
 
                 break;
@@ -238,6 +247,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
 
                 GetCategoryPropertyRequest getCategoryPropertyRequest = new GetCategoryPropertyRequest();
                 getCategoryPropertyRequest.setSubCategoryId(getArguments().getString("subcategory_id"));
+                getCategoryPropertyRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
 
                 if(AppState.getInstance().getUserId()!=null){
                     getCategoryPropertyRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
@@ -267,16 +277,20 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                         property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                                     }
 
-                                    if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                    if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                        property.setArea(Integer.parseInt(propertyList.getPlotArea()));
+                                    }
+                                    if (propertyList.getBathroom_count() != null && propertyList.getBathroom_count().length() > 0) {
+                                        property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
                                     }
 
                                     property.setPropertyType(propertyList.getSubCategoryName());
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
                                     property.setFavourite(propertyList.getFavourite());
+
 
                                     mPropertyList.add(property);
                                 }
@@ -362,6 +376,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                 getPropertyByTypeRequest.setSelectedType(getArguments().getInt("type"));
                 getPropertyByTypeRequest.setCurrentPageno(1);
                 getPropertyByTypeRequest.setPerPage(50);
+                getPropertyByTypeRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
 
                 if(AppState.getInstance().getUserId()!=null){
                     getPropertyByTypeRequest.setUserId(Integer.parseInt(AppState.getInstance().getUserId()));
@@ -389,18 +404,43 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setAddress(propertyList.getLocation());
                                     property.setPropertyType(propertyList.getSubCategoryName());
 
-                                    if (propertyList.getRooms() != null && propertyList.getRooms().length() > 0) {
-                                        property.setBedCount(Integer.parseInt(propertyList.getRooms()));
-                                    }
+//                                    if (propertyList.getRooms() != null && propertyList.getRooms().length() > 0) {
+//                                        property.setBedCount(Integer.parseInt(propertyList.getRooms()));
+//                                    }
 
-                                    if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
-                                    }
-                                    property.setPrice(propertyList.getPrice());
+//                                    if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+//                                        property.setArea(Integer.parseInt(String.valueOf(Double.parseDouble(propertyList.getPlotArea()))));
+//                                    }
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
-                                    property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
+                                    if (propertyList.getLat().isEmpty()|propertyList.getLat().matches("")&&propertyList.getLong().isEmpty()|propertyList.getLong().matches("")){
+                                        property.setLatLng(new LatLng(Double.valueOf(0), Double.valueOf(0)));
+                                    }else {
+                                        property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
+                                    }
+//                                    property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
                                     property.setFavourite(propertyList.getFavourite());
+
+                                    if (propertyList.getBedcount().equals(null)||propertyList.getBedcount()==null){
+                                        property.setBedCount(0);
+                                    }else {
+                                        property.setBedCount(Integer.parseInt(propertyList.getBedcount()));
+                                    }
+
+                                    if (propertyList.getBathroom_count().equals(null)||propertyList.getBathroom_count()==null){
+                                        property.setBathCount(0);
+
+                                    }else {
+                                        property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
+
+                                    }
+
+                                    if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                        String sarea = propertyList.getPlotArea();
+                                        double d = Double.parseDouble(sarea);
+                                        property.setArea((int) d);
+                                    }
 
                                     mPropertyList.add(property);
                                 }
@@ -512,10 +552,10 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                         property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                                     }
 
-                                    if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                    if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                        property.setArea(Integer.parseInt(propertyList.getPlotArea()));
                                     }
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
@@ -616,20 +656,123 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                             property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                         }
 
-                        if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                            property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                        if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+
+                            float i = Float.valueOf(propertyList.getPlotArea());
+                            property.setArea((int) i);
                         }
-                        property.setPrice(propertyList.getPrice());
+                        property.setPrice(Float.valueOf(propertyList.getPrice()));
                         property.setImage(propertyList.getImage());
                         property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                         property.setDescription("");
                         property.setFavourite(propertyList.getFavourite());
+                        if (propertyList.getBathroom_count().equals(null) || propertyList.getBathroom_count() == null) {
+                            property.setBathCount(0);
+                        } else {
+                            property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
+                        }
+
+                        if (propertyList.getBed_count().equals(null) || propertyList.getBed_count() == null) {
+                            property.setBedCount(0);
+                        } else {
+
+                            property.setBedCount(Integer.parseInt(propertyList.getBed_count()));
+                        }
 
                         mPropertyList.add(property);
                     }
 
                 } else {
                     mPropertyList = getArguments().getParcelableArrayList("dealer_properties");
+                }
+
+            }
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            rlProgressHolder.setVisibility(View.GONE);
+
+            mPropertyAdapter.addItems(mPropertyList);
+            mPropertyAdapter.notifyDataSetChanged();
+
+
+        }
+    }
+
+
+    private class getSearchItems extends AsyncTask<Void, Void, Void> {
+
+        private ArrayList<HomeResponse.RecentProperty> recentProperties;
+
+
+        public getSearchItems(ArrayList<HomeResponse.RecentProperty> recentProperties) {
+
+            this.recentProperties = recentProperties;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            rlProgressHolder.setVisibility(View.VISIBLE);
+            mPropertyList.clear();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            if (recentProperties != null && recentProperties.size() > 0) {
+
+                if (!getArguments().containsKey("new_filter")) {
+
+                    for (HomeResponse.RecentProperty propertyList : recentProperties) {
+
+                        Property property = new Property();
+
+                        property.setId(Integer.parseInt(propertyList.getPropertyId()));
+                        property.setTitle(propertyList.getPropertyName());
+                        property.setAddress(propertyList.getLocation());
+                        property.setPropertyType(propertyList.getSubCategoryName());
+
+                        if (propertyList.getRooms() != null && propertyList.getRooms().length() > 0) {
+                            property.setBedCount(Integer.parseInt(propertyList.getRooms()));
+                        }
+
+                        if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+
+                            float i = Float.valueOf(propertyList.getPlotArea());
+                            property.setArea((int) i);
+                        }
+                        property.setPrice(Float.valueOf(propertyList.getPrice()));
+                        property.setImage(propertyList.getImage());
+                        property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
+                        property.setDescription("");
+                        property.setFavourite(propertyList.getFavourite());
+                        if (propertyList.getBathroom_count().equals(null) || propertyList.getBathroom_count() == null) {
+                            property.setBathCount(0);
+                        } else {
+
+                            property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
+                        }
+
+                        if (propertyList.getBed_count().equals(null) || propertyList.getBed_count() == null) {
+                            property.setBedCount(0);
+                        } else {
+
+                            property.setBedCount(Integer.parseInt(propertyList.getBed_count()));
+                        }
+
+                        mPropertyList.add(property);
+                    }
+
+                } else {
+                    mPropertyList = getArguments().getParcelableArrayList("new_filter");
                 }
 
             }
@@ -706,12 +849,12 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                         property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                                     }
 
-                                    if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                    if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                        property.setArea(Integer.parseInt(propertyList.getPlotArea()));
                                     }
 
                                     property.setPropertyType(propertyList.getSubCategoryName());
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                     property.setDescription(propertyList.getDescription());
@@ -806,7 +949,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                         Collections.sort(properties, new Comparator<Property>(){
                             public int compare(Property obj1, Property obj2) {
 
-                                 return Integer.valueOf(obj1.getPrice()).compareTo(Integer.valueOf(obj2.getPrice()));
+                                 return Float.valueOf(String.valueOf(obj1.getPrice())).compareTo(Float.valueOf(String.valueOf(obj2.getPrice())));
                             }
                         });
 
@@ -817,7 +960,7 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                         Collections.sort(properties, new Comparator<Property>(){
                             public int compare(Property obj1, Property obj2) {
 
-                                return Integer.valueOf(obj2.getPrice()).compareTo(Integer.valueOf(obj1.getPrice()));
+                                return Float.valueOf(String.valueOf(Float.valueOf(obj2.getPrice()))).compareTo(Float.valueOf(String.valueOf(obj1.getPrice())));
                             }
                         });
 
@@ -918,12 +1061,12 @@ public class PropertyListFragment extends BaseFragment implements View.OnClickLi
                                     property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                                 }
 
-                                if (propertyList.getBuildingArea() != null && propertyList.getBuildingArea().length() > 0) {
-                                    property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                if (propertyList.getPlotArea() != null && propertyList.getPlotArea().length() > 0) {
+                                    property.setArea(Integer.parseInt(propertyList.getPlotArea()));
                                 }
 
                                 property.setPropertyType(propertyList.getSubCategoryName());
-                                property.setPrice(propertyList.getPrice());
+                                property.setPrice(Float.valueOf(propertyList.getPrice()));
                                 property.setImage(propertyList.getImage());
                                 property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()), Double.valueOf(propertyList.getLong())));
                                 property.setDescription(propertyList.getDescription());

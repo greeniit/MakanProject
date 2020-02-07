@@ -12,12 +12,13 @@
        <ImageView
            android:src="@drawable/placeholder_error"
            android:layout_centerInParent="true"
-           android:layout_width="75dp"
-           android:layout_height="75dp" />
+           android:layout_width="@dimen/width_75dp"
+           android:layout_height="@dimen/height_75dp" />
    </RelativeLayout>
 
     <ImageView
         android:id="@+id/ivFullMode"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

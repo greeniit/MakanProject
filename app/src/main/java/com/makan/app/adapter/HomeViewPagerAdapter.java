@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.makan.R;
 import com.makan.app.activity.PropertyListActivity;
 import com.makan.app.app.WebConstant;
+import com.makan.app.professional.ProfessionalsDetailsActivity;
 import com.makan.app.util.Utility;
 import com.makan.app.web.pojo.HomeResponse;
+import com.makan.app.web.pojo.ProfesionalServiceRespose;
 
 import java.util.List;
 
@@ -24,6 +26,8 @@ public class HomeViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private List<HomeResponse.SliderImage> imagesToLoad;
+
+
 
     public HomeViewPagerAdapter(Context context,List<HomeResponse.SliderImage> imagesToLoad) {
         this.context = context;
@@ -48,7 +52,7 @@ public class HomeViewPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.custom_cell_home_main_image, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.ivHomeMain);
         TextView tvPlaceName=(TextView)view.findViewById(R.id.tvPlaceName);
-        tvPlaceName.setText(imagesToLoad.get(position).getCitieName()+" ("+imagesToLoad.get(position).getCount()+")");
+        tvPlaceName.setText(imagesToLoad.get(position).getCitieName());
 
         Glide.with(context).load(WebConstant.BASE_IMAGE_URL+imagesToLoad.get(position).getImage()).into(imageView);
 
@@ -56,8 +60,8 @@ public class HomeViewPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
-                bundle.putString("place_name",imagesToLoad.get(position).getCitieName());
-                new Utility().moveToActivity(context, PropertyListActivity.class, bundle);
+                bundle.putString("ITEM_ID",imagesToLoad.get(position).getPreferCitiesId());
+                new Utility().moveToActivity(context, ProfessionalsDetailsActivity.class, bundle);
             }
         });
 

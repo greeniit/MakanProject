@@ -55,6 +55,10 @@
             android:title="@string/contact_us" />
 
         <item
+            android:id="@+id/nav_search"
+            android:title="@string/search" />
+
+        <item
             android:id="@+id/nav_logout"
             android:title="@string/logout" />
 

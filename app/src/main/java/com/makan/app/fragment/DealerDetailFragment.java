@@ -32,6 +32,8 @@ import com.makan.app.adapter.PropertyListAdapter;
 import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.Dealer;
@@ -193,6 +195,7 @@ public class DealerDetailFragment extends BaseFragment implements OnMapReadyCall
 
                 DealerDetailRequest dealerDetailRequest=new DealerDetailRequest();
                 dealerDetailRequest.setAgencyId(getActivity().getIntent().getExtras().getString("dealer_id"));
+                dealerDetailRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
 
                 Response<DealerDetailResponse> response = WebServiceManager.getInstance().getDealerDetail(dealerDetailRequest);
 
@@ -222,9 +225,11 @@ public class DealerDetailFragment extends BaseFragment implements OnMapReadyCall
                                     if(propertyList.getBuildingArea()!=null&&propertyList.getBuildingArea().length()>0) {
                                         property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
                                     }
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setDescription(propertyList.getDescription());
+                                    property.setBedCount(Integer.parseInt(propertyList.getBathroom_count()));
+                                    property.setBathCount(Integer.parseInt(propertyList.getBathroom_count()));
                                     property.setLatLng(new LatLng(Double.valueOf(propertyList.getLat()),Double.valueOf(propertyList.getLong())));
 
                                     mSimilarPropertyList.add(property);

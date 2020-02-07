@@ -56,7 +56,7 @@ public class BusinessFragment extends BaseFragment{
 
         }else{
 
-            new Utility().showMessageAlertDialog(getActivity(),"Enter all the details.");
+            new Utility().showMessageAlertDialog(getActivity(),getResources().getString(R.string.enteralldetails));
         }
 
     }
@@ -131,7 +131,7 @@ public class BusinessFragment extends BaseFragment{
 
             if (result == Codes.SUCCESS) {
 
-                new Utility().showMessageAlertDialog(getActivity(), "You have successfully subscribed to makan.");
+                new Utility().showMessageAlertDialog(getActivity(), getResources().getString(R.string.sucessfullyScribed));
 
             } else {
 

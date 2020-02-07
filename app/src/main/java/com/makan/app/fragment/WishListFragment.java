@@ -1,8 +1,10 @@
 package com.makan.app.fragment;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,10 +18,13 @@ import com.makan.app.activity.FilterActivity;
 import com.makan.app.activity.MapActivity;
 import com.makan.app.adapter.PropertyListAdapter;
 import com.makan.app.app.AppState;
+import com.makan.app.app.WebConstant;
 import com.makan.app.callback.PropertyAdapterWishListOperationCallback;
 import com.makan.app.callback.WishListAddDeleteOperationCallback;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.task.WishListAddDeleteOperationTask;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
@@ -61,6 +66,13 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
         setListeners();
         return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPropertyAdapter.notifyDataSetChanged();
+    }
+
 
     private void initialiseComponents(View rootView) {
         btnFilter=(Button)rootView.findViewById(R.id.btnFilter);
@@ -126,7 +138,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                 break;
 
             case R.id.btnFilter:
-                new Utility().moveToActivity(getActivity(), FilterActivity.class,null);
+                new Utility().moveToActivity(getActivity(), NewFilterFragment.class,null);
                 break;
         }
     }
@@ -149,6 +161,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
             public void AddToWishListTaskSuccess() {
 
                 dismissProgressDialog();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new WishListFragment()).commit(); mPropertyAdapter.notifyDataSetChanged();
 
                 if(property.getFavourite().equalsIgnoreCase("1")){
                     property.setFavourite("0");
@@ -157,6 +170,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                 }
 
                 mPropertyAdapter.updateItem(property,pos);
+
 
             }
 
@@ -194,6 +208,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                 WishListRequest wishListRequest=new WishListRequest();
                 wishListRequest.setUserId(AppState.getInstance().getUserId());
+                wishListRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
 
                 Response<WishListResponse> response = WebServiceManager.getInstance().getWishList(wishListRequest);
 
@@ -219,11 +234,11 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                                         property.setBedCount(Integer.parseInt(propertyList.getRooms()));
                                     }
 
-                                    if(propertyList.getBuildingArea()!=null&&propertyList.getBuildingArea().length()>0){
-                                        property.setArea(Integer.parseInt(propertyList.getBuildingArea()));
+                                    if(propertyList.getPlotArea()!=null&&propertyList.getPlotArea().length()>0){
+                                        property.setArea(Integer.parseInt(propertyList.getPlotArea()));
                                     }
 
-                                    property.setPrice(propertyList.getPrice());
+                                    property.setPrice(Float.valueOf(propertyList.getPrice()));
                                     property.setImage(propertyList.getImage());
                                     property.setDescription(propertyList.getDescription());
                                     property.setFavourite("1");
@@ -237,6 +252,7 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
                         } else if (wishListResponse.getIsSuccess() == 1 && (wishListResponse.getPropertyList()==null||wishListResponse.getPropertyList().size()==0)){
 
                             statusCode = Codes.SUCCESS;
+//                            mPropertyAdapter.notifyDataSetChanged();
 
                         } else {
                             statusCode = Codes.ERROR_UNEXPECTED;
@@ -269,6 +285,9 @@ public class WishListFragment extends BaseFragment implements View.OnClickListen
 
                 mPropertyAdapter.addItems(mPropertyList);
                 mPropertyAdapter.notifyDataSetChanged();
+
+
+
 
             } else {
 

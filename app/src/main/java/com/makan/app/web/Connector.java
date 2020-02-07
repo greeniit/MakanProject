@@ -42,7 +42,6 @@ public class Connector {
                 .addNetworkInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
-
                         Request request = chain.request().newBuilder().build();
                         return chain.proceed(request);
 

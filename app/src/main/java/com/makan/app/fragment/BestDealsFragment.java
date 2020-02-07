@@ -2,6 +2,7 @@ package com.makan.app.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +15,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.makan.R;
 import com.makan.app.adapter.AdvertisementAdapter;
 import com.makan.app.adapter.BestDealAdapter;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
 import com.makan.app.model.Property;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.AdvertisementResponse;
@@ -32,6 +36,7 @@ import retrofit2.Response;
 public class BestDealsFragment extends BaseFragment {
 
     private RecyclerView rvBestDeals,rvDealer;
+    public com.makan.app.preference.PreferenceManager preferenceManager;
 
     @BindView(R.id.rlProgressHolder)
     RelativeLayout rlProgressHolder;
@@ -62,6 +67,7 @@ public class BestDealsFragment extends BaseFragment {
 
     private void initialiseComponents(View rootView) {
 
+        preferenceManager = new PreferenceManager();
         rvBestDeals=(RecyclerView)rootView.findViewById(R.id.rvBestDeals);
         rvDealer=(RecyclerView)rootView.findViewById(R.id.rvDealer);
     }
@@ -119,6 +125,7 @@ public class BestDealsFragment extends BaseFragment {
         private String errorMessage;
         private FindDealsResponse findDealsResponse;
         private AdvertisementResponse advertisementResponse;
+        private BestDealsRequest bestDealsRequest;
 
         @Override
         protected void onPreExecute() {
@@ -134,7 +141,10 @@ public class BestDealsFragment extends BaseFragment {
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<FindDealsResponse> response = WebServiceManager.getInstance().findDeals();
+
+                bestDealsRequest = new BestDealsRequest();
+                bestDealsRequest.setLanguage(preferenceManager.getValue(getActivity(), PrefKey.CURRENT_DATA));
+                Response<FindDealsResponse> response = WebServiceManager.getInstance().findDeals(bestDealsRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 
@@ -157,25 +167,41 @@ public class BestDealsFragment extends BaseFragment {
                                     property.setAddress(offerProperty.getLocation());
                                     property.setPropertyType(offerProperty.getSubCategoryName());
 
-                                    if(offerProperty.getRooms()!=null&&offerProperty.getRooms().length()>0) {
-                                        property.setBedCount(Integer.parseInt(offerProperty.getRooms()));
-                                    }
+//                                    if(offerProperty.getRooms()!=null&&offerProperty.getRooms().length()>0) {
+//                                        property.setBedCount(Integer.parseInt(offerProperty.getRooms()));
+//                                    }
 
                                     if(offerProperty.getBuildingArea()!=null&&offerProperty.getBuildingArea().length()>0) {
                                         property.setArea(Integer.parseInt(offerProperty.getBuildingArea()));
                                     }
 
-                                    property.setPrice(offerProperty.getPrice());
+                                    property.setPrice(Float.valueOf(offerProperty.getPrice()));
                                     property.setImage(offerProperty.getImage());
                                     property.setLatLng(new LatLng(Double.valueOf(offerProperty.getLat()),Double.valueOf(offerProperty.getLong())));
                                     property.setDescription("");
                                     property.setFavourite(offerProperty.getFavourite());
+                                    if (offerProperty.getBedcount().equals(null)||offerProperty.getBedcount()==null){
+                                        property.setBedCount(0);
+                                    }else {
+                                        property.setBedCount(Integer.parseInt(offerProperty.getBedcount()));
+                                    }
 
-                                    int discount=Integer.parseInt(offerProperty.getPrice())*(Integer.parseInt(offerProperty.getOffer()));
+                                    if (offerProperty.getBathroomcount().equals(null)||offerProperty.getBathroomcount()==null){
+                                        property.setBathCount(0);
+
+                                    }else {
+                                        property.setBathCount(Integer.parseInt(offerProperty.getBathroomcount()));
+
+                                    }
+
+
+
+
+                                    float discount=Float.parseFloat(offerProperty.getPrice())*(Float.parseFloat(offerProperty.getOffer()));
 
                                     discount=discount/100;
 
-                                    int newPrice=Integer.parseInt(offerProperty.getPrice())-discount;
+                                    float newPrice=Float.parseFloat(offerProperty.getPrice())-discount;
 
                                     property.setOfferPrice(String.valueOf(newPrice));
                                     property.setOfferPercentage(offerProperty.getOffer());
@@ -212,8 +238,8 @@ public class BestDealsFragment extends BaseFragment {
             if(statusCode== Codes.SUCCESS){
 
                 if (new Utility().isNetworkConnected(getActivity())) {
-
-                    Response<AdvertisementResponse> response = WebServiceManager.getInstance().getAdds();
+                    bestDealsRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
+                    Response<AdvertisementResponse> response = WebServiceManager.getInstance().getAdds(bestDealsRequest);
 
                     if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

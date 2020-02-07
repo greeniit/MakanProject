@@ -4,65 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="2"
         android:orientation="vertical">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDealer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/card_margin"
-            android:layout_marginRight="@dimen/card_margin" />
-
-        <LinearLayout
-            android:id="@+id/llLabelHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/rvDealer"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="ADVERTISEMENTS"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="4dp"
-                android:background="#FCE4EC" />
-
-        </LinearLayout>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvBestDeals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/llLabelHolder"
-            android:layout_marginTop="@dimen/card_margin" />
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/llLabelHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ADVERTISEMENTS"
+                    android:background="@color/colorPrimaryDark"
+                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/marginbottom_4dp"
+                android:background="#FCE4EC" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDealer"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="false" />
+
+
+
+    </LinearLayout>
 
     <include layout="@layout/layout_progress" />
 

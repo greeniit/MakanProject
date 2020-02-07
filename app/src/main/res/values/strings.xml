@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Makan</string>
 
-    <string name="facebook_app_id">1992052874388335</string>
-    <string name="fb_login_protocol_scheme">fb1992052874388335</string>
-
+    <string name="facebook_app_id">589865944896706</string>
+    <string name="fb_login_protocol_scheme">fb589865944896706</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -30,38 +29,6 @@
     <string name="logout">Log Out</string>
 
 
-    <string-array name="nav_item_activity_titles_logged_in">
-        <item name="home">Makan</item>
-        <item name="category">Category</item>
-        <item name="dealers">Dealers</item>
-        <item name="wishlist">Wishlist</item>
-        <item name="mortgage">Mortgage</item>
-        <item name="settings">Settings</item>
-        <item name="feedback">Feedback</item>
-        <item name="business">Makan for Business</item>
-        <item name="business">Find Deals</item>
-        <item name="news">News</item>
-        <item name="notification">Notification</item>
-        <item name="contact_us">Contact Us</item>
-        <item name="logout">Makan</item>
-    </string-array>
-
-    <string-array name="nav_item_activity_titles_non_logged_in">
-        <item name="home">Makan</item>
-        <item name="category">Category</item>
-        <item name="dealers">Dealers</item>
-        <item name="wishlist">Wishlist</item>
-        <item name="mortgage">Mortgage</item>
-        <item name="settings">Settings</item>
-        <item name="feedback">Feedback</item>
-        <item name="business">Makan for Business</item>
-        <item name="business">Find Deals</item>
-        <item name="news">News</item>
-        <item name="notification">Notification</item>
-        <item name="contact_us">Contact Us</item>
-
-    </string-array>
-
     <string name="property_description">
         <![CDATA[<html>
  <head></head>
@@ -78,22 +45,206 @@
 ]]>
     </string>
 
-
     <string name="image_count_message"># out of $</string>
+
+    <string name="error_unexpected">An unexpected error has occurred.</string>
+
+
+    <string name="error_network">No internet connectivity.</string>
 
 
     <!--Error messages-->
-    <string name="error_unexpected">An unexpected error has occurred.</string>
-    <string name="error_network">No internet connectivity.</string>
     <string name="error_server_conection">Unable to connect to server.</string>
     <string name="error_invalid_credentials">Invalid email address or password.</string>
+    <string name="registration_success">Registration completed successfully.</string>
+    <string name="permission_phone_not_granted">Call permission not granted. Enable permission from app settings.</string>
 
     <!--Sign up-->
-    <string name="registration_success">Registration completed successfully.</string>
-
-
-    <string name="permission_phone_not_granted">Call permission not granted. Enable permission from app settings.</string>
     <string name="permission_camera_not_granted">Camera permission not granted. Enable permission from app settings.</string>
     <string name="permission_gallery_not_granted">Gallery permission not granted. Enable permission from app settings.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="professional">Professionals</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="search">Search</string>
+    <string name="postyourrequirements">Post Your Requirements</string>
+    <string name="buy">Buy</string>
+    <string name="rent">Rent</string>
+    <string name="recentlyaddedproperty">Recently Added Property</string>
+    <string name="showall">Show All</string>
+    <string name="featuredproperty">Featured Property</string>
+    <string name="title_activity_professionals">ProfessionalsActivity</string>
+    <string name="professionalsearch">Professional Search</string>
+    <string name="professionalsearchecample">Eg :- "Oman"</string>
+    <string name="title_activity_professional_search_result">ProfessionalSearchResultActivity</string>
+    <string name="pleaseenteravalidtext">Please enter a valid text</string>
+    <string name="title_activity_professionals_details">ProfessionalsDetailsActivity</string>
+    <string name="reviews">Reviews</string>
+    <string name="post">Post your review</string>
+    <string name="location">Location</string>
+    <string name="ourclients">Our Clients</string>
+    <string name="title_activity_professionals_gallery">ProfessionalsGalleryActivity</string>
+    <string name="nameheader">NAME</string>
+    <string name="emailheader">EMAIL</string>
+    <string name="stateheader">STATES</string>
+    <string name="govheader">GOVERNORATES</string>
+    <string name="arearange">AREA RANGE</string>
+    <string name="bedroomheader">BEDROOM</string>
+    <string name="floornumberheader">FLOOR NUMBER</string>
+    <string name="mobileheader">MOBILE NUMBER</string>
+    <string name="transactionTypeHeader">TRANSACTION TYPE</string>
+    <string name="categoryHeader">CATEGORY</string>
+    <string name="priceRangeHeader">PRICE RANGE</string>
+    <string name="freqOfAlert">FREQUENCY OF ALERTS</string>
+    <string name="ageOfConstructionHeader">AGE OF CONSTRUCTION</string>
+    <string name="propertyDesc">PROPERTY DESCRIPTION</string>
+    <string name="saleProperty">Buy Property</string>
+    <string name="rentProperty">Rent Property</string>
+    <string name="selectLocation">Select Location</string>
+    <string name="selectArea">Select Area</string>
+    <string name="propertytypes">Property Type</string>
+    <string name="residential">Resdential</string>
+    <string name="commercial">Commercial</string>
+    <string name="rentFrequency">Rent Frequency</string>
+    <string name="yearly">Yearly</string>
+    <string name="monthly">Monthly</string>
+    <string name="priceRange">Price (OMR)</string>
+    <string name="area">Area (Sqrt)</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="studio">Studio</string>
+    <string name="bathroom">Bathroom</string>
+    <string name="mapSearch">Map Search</string>
+    <string name="makanforbusiness">Makan for business</string>
+    <string name="login">Log In</string>
+    <string name="mapView">Map View</string>
+    <string name="gallery">Gallery</string>
+    <string name="nearbypropreties">Nearby Faclities</string>
+    <string name="details">Details</string>
+    <string name="calculate_and_view_the_monthly_mortgage">Calculate and view the monthly mortgage</string>
+    <string name="propretyListedBy">Property listed by :</string>
+    <string name="call">Call</string>
+    <string name="enquiry">Enquiry</string>
+    <string name="filter">Filter</string>
+    <string name="provinanceheader">PROVINCES</string>
+    <string name="property_types">Type of property :</string>
+    <string name="totalbuildarea">Total building area :</string>
+    <string name="totalplotarea">Total land area :</string>
+    <string name="bathroomcount">Bathroom count :</string>
+    <string name="bedroomcount">Bedroom count</string>
+    <string name="locations">Locations :</string>
+    <string name="description">Description</string>
+    <string name="keyfacilities">Key Facilities :</string>
+    <string name="headoffice">Head Office :</string>
+    <string name="officeemail">Office Email :</string>
+    <string name="website">Website :</string>
+    <string name="agent">Agent :</string>
+    <string name="totalprice">Total Price</string>
+    <string name="loanperiod">Loan Period</string>
+    <string name="downpayment">Down Payment</string>
+    <string name="rateofinterset">Rate of interest</string>
+    <string name="totalpayable">Total Payable</string>
+    <string name="paymentbreakedown">Payment Breakdown</string>
+    <string name="interest">Interest</string>
+    <string name="principal">Principal</string>
+    <string name="monthlyPayment">Monthly Payment</string>
+    <string name="enteralldetails">Enter all the details.</string>
+    <string name="agreetermsandconditions">Agree to terms and conditions to proceed.</string>
+    <string name="enterRequiredDetails">Enter all required details.</string>
+    <string name="sucessfullyScribed">You have successfully subscribed makan.</string>
+    <string name="item"> Item</string>
+    <string name="items"> Items</string>
+    <string name="sucessfully">Successfully submitted feedback.</string>
+    <string name="VeryGood">Very Good</string>
+    <string name="good">Good</string>
+    <string name="fair">Fair</string>
+    <string name="average">Average</string>
+    <string name="Bad">Bad</string>
+    <string name="itemone">1 Item</string>
+    <string name="specifyemail">Specify email</string>
+    <string name="specifyPassword">Specify Password</string>
+    <string name="please">Please enter a valid data.</string>
+    <string name="pleaseenteravaliddata">Please enter a valid data.</string>
+    <string name="omr"> OMR</string>
+    <string name="years"> Years</string>
+    <string name="error_no_records">No data found.</string>
+    <string name="thankyoufoyourrating">Thank you for your rating.</string>
+    <string name="nodatafound">No data found.</string>
+    <string name="makanalert">Makan Alert</string>
+    <string name="map">Map View</string>
+    <string name="postedyourrequirements">Posted your requirements.</string>
+    <string name="requiredfield">Required Field</string>
+    <string name="service">Service</string>
+    <string name="sort">Sort</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="server_client_id">1047316023661-k3f8lvf5i9h334iim0egpts0f2p2kn8p.apps.googleusercontent.com</string>
+    <string name="Sqft">Sq. Area</string>
+    <string name="clickheretorate">Click here to rate</string>
+    <string name="ratting">Ratting</string>
+    <string name="packages">Packages</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="socialnetwork">Social Networks</string>
+    <string name="facebook">Facebook</string>
+    <string name="snapchat">Snapchat</string>
+    <string name="instagram">Instagram</string>
+    <string name="linkedin">Linked In</string>
+    <string name="selecttheplan">Select Plan</string>
+    <string name="clientdetails">Clients Details</string>
+    <string name="sociallink">Social Link</string>
+    <string name="postinmobile"><![CDATA[Post in mobile app & web]]></string>
+    <string name="features">Featured</string>
+    <string name="imagelimit">Image Limit</string>
+    <string name="featuress">Features</string>
+    <string name="propertylisting">Property Listing</string>
+    <string name="featuredlisting">Featured Listing</string>
+    <string name="professionalservice">Professional Service</string>
+    <string name="emails">Email</string>
+    <string name="companyname">Company Name</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="agencyregistration">Agency Registration</string>
+    <string name="name">Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="message">Message</string>
+    <string name="submit">Submit</string>
+    <string name="crno">CR No.</string>
+    <string name="backtopackages">Back to packages</string>
+    <string name="selectservicefromdelow">Select service from below</string>
+    <string name="servicepro">Service Provider Registration</string>
+    <string name="pleaseselectanyplan">Please select any plan</string>
+    <string name="proffesionalpackage">Professional Package</string>
+    <string name="dealerpackage">Dealer Package</string>
+    <string name="makan">MAKAN</string>
+    <string name="beds">Beds</string>
+    <string-array name="nav_item_activity_titles_logged_in">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+        <item name="logout">Makan</item>
+    </string-array>
+    <string-array name="nav_item_activity_titles_non_logged_in">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+
+    </string-array>
 
 </resources>

@@ -9,4 +9,5 @@ public interface Codes {
     int ERROR_USER_ALREADY_EXISTS=5;
     int ERROR_INVALID_CREDENTIALS=6;
     int ERROR_NO_RECORDS=7;
+    int ALERT_FOR_SUCESS =8;
 }

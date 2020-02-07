@@ -1,14 +1,17 @@
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+    dataBinding.enabled = true
 
     defaultConfig {
         applicationId "com.makan.app"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion 21
+        targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -36,15 +39,22 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
 
-    compile('com.android.support:support-v4:26.1.0') {
+    implementation('com.android.support:support-v4:28.0.0') {
         force = true;
     }
 
     // Glide image library
-
+    configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:support-v4:28.0.0'
+        }
+    }
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
@@ -52,27 +62,48 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'*/
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    compile 'com.google.android.gms:play-services-places:11.0.4'
-    compile 'com.github.guilhe:seekbar-ranged-view:1.0.2'
-    compile 'com.github.ornolfr:rating-view:0.1.2@aar'
-    compile 'com.google.android.gms:play-services-auth:11.0.4'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'me.relex:circleindicator:1.2.2@aar'
-    implementation 'com.facebook.android:facebook-login:[4,5)'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.github.guilhe:seekbar-ranged-view:1.0.2'
+    implementation 'com.github.ornolfr:rating-view:0.1.2@aar'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.github.jkwiecien:EasyImage:2.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+//  implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+//  implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.libraries.places:places:1.0.0'
+//  implementation 'com.google.android.libraries.places:places-compat:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
 }
-/*
-apply plugin: 'com.google.gms.google-services'*/
+
+apply plugin: 'com.google.gms.google-services'
+
+//facebook deteils//
+// username : +96896672722
+//password : Youtoo33885566
+
+//////////////////////
+
+//Goolge client id : 933991405929-r3ke03gt30mu32caql66oro8bnehlqef.apps.googleusercontent.com
+
+//Client Secret : mLlvp7I3Cd5zbwvpuOLAM_Z3

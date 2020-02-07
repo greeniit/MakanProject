@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".app.professional.ProfessionalsDetailsActivity"
+    tools:showIn="@layout/activity_professionals_details">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="none">
+
+                <ImageView
+                    android:id="@+id/ivMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"
+                    android:src="@drawable/navmenucard" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/homeViewPagerMain"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_190dp"
+                        android:layout_marginBottom="@dimen/marginbottom_8dp"/>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:layout_gravity="top"
+                        android:id="@+id/indicatorMain"
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_48dp"/>
+
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/ivGallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="@dimen/card_margin"
+                        android:padding="@dimen/card_margin"
+                        android:visibility="gone"
+                        android:src="@drawable/image_gallery" />
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/album_title_padding"
+                android:paddingBottom="@dimen/album_title_padding"
+                android:weightSum="2">
+
+
+                <LinearLayout
+                    android:id="@+id/llMapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/detailspagebutton"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingEnd="@dimen/card_margin"
+                        android:src="@drawable/ic_map_white_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mapView"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llGalleryView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/detailspagebutton"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingEnd="@dimen/card_margin"
+                        android:src="@drawable/image_gallery1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gallery"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/height_1dp"
+                android:background="#2E7BB3" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:orientation="vertical"
+                    android:background="#CDD1D6">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:gravity="center"
+                        android:text="Luxury Homes"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+                    <ImageView
+                        android:id="@+id/ivThumbnail"
+                        android:layout_width="@dimen/height_100dp"
+                        android:layout_height="@dimen/height_100dp"
+                        android:scaleType="centerInside"
+                        android:layout_gravity="center"
+                        android:src="@drawable/noimage"/>
+
+
+                    <RelativeLayout
+                        android:id="@+id/llWebHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/card_margin"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tvWebAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/marginend_2dp"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding_5dp"
+                            android:drawableStart="@drawable/web"
+                            android:drawablePadding="@dimen/drawablepadding_6dp"
+                            android:text="http://www.hotmail.com"
+                            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/llLocationHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/card_margin"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tvLocationAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/marginend_2dp"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding_5dp"
+                            android:drawableStart="@drawable/ic_placeholder"
+                            android:drawablePadding="@dimen/drawablepadding_6dp"
+                            android:text="Vatakara, Calicut"
+                            android:textAppearance="@android:style/TextAppearance.Medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/llEmailHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/card_margin"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/marginend_2dp"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:padding="@dimen/padding_5dp"
+                            android:drawableStart="@drawable/ic_email"
+                            android:drawablePadding="@dimen/drawablepadding_6dp"
+                            android:text="nazil.rayaroth@gmail.com"
+                            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/llMobileHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/card_margin"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvMobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/marginend_2dp"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:padding="@dimen/padding_5dp"
+                            android:drawableStart="@drawable/ic_smartphone_call"
+                            android:drawablePadding="@dimen/drawablepadding_6dp"
+                            android:text="+91 8606012222"
+                            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginEnd="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvServices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/marginbottom_2dp"
+                            android:layout_marginTop="@dimen/margintop_2dp"
+                            android:singleLine="true"
+                            android:layout_marginStart="@dimen/marginstart_5dp"
+                            android:gravity="start|center"
+                            android:text="@string/service"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/height_1dp"
+                            android:background="#2E7BB3"
+                            android:layout_margin="@dimen/margin_5dp"
+                            android:layout_below="@id/tvServices"/>
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvNearByDacilities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#CDD1D6" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvGallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:gravity="start|center"
+                        android:text="@string/gallery"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_1dp"
+                        android:background="#2E7BB3"
+                        android:layout_margin="@dimen/margin_5dp"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_190dp"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_marginBottom="@dimen/marginbottom_5dp">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/homeViewPagerGallery"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_190dp"
+                            android:layout_marginBottom="@dimen/marginbottom_8dp"/>
+
+                        <me.relex.circleindicator.CircleIndicator
+                            android:layout_gravity="top"
+                            android:id="@+id/indicatorGallery"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_48dp"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginEnd="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvClients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:gravity="start|center"
+                        android:text="@string/ourclients"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_1dp"
+                        android:background="#2E7BB3"
+                        android:layout_margin="@dimen/margin_5dp"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_190dp"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_marginBottom="@dimen/marginbottom_5dp"
+                        android:visibility="visible">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/homeViewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_190dp"
+                            android:layout_marginBottom="@dimen/marginbottom_8dp"/>
+
+                        <me.relex.circleindicator.CircleIndicator
+                            android:layout_gravity="top"
+                            android:id="@+id/indicator"
+                            android:visibility="invisible"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_48dp"/>
+
+                    </FrameLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginEnd="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:gravity="start|center"
+                        android:text="@string/location"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_1dp"
+                        android:background="#2E7BB3"
+                        android:layout_margin="@dimen/margin_5dp"/>
+
+                    <fragment
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        class="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_200dp" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginEnd="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:gravity="start|center"
+                        android:text="@string/reviews" android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                        />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#2E7BB3"
+                        android:layout_margin="@dimen/margin_5dp"/>
+
+                    <Button
+                        android:id="@+id/btReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_2dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:singleLine="true"
+                        android:background="@drawable/filiter_button_back"
+                        android:gravity="center"
+                        android:text="@string/clickheretorate"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+
+                    <com.github.ornolfr.ratingview.RatingView
+                        android:id="@+id/rvratingBar"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_4dp"
+                        android:layout_marginStart="@dimen/marginend_5dp"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_marginTop="@dimen/margintop_2dp"
+                        android:maxLines="1"
+                        android:clickable="true"
+                        app:drawable_half="@drawable/ic_star_half"
+                        app:drawable_empty="@drawable/ic_star_empty"
+                        app:drawable_filled="@drawable/ic_star_filled"
+                        android:theme="@style/RatingBaar"/>
+
+                    <EditText
+                        android:id="@+id/etReview"
+                        android:visibility="gone"
+                        android:imeOptions="actionSend"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_150dp"
+                        android:hint="@string/post"
+                        android:inputType="text"
+                        android:gravity="top"
+                        android:background="@drawable/editext_border"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding_5dp"
+                        android:layout_margin="@dimen/margin_5dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvReview"
+                        tools:listitem="@layout/rowitem_professionalsearchserviceresult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginbottom_5dp">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/layout_progress"/>
+</android.support.constraint.ConstraintLayout>

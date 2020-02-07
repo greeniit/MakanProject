@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.makan.R;
 import com.makan.app.fragment.PropertyListFragment;
@@ -57,6 +58,10 @@ public class PropertyListActivity extends BaseActivity{
             }else if(getIntent().getExtras()!=null&&(getIntent().getExtras().containsKey("search_properties")||getIntent().getExtras().containsKey("search_key"))){
 
                 getSupportActionBar().setTitle("Search Property");
+
+            }else if(getIntent().getExtras()!=null&&(getIntent().getExtras().containsKey("new_filter"))) {
+
+                getSupportActionBar().setTitle("Search Result");
 
             }
 

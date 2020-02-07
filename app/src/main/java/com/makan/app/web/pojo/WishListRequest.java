@@ -9,11 +9,26 @@ public class WishListRequest {
     @Expose
     private String userId;
 
+
+    @SerializedName("language")
+    @Expose
+    private String language;
+
+
+
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

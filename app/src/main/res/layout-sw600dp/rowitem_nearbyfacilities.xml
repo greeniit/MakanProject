@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_productcategory_main"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#CDD1D6"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/marginbottom_01dp"
+            android:layout_marginEnd="@dimen/marginend_01dp"
+            android:background="#CDD1D6"
+            android:layout_marginTop="@dimen/margintop_01dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_height="@dimen/height_35dp"
+                android:layout_width="@dimen/width_35dp"
+                android:layout_marginTop="@dimen/margintop_5dp"
+                android:id="@+id/ivProfessionalImage"
+                android:scaleType="fitXY"
+                android:src="@drawable/airport"
+                android:layout_gravity="center"/>
+
+
+
+
+            <TextView
+                android:id="@+id/ivProfessionalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_5dp"
+                android:text="TextView"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+

@@ -12,8 +12,9 @@ public class Property implements Parcelable {
     private String description;
     private String address;
     private int bedCount;
+    private int bathCount;
     private int area;
-    private String price;
+    private Float price;
     private int thumbnail;
     private String image;
     private String propertyType;
@@ -21,6 +22,7 @@ public class Property implements Parcelable {
     private String offerPrice;
     private String offerPercentage;
     private String favourite;
+    private String subCategory;
 
     public int getId() {
         return id;
@@ -37,7 +39,6 @@ public class Property implements Parcelable {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     public String getDescription() {
         return description;
@@ -71,11 +72,11 @@ public class Property implements Parcelable {
         this.area = area;
     }
 
-    public String getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -136,10 +137,28 @@ public class Property implements Parcelable {
         this.favourite = favourite;
     }
 
+    public int getBathCount() {
+        return bathCount;
+    }
+
+    public void setBathCount(int bathCount) {
+        this.bathCount = bathCount;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
+
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -149,7 +168,7 @@ public class Property implements Parcelable {
         dest.writeString(this.address);
         dest.writeInt(this.bedCount);
         dest.writeInt(this.area);
-        dest.writeString(this.price);
+        dest.writeFloat(this.price);
         dest.writeInt(this.thumbnail);
         dest.writeString(this.image);
         dest.writeString(this.propertyType);
@@ -157,6 +176,8 @@ public class Property implements Parcelable {
         dest.writeString(this.offerPrice);
         dest.writeString(this.offerPercentage);
         dest.writeString(this.favourite);
+        dest.writeInt(this.bathCount);
+        dest.writeString(this.subCategory);
     }
 
     public Property() {
@@ -169,7 +190,7 @@ public class Property implements Parcelable {
         this.address = in.readString();
         this.bedCount = in.readInt();
         this.area = in.readInt();
-        this.price = in.readString();
+        this.price = in.readFloat();
         this.thumbnail = in.readInt();
         this.image = in.readString();
         this.propertyType = in.readString();
@@ -177,6 +198,8 @@ public class Property implements Parcelable {
         this.offerPrice = in.readString();
         this.offerPercentage = in.readString();
         this.favourite = in.readString();
+        this.bathCount = in.readInt();
+        this.subCategory = in.readString();
     }
 
     public static final Parcelable.Creator<Property> CREATOR = new Parcelable.Creator<Property>() {

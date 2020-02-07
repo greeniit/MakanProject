@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/card_margin"
+    android:layout_marginEnd="@dimen/card_margin"
+    android:layout_marginTop="@dimen/card_margin"
+    android:elevation="@dimen/elevation_3dp"
+    card_view:cardCornerRadius="@dimen/card_album_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llThumbnailHolder"
+            android:layout_width="@dimen/width_100dp"
+            android:layout_height="@dimen/height_100dp">
+
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="@dimen/width_100dp"
+                android:layout_height="@dimen/height_100dp"
+                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/marginbottom_2dp"
+            android:layout_marginEnd="@dimen/marginend_2dp"
+            android:layout_marginTop="@dimen/margintop_2dp"
+            android:drawableStart="@drawable/ic_price_18dp"
+            android:text=" 0 OMR"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvPrice"
+            android:layout_below="@+id/tvPrice"
+            android:layout_toEndOf="@+id/llThumbnailHolder"
+            android:orientation="vertical">
+
+            <TextView
+                android:maxLines="1"
+                android:layout_margin="6dp"
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_5dp"
+                android:layout_marginEnd="@dimen/marginend_5dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:text="Luxury Homes"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="@color/album_title" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_2dp"
+                android:layout_marginStart="@dimen/marginstart_5dp"
+                android:layout_marginEnd="@dimen/marginend_5dp"
+                android:background="#2F507D"/>
+
+            <RelativeLayout
+                android:id="@+id/llLocationHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintop_5dp">
+
+                <ImageView
+                    android:id="@+id/ivLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginEnd="@dimen/marginend_5dp"
+                    android:src="@drawable/ic_place_black_18dp" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/ivLocation"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/songs_count_padding_bottom"
+                    android:text="Um Al Ghawarif St, Salalah Oman"
+                    android:textAppearance="@android:style/TextAppearance.Small" />
+
+            </RelativeLayout>z
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivBed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:src="@drawable/ic_bed_18dp" />
+
+                    <TextView
+
+                        android:id="@+id/tvBed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivBed"
+                        android:gravity="center"
+                        android:text="3 Bedrooms"
+                        android:textSize="@dimen/textSize12sp" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginEnd="@dimen/marginend_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/marginstart_5dp"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:src="@drawable/ic_area_18dp" />
+
+                    <TextView
+                        android:id="@+id/tvArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/ivArea"
+                        android:gravity="center"
+                        android:text="6000 Sqft"
+                        android:textSize="@dimen/textSize12sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/marginbottom_2dp"
+                    android:layout_marginStart="@dimen/marginstart_5dp"
+                    android:layout_marginTop="@dimen/margintop_2dp"
+                    android:layout_toLeftOf="@+id/ivWishList"
+                    android:layout_toStartOf="@+id/ivWishList"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="3 year old apartment will all amenities."
+                    android:textAppearance="@android:style/TextAppearance.Small" />
+
+                <ImageView
+                    android:id="@+id/ivWishList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/favourite" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:visibility="visible">
+
+                <com.github.ornolfr.ratingview.RatingView
+                    android:id="@+id/rvratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginbottom_2dp"
+                    android:layout_marginStart="@dimen/marginend_5dp"
+                    android:layout_marginEnd="@dimen/marginend_5dp"
+                    android:layout_marginTop="@dimen/margintop_2dp"
+                    android:maxLines="1"
+                    app:drawable_half="@drawable/ic_star_half"
+                    app:drawable_empty="@drawable/ic_star_empty"
+                    app:drawable_filled="@drawable/ic_star_filled"
+                    android:theme="@style/RatingBaar"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
+

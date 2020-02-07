@@ -8,8 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.libraries.places.api.model.Place;
 import com.makan.R;
 import com.makan.app.fragment.FilterFragment;
 
@@ -22,32 +21,37 @@ public class FilterActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_fragment_holder);
-
+        hideKeyboard(this);
         setFragment();
     }
 
     private void setFragment(){
 
         signUpFragment = new FilterFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString( "TOOLBAR HIDE" , "NO");
+        signUpFragment.setArguments(arguments);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frame, signUpFragment);
         transaction.commit();
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            if (resultCode == RESULT_OK) {
-                Place place = PlaceAutocomplete.getPlace(this, data);
-                signUpFragment.setSelectedLocation(place);
-
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
-                Log.e("Makan", status.getStatusMessage());
-
-            } else if (resultCode == RESULT_CANCELED) {
-
-            }
+//            if (resultCode == RESULT_OK) {
+//                Place place = PlaceAutocomplete.getPlace(this, data);
+//                signUpFragment.setSelectedLocation(place);
+//
+//            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+//                Status status = PlaceAutocomplete.getStatus(this, data);
+//                Log.e("Makan", status.getStatusMessage());
+//
+//            } else if (resultCode == RESULT_CANCELED) {
+//
+//            }
 
     }
 }

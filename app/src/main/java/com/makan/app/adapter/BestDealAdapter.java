@@ -60,7 +60,7 @@ public class BestDealAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         viewHolder.tvTitle.setText(property.getTitle());
         viewHolder.tvAddress.setText(property.getAddress());
-        viewHolder.tvPrevPrice.setText(property.getPrice());
+        viewHolder.tvPrevPrice.setText(""+property.getPrice());
         viewHolder.tvPrice.setText(property.getOfferPrice());
         viewHolder.tvOfferPercentage.setText(property.getOfferPercentage()+"%");
 

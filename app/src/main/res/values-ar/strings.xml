@@ -1,0 +1,269 @@
+<resources>
+    <string name="app_name">مكان</string>
+
+    <string name="facebook_app_id">589865944896706</string>
+    <string name="fb_login_protocol_scheme">fb589865944896706</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <string name="phone_number">+91 8593848004</string>
+    <string name="email">info@makanreality.com</string>
+
+
+    <!-- Navigation Drawer menu labels -->
+    <string name = "home"> الصفحة الرئيسية </string>
+         <string name = "category"> الفئة </string>
+         <string name = "dealers"> التجار </string>
+         <string name = "wishlist"> قائمة الأمنيات </string>
+         <string name = "mortgage"> الرهن العقاري </string>
+         <string name = "settings"> الإعدادات </string>
+         <string name = "feedback"> الملاحظات </string>
+         <string name = "business"> مكان للأعمال </string>
+         <string name = "find_deals"> البحث عن العروض </string>
+         <string name = "news"> الأخبار </string>
+         <string name = "notification"> الإخطار </string>
+         <string name = "contact_us"> اتصل بنا </string>
+         <string name = "logout"> تسجيل الخروج </string>
+
+
+    <string-array name="nav_item_activity_titles_logged_in">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+        <item name="logout">Makan</item>
+    </string-array>
+
+    <string-array name="nav_item_activity_titles_non_logged_in">
+        <item name="home">Makan</item>
+        <item name="category">Category</item>
+        <item name="dealers">Dealers</item>
+        <item name="wishlist">Wishlist</item>
+        <item name="mortgage">Mortgage</item>
+        <item name="settings">Settings</item>
+        <item name="feedback">Feedback</item>
+        <item name="business">Makan for Business</item>
+        <item name="business">Find Deals</item>
+        <item name="news">News</item>
+        <item name="notification">Notification</item>
+        <item name="contact_us">Contact Us</item>
+
+    </string-array>
+
+    <string name="property_description">
+        <![CDATA[<html>
+ <head></head>
+ <body style="text-align:justify;"><b>وصف العقار: </b>#</body>
+</html>
+]]>
+    </string>
+
+    <string name="property_type">
+        <![CDATA[<html>
+ <head></head>
+ <body style="text-align:justify;"><b>نوع الملكية: </b>#</body>
+</html>
+]]>
+    </string>
+
+
+    <string name="image_count_message"># بعيدا عن المكان $</string>
+
+
+    <!--Error messages-->
+
+         <string name = "error_unexpected"> حدث خطأ غير متوقع. </string>
+         <string name = "error_network"> لا يوجد اتصال بالإنترنت. </string>
+         <string name = "error_server_conection"> غير قادر على الاتصال بالخادم. </string>
+         <string name = "error_invalid_credentials"> عنوان البريد الإلكتروني أو كلمة المرور غير صالحة. </string>
+
+    <!--Sign up-->
+    <string name = "registration_success"> تم الانتهاء من التسجيل بنجاح. </string>
+         <string name = "permission_phone_not_granted"> لم يتم منح إذن بالمكالمة. تمكين الإذن من إعدادات التطبيق. </string>
+         <string name = "permission_camera_not_granted"> لم يتم منح إذن الكاميرا. تمكين الإذن من إعدادات التطبيق. </string>
+         <string name = "permission_gallery_not_granted"> لم يتم منح إذن المعرض. تمكين الإذن من إعدادات التطبيق. </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name = "hello_blank_fragment"> مرحبًا ، جزء فارغ </string>
+         <string name = "professional"> المحترفين </string>
+         <string name = "search"> البحث </string>
+         <string name = "postyourrequirements"> نشر متطلباتك </string>
+         <string name = "buy"> يشترى </string>
+         <string name = "rent"> تأجير </string>
+         <string name = "recentlyaddedproperty"> الملكية المضافة حديثًا </string>
+         <string name = "showall"> إظهار الكل </string>
+         <string name = "featuredproperty"> خاصية مميزة </string>
+
+    <string name="title_activity_professionals">ProfessionalsActivity</string>
+    <string name="professionalsearch">البحث المهني</string>
+    <string name="professionalsearchecample">على سبيل المثال: - "عمان"</string>
+    <string name="title_activity_professional_search_result">ProfessionalSearchResultActivity</string>
+    <string name="pleaseenteravalidtext">الرجاء إدخال النص صالح</string>
+    <string name="title_activity_professionals_details">ProfessionalsDetailsActivity</string>
+
+    <string name = "reviews"> المراجعات </string>
+         <string name = "post"> نشر تعليقك </string>
+         <string name = "location"> الموقع </string>
+         <string name = "ourclients"> عملاؤنا </string>
+
+    <string name="title_activity_professionals_gallery">ProfessionalsGalleryActivity</string>
+
+    <string name = "nameheader"> اسم </string>
+        <string name = "emailheader"> البريد الإلكتروني </string>
+        <string name = "stateheader"> الولايات </string>
+        <string name = "govheader"> المحافظات </string>
+        <string name = "arearange"> نطاق المنطقة (الحد الأدنى - الحد الأقصى) </string>
+        <string name = "bedroomheader"> غرفة النوم </string>
+        <string name = "floornumberheader"> رقم الطابق (من - إلى) </string>
+        <string name = "mobileheader"> رئيس المحمول </string>
+        <string name = "transactionTypeHeader"> نوع المعاملة </string>
+        <string name = "categoryHeader"> الفئة </string>
+        <string name = "priceRangeHeader"> نطاق السعر (الحد الأدنى - الحد الأقصى) </string>
+        <string name = "freqOfAlert"> تكرار التنبيهات </string>
+        <string name = "ageOfConstructionHeader"> عصر البناء </string>
+        <string name = "propertyDesc"> وصف الملكية </string>
+        <string name = "saleProperty"> بيع الممتلكات </string>
+        <string name = "rentProperty"> تأجير العقارات </string>
+        <string name = "selectLocation"> حدد الموقع </string>
+        <string name = "selectArea"> حدد المساحة </string>
+        <string name = "propertytypes"> نوع الخاصية </string>
+        <string name = "residential"> سكني </string>
+        <string name = "commercial"> تجاري </string>
+        <string name = "rentFrequency"> إيجار التردد </string>
+        <string name = "yearly"> سنوي </string>
+        <string name = "monthly"> شهريًا </string>
+        <string name = "priceRange"> نطاق السعر </string>
+        <string name = "area"> المساحة </string>
+        <string name = "bedroom"> غرفة النوم </string>
+        <string name = "studio"> ستوديو </string>
+        <string name = "bathroom"> الحمام </string>
+        <string name = "mapSearch"> بحث الخريطة </string>
+    <string name="makanforbusiness">الزوج للعمل</string>
+    <string name="login">تسجيل الدخول</string>
+
+
+
+
+    <string name = "mapView"> عرض الخريطة </string>
+         <string name = "gallery"> المعرض </string>
+         <string name = "nearbypropreties"> العناصر المجاورة القريبة </string>
+         <string name = "details"> التفاصيل </string>
+         <string name = "calculate_and_view_the_monthly_mortgage"> حساب وعرض الرهن العقاري الشهري </string>
+         <string name = "propretyListedBy"> الخاصية المدرجة بواسطة: </string>
+         <string name = "call"> الاتصال </string>
+         <string name = "enquiry"> الاستفسار </string>
+         <string name = "filter"> منقي </string>
+         <string name = "provinanceheader"> المحافظة </string>
+
+
+
+
+    <string name = "property_types"> نوع العقار: </string>
+        <string name = "totalbuildarea"> إجمالي مساحة البناء: </string>
+        <string name = "totalplotarea"> إجمالي مساحة الأرض: </string>
+        <string name = "bathroomcount"> عدد الحمامات: </string>
+        <string name = "bedroomcount"> عدد غرف النوم </string>
+        <string name = "locations"> المواقع: </string>
+        <string name = "description"> الوصف </string>
+        <string name = "keyfacilities"> التسهيلات الرئيسية: </string>
+        <string name = "headoffice"> المكتب الرئيسي: </string>
+        <string name = "officeemail"> بريد المكتب الإلكتروني: </string>
+        <string name = "website"> موقع الويب: </string>
+        <string name = "agent"> الوكيل: </string>
+        <string name = "totalprice"> السعر الإجمالي </string>
+        <string name = "loanperiod"> فترة القرض </string>
+        <string name = "downpayment"> الدفعة الأولى </string>
+        <string name = "rateofinterset"> سعر الفائدة </string>
+        <string name = "totalpayable"> إجمالي الدفع </string>
+        <string name = "paymentbreakedown"> تفاصيل الدفع </string>
+        <string name = "interest"> الاهتمام </string>
+        <string name = "principal"> المدير </string>
+        <string name = "monthlyPayment"> الدفع الشهري </string>
+        <string name = "enteralldetails"> أدخل جميع التفاصيل. </string>
+        <string name = "agreetermsandconditions"> توافق على البنود والشروط للمتابعة. </string>
+        <string name = "enterRequiredDetails"> أدخل جميع التفاصيل المطلوبة. </string>
+        <string name = "sucessfullyScribed"> لقد اشتركت بنجاح في مكان. </string>
+        <string name = "item"> العنصر </string>
+        <string name = "items"> العناصر </string>
+        <string name = "sucessfully"> تم إرسال التعليقات بنجاح. </string>
+        <string name = "VeryGood"> جيد جدًا </string>
+        <string name = "good"> جيد </string>
+        <string name = "fair"> عادل </string>
+        <string name = "average"> معدل </string>
+        <string name = "Bad"> سيئ </string>
+        <string name = "itemone"> عنصر واحد </string>
+        <string name = "specifyemail"> حدد البريد الإلكتروني </string>
+        <string name = "specifyPassword"> تحديد كلمة المرور </string>
+        <string name = "please"> يرجى إدخال بيانات صالحة. </string>
+        <string name = "pleaseenteravaliddata"> يرجى إدخال بيانات صالحة. </string>
+        <string name = "omr"> عمان الريال </string>
+        <string name = "years"> السنوات </string>
+        <string name = "error_no_records"> لم يتم العثور على بيانات. </string>
+        <string name = "thankyoufoyourrating"> شكرًا على تقييمك. </string>
+        <string name = "nodatafound"> ​​لم يتم العثور على بيانات. </string>
+        <string name = "makanalert"> تنبيه ماكان </string>
+        <string name = "map"> الخريطة </string>
+        <string name = "postedyourrequirements"> نشر متطلباتك. </string>
+        <string name = "requiredfield"> حقل مطلوب </string>
+        <string name = "service"> الخدمة </string>
+    <string name="sort"> فرز </string>
+
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="server_client_id">1047316023661-k3f8lvf5i9h334iim0egpts0f2p2kn8p.apps.googleusercontent.com</string>
+    <string name="Sqft">Sqft</string>
+
+    <string name = "clickheretorate"> انقر هنا للتقييم </string>
+        <string name = "ratting"> Ratting </string>
+        <string name = "packages"> الحزم </string>
+        <string name = "shortcuts"> الاختصارات </string>
+        <string name = "socialnetwork"> الشبكات الاجتماعية </string>
+        <string name = "facebook"> فيس بوك </string>
+        <string name = "snapchat"> سناب شات </string>
+        <string name = "instagram"> إينستاجرام </string>
+        <string name = "linkedin"> مرتبط </string>
+
+
+
+        <string name = "selecttheplan"> حدد خطة </string>
+        <string name = "clientdetails"> تفاصيل العملاء </string>
+        <string name = "sociallink"> الرابط الاجتماعي </string>
+        <string name = "postinmobile"> المشاركة في تطبيق الجوال والويب </string>
+        <string name = "features"> المميز </string>
+        <string name = "imagelimit"> حد الصورة </string>
+        <string name = "featuress"> الميزات </string>
+        <string name = "propertylisting"> قائمة العقارات </string>
+        <string name = "featuredlisting"> قائمة مميزة </string>
+        <string name = "professionalservice"> الخدمة الاحترافية </string>
+        <string name = "emails"> البريد الإلكتروني </string>
+        <string name = "companyname"> اسم الشركة </string>
+        <string name = "phone"> الهاتف </string>
+        <string name = "address"> العنوان </string>
+        <string name = "agencyregistration"> تسجيل الوكالة </string>
+        <string name = "name"> الاسم </string>
+        <string name = "contact_number"> رقم الاتصال </string>
+        <string name = "message"> الرسالة </string>
+        <string name = "submit"> إرسال </string>
+        <string name = "crno"> رقم السجل التجاري </string>
+        <string name = "backtopackages"> الرجوع إلى الحزم </string>
+        <string name = "selectservicefromdelow"> حدد الخدمة من الأسفل </string>
+        <string name = "servicepro"> تسجيل مقدم الخدمة </string>
+        <string name = "pleaseselectanyplan"> يرجى تحديد أي خطة </string>
+
+        <string name = "proffesionalpackage"> الحزمة الاحترافية </string>
+        <string name = "dealerpackage"> باقة التاجر </string>
+
+</resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".app.professional.ProfessionalsActivity"
+    tools:showIn="@layout/activity_professionals">
+
+    <LinearLayout
+        android:id="@+id/ll_professionalSearch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_60dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/sv_profesionalSerach"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:layout_height="match_parent"
+            android:background="@drawable/searchbar"
+            android:layout_margin="@dimen/margin_8dp"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="@dimen/drawablepadding_10dp"
+            android:paddingStart="@dimen/paddingstart_10dp"
+            android:hint="@string/professionalsearchecample"
+            android:layout_alignParentTop="true"
+            android:inputType="text"
+            android:imeOptions="actionSend"/>
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fl_pageViewer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_professionalSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/homeViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_190dp"/>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:layout_gravity="bottom"
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_20dp"/>
+
+    </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/fl_pageViewer1"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_professionalSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/ivHomeAdv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_190dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ok"/>
+
+            <TextView
+                android:layout_gravity="bottom"
+                android:id="@+id/tvHomAdv"
+                android:background="@color/semi_transparent_black"
+                android:layout_margin="@dimen/margin_10dp"
+                android:text="@string/home"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_48dp"/>
+
+
+
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_professionalData"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_0dp"
+        app:layout_constraintTop_toBottomOf="@id/fl_pageViewer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <include layout="@layout/layout_progress"/>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".app.professional.ProfessionalSearchResultActivity"
+    tools:showIn="@layout/activity_professional_search_result">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvServiceList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:focusedByDefault="true"
+        android:layout_marginTop="@dimen/margintop_5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvServiceItemsList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_0dp"
+        tools:listitem="@layout/rowitem_professionalsearchserviceresult"
+        app:layout_constraintTop_toBottomOf="@+id/rvServiceList"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+
+    <include layout="@layout/layout_progress"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

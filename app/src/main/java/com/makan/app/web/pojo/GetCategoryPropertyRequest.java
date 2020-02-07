@@ -13,6 +13,10 @@ public class GetCategoryPropertyRequest {
     @Expose
     private int userId;
 
+    @SerializedName("language")
+    @Expose
+    private String language;
+
     public String getSubCategoryId() {
         return subCategoryId;
     }
@@ -27,5 +31,13 @@ public class GetCategoryPropertyRequest {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

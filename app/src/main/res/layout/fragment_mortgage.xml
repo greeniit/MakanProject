@@ -25,7 +25,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|center_vertical"
+                android:layout_gravity="start|center_vertical"
                 android:background="#80000000">
 
                 <TextView
@@ -33,8 +33,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:gravity="left"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
                     android:text="Mortgage"
                     android:textAppearance="@android:style/TextAppearance.Large"
                     android:textColor="@android:color/white"
@@ -68,10 +68,10 @@
                         android:id="@+id/tvBasicLoanCalculatorLbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginRight="5dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_toLeftOf="@+id/llMonthlyPaymentDetailHolder"
+                        android:layout_toStartOf="@+id/llMonthlyPaymentDetailHolder"
                         android:text="Basic Loan Calculation"
                         android:textAppearance="@android:style/TextAppearance.Small"
                         android:textColor="@android:color/white"
@@ -80,15 +80,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@+id/tvBasicLoanCalculatorLbl"
-                        android:layout_toLeftOf="@+id/llMonthlyPaymentDetailHolder"
+                        android:layout_toStartOf="@+id/llMonthlyPaymentDetailHolder"
                         android:orientation="vertical">
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:text="Loan Amount:"
                             android:layout_width="wrap_content"
@@ -99,8 +99,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="8dp"
                             android:background="@android:color/black"
                             android:hint="Loan Amount"
@@ -116,8 +116,8 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Rate (APR):"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -127,8 +127,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="8dp"
                             android:background="@android:color/black"
                             android:hint="Rate (APR)"
@@ -144,8 +144,8 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Term:"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -155,8 +155,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="8dp"
                             android:background="@android:color/black"
                             android:hint="Term"
@@ -175,7 +175,7 @@
                         android:id="@+id/llMonthlyPaymentDetailHolder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:background="@android:color/black"
                         android:orientation="vertical"
                         android:padding="@dimen/activity_horizontal_margin">
@@ -302,7 +302,7 @@
                         android:id="@+id/tvInterestSavingCalculatorLbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:text="Interest Saving Calculation"
                         android:textAppearance="@android:style/TextAppearance.Small"
                         android:textColor="@android:color/white"
@@ -311,15 +311,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@+id/tvInterestSavingCalculatorLbl"
                         android:layout_centerInParent="true"
                         android:orientation="vertical">
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:text="Loan Amount:"
                             android:layout_width="wrap_content"
@@ -332,8 +332,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Loan Amount"
                             android:imeOptions="actionNext"
@@ -347,8 +347,8 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Rate (APR):"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -360,8 +360,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Rate (APR)"
                             android:imeOptions="actionNext"
@@ -375,8 +375,8 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Term:"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -388,8 +388,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Term"
                             android:imeOptions="actionNext"
@@ -403,8 +403,8 @@
 
                         <TextView
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Comparison Rate:"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -416,8 +416,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Comparison Rate"
                             android:imeOptions="actionDone"
@@ -431,8 +431,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:orientation="vertical"
                             android:padding="@dimen/activity_horizontal_margin">
@@ -501,7 +501,7 @@
                         android:id="@+id/tvAmortizationScheduleCalculatorLbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:text="Amortization Schedule Calculation"
                         android:textAppearance="@android:style/TextAppearance.Small"
                         android:textColor="@android:color/white"
@@ -510,7 +510,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@+id/tvAmortizationScheduleCalculatorLbl"
                         android:layout_centerInParent="true"
                         android:orientation="vertical">
@@ -518,8 +518,8 @@
                         <TextView
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Loan Amount:"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -535,8 +535,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Loan Amount"
                             android:padding="10dp"
@@ -547,8 +547,8 @@
                         <TextView
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Rate (APR):"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -564,8 +564,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Rate (APR)"
                             android:padding="10dp"
@@ -576,8 +576,8 @@
                         <TextView
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="Term:"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -592,8 +592,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:background="@android:color/black"
                             android:hint="Term"
                             android:padding="10dp"

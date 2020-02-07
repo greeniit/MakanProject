@@ -2,6 +2,7 @@ package com.makan.app.web.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.makan.app.web.pojo.PropertyList;
 
 import java.util.List;
 
@@ -207,6 +208,10 @@ public class PropertyDetailResponse {
         @Expose
         private String nearByIcon;
 
+        @SerializedName("am_img")
+        @Expose
+        private String amimg;
+
         public String getNearById() {
             return nearById;
         }
@@ -229,6 +234,14 @@ public class PropertyDetailResponse {
 
         public void setNearByIcon(String nearByIcon) {
             this.nearByIcon = nearByIcon;
+        }
+
+        public String getAmimg() {
+            return amimg;
+        }
+
+        public void setAmimg(String amimg) {
+            this.amimg = amimg;
         }
     }
 }

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="#00336d"
+    android:orientation="horizontal"
+    android:paddingTop="50dp"
+    android:paddingBottom="50dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/img_header_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/navmenucard" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/makanlogos" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="15dp">
+
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:text="Qzaak"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <TextView
+                    android:id="@+id/website"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:text="Qzaak"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                <Button
+                    android:id="@+id/bt_login"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:text="@string/login"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/roundedbutton"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="@dimen/marginend_5dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+
+
+
+
+                    <Button
+                        android:id="@+id/bt_languageChangeAr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/arabic"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rounderlanguagebutton"
+                        android:layout_marginEnd="@dimen/marginend_5dp"
+                        android:layout_marginTop="@dimen/margintop_5dp"/>
+
+                    <Button
+                        android:id="@+id/bt_languageChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rounderlanguagebutton"
+                        android:layout_marginEnd="@dimen/marginstart_5dp"
+                        android:layout_marginTop="@dimen/marginstart_5dp"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

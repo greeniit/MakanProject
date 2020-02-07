@@ -20,6 +20,9 @@ public class SignUpRequest {
     @SerializedName("device_token")
     @Expose
     private String deviceToken;
+    @SerializedName("display_name")
+    @Expose
+    private String displayName;
 
     public String getEmail() {
         return email;
@@ -61,4 +64,11 @@ public class SignUpRequest {
         this.deviceToken = deviceToken;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 }

@@ -35,23 +35,27 @@ public class PropertyList {
     @SerializedName("price")
     @Expose
     private String price;
-
-    @SerializedName("main_category_name")
-    @Expose
-    private String mainCategoryName;
-
     @SerializedName("sub_category_id")
     @Expose
     private String subCategoryId;
     @SerializedName("sub_category_name")
     @Expose
     private String subCategoryName;
+    @SerializedName("main_category_id")
+    @Expose
+    private String mainCategoryId;
+    @SerializedName("main_category_name")
+    @Expose
+    private String mainCategoryName;
     @SerializedName("property_type")
     @Expose
     private String propertyType;
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("agency_id")
+    @Expose
+    private String agencyid;
     @SerializedName("agency_name")
     @Expose
     private String agencyName;
@@ -77,9 +81,24 @@ public class PropertyList {
     @Expose
     private String _long;
 
+    @SerializedName("bathroom_count")
+    @Expose
+    private String bathroom_count;
+
+    @SerializedName("bed_count")
+    @Expose
+    private String bedcount;
+
     @SerializedName("favourite")
     @Expose
     private String favourite;
+
+    @SerializedName("agency_member_contact_no")
+    @Expose
+    private String agencymembercontactno;
+
+
+
 
     public String getPropertyId() {
         return propertyId;
@@ -177,6 +196,22 @@ public class PropertyList {
         this.subCategoryName = subCategoryName;
     }
 
+    public String getMainCategoryId() {
+        return mainCategoryId;
+    }
+
+    public void setMainCategoryId(String mainCategoryId) {
+        this.mainCategoryId = mainCategoryId;
+    }
+
+    public String getMainCategoryName() {
+        return mainCategoryName;
+    }
+
+    public void setMainCategoryName(String mainCategoryName) {
+        this.mainCategoryName = mainCategoryName;
+    }
+
     public String getPropertyType() {
         return propertyType;
     }
@@ -257,12 +292,21 @@ public class PropertyList {
         this._long = _long;
     }
 
-    public String getMainCategoryName() {
-        return mainCategoryName;
+    public String getBathroom_count() {
+        return bathroom_count;
     }
 
-    public void setMainCategoryName(String mainCategoryName) {
-        this.mainCategoryName = mainCategoryName;
+    public void setBathroom_count(String bathroom_count) {
+        this.bathroom_count = bathroom_count;
+    }
+
+
+    public String getBedcount() {
+        return bedcount;
+    }
+
+    public void setBedcount(String bedcount) {
+        this.bedcount = bedcount;
     }
 
     public String getFavourite() {
@@ -271,5 +315,21 @@ public class PropertyList {
 
     public void setFavourite(String favourite) {
         this.favourite = favourite;
+    }
+
+    public String getAgencymembercontactno() {
+        return agencymembercontactno;
+    }
+
+    public void setAgencymembercontactno(String agencymembercontactno) {
+        this.agencymembercontactno = agencymembercontactno;
+    }
+
+    public String getAgencyid() {
+        return agencyid;
+    }
+
+    public void setAgencyid(String agencyid) {
+        this.agencyid = agencyid;
     }
 }

@@ -118,6 +118,14 @@ public class FindDealsResponse {
         @Expose
         private String favourite;
 
+        @SerializedName("bathroom_count")
+        @Expose
+        private String bathroomcount;
+
+        @SerializedName("bed_count")
+        @Expose
+        private String bedcount;
+
         public String getPropertyId() {
             return propertyId;
         }
@@ -223,7 +231,7 @@ public class FindDealsResponse {
         }
 
         public String getOffer() {
-            return offer;
+            return offer=offer;
         }
 
         public void setOffer(String offer) {
@@ -253,6 +261,22 @@ public class FindDealsResponse {
 
         public void setFavourite(String favourite) {
             this.favourite = favourite;
+        }
+
+        public String getBathroomcount() {
+            return bathroomcount;
+        }
+
+        public void setBathroomcount(String bathroomcount) {
+            this.bathroomcount = bathroomcount;
+        }
+
+        public String getBedcount() {
+            return bedcount;
+        }
+
+        public void setBedcount(String bedcount) {
+            this.bedcount = bedcount;
         }
     }
 }

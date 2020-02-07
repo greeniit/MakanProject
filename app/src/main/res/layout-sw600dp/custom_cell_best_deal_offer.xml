@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cvDealerListHolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/paddingbottom_8dp"
+                    android:paddingTop="@dimen/paddingtop_8dp"
+                    android:paddingEnd="@dimen/paddingend_5dp"
+                    android:paddingStart="@dimen/paddingstart_5dp"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@android:color/white" />
+
+                <ImageView
+                    android:id="@+id/ivProperty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tvTitle"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/semi_transparent_black"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin">
+
+                    <RelativeLayout
+                        android:id="@+id/llLocationHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginbottom_5dp">
+
+                        <ImageView
+                            android:id="@+id/ivLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_place_black_18dp" />
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="@dimen/marginend_2dp"
+                            android:layout_toEndOf="@+id/ivLocation"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:paddingBottom="@dimen/songs_count_padding_bottom"
+                            android:text="Um Al Ghawarif St, Salalah Oman"
+                            android:textAppearance="@android:style/TextAppearance.Small"
+                            android:textColor="@android:color/white" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivPrevPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/marginstart_5dp"
+                                android:layout_marginEnd="@dimen/marginend_5dp"
+                                android:src="@drawable/price_white_18dp" />
+
+
+                            <TextView
+                                android:id="@+id/tvPrevPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/ivPrevPrice"
+                                android:gravity="center"
+                                android:text="5000 OMR"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/textSize16sp" />
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/height_2dp"
+                                android:layout_alignEnd="@+id/tvPrevPrice"
+                                android:layout_alignStart="@+id/tvPrevPrice"
+                                android:layout_alignTop="@+id/tvPrevPrice"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:background="@android:color/holo_red_dark" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginStart="@dimen/card_margin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:src="@drawable/price_white_18dp" />
+
+                            <TextView
+                                android:id="@+id/tvPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/ivPrice"
+                                android:gravity="center"
+                                android:text="4000 OMR"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/textSize12sp" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:background="@android:color/holo_red_dark"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvOfferPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5%"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OFF"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

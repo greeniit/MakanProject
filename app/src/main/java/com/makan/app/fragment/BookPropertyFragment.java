@@ -118,13 +118,13 @@ public class BookPropertyFragment extends BaseFragment {
 
             } else {
 
-                new Utility().showMessageAlertDialog(getActivity(), "Agree to terms and conditions to proceed.");
+                new Utility().showMessageAlertDialog(getActivity(), getResources().getString(R.string.agreetermsandconditions));
             }
 
 
         } else {
 
-            new Utility().showMessageAlertDialog(getActivity(), "Enter all required details.");
+            new Utility().showMessageAlertDialog(getActivity(), getResources().getString(R.string.enterRequiredDetails));
         }
 
 
@@ -213,7 +213,7 @@ public class BookPropertyFragment extends BaseFragment {
 
             if (result == Codes.SUCCESS) {
 
-                new Utility().showMessageAlertDialog(getActivity(), "You have successfully subscribed to makan.", 1, new DialogCallback() {
+                new Utility().showMessageAlertDialog(getActivity(), getResources().getString(R.string.sucessfullyScribed), 1, new DialogCallback() {
                     @Override
                     public void onDialogDismissed(int dialogId) {
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    app:cardElevation="@dimen/elevation_2dp"
+    app:cardCornerRadius="@dimen/cornerRadius_3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#35599b">
+
+    <ImageView
+        android:id="@+id/im_icon"
+        android:layout_width="@dimen/width_24dp"
+        android:layout_height="@dimen/height_24dp"
+        android:layout_marginStart="10dp"
+        android:tint="#F3F0F0"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_bed"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:paddingStart="@dimen/paddingstart_12dp"
+        android:text="Home"
+        android:textSize="@dimen/textSize14sp"/>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="10dp"
+        android:background="#FFFFFF" />
+
+</android.support.v7.widget.CardView>

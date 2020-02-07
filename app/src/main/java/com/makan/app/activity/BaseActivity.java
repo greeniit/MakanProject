@@ -1,11 +1,12 @@
 package com.makan.app.activity;
 
+import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-
+import android.view.WindowManager;
 import com.makan.R;
 
 public class BaseActivity extends AppCompatActivity{
@@ -25,7 +26,6 @@ public class BaseActivity extends AppCompatActivity{
         View dialogView = inflater.inflate(R.layout.progress_dialog, null);
         dialogBuilder.setView(dialogView);
         dialogBuilder.setCancelable(false);
-
         progressDialog = dialogBuilder.create();
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         progressDialog.show();
@@ -37,5 +37,11 @@ public class BaseActivity extends AppCompatActivity{
 
             progressDialog.dismiss();
         }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
 }

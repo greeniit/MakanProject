@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -55,6 +57,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.security.MessageDigest;
 import java.util.List;
 
 import butterknife.BindView;
@@ -134,8 +137,9 @@ public class SignUpFragment extends BaseFragment implements DialogCallback{
         }else{
 
             SignUpRequest signUpRequest=new SignUpRequest();
-            signUpRequest.setEmail(etName.getText().toString());
+            signUpRequest.setEmail(etEmail.getText().toString());
             signUpRequest.setPass(etPassword.getText().toString());
+            signUpRequest.setDisplayName(etName.getText().toString());
             signUpRequest.setDeviceToken("");
             signUpRequest.setDeviceType(1);
             signUpRequest.setPhone(Long.parseLong(etPhone.getText().toString()));
@@ -233,7 +237,12 @@ public class SignUpFragment extends BaseFragment implements DialogCallback{
                 if(imagesFiles!=null&&imagesFiles.size()>0){
 
                     imageFilePath = imagesFiles.get(0).getAbsolutePath();
-                    Glide.with(getActivity()).load(imagesFiles.get(0)).transform(new CircleTransform(getActivity())).into(ivPickImage);
+//                    Glide.with(getActivity()).load(imagesFiles.get(0)).transform(new CircleTransform(getActivity())).into(ivPickImage);
+                    Glide.with(getActivity())
+                            .load(imagesFiles.get(0))
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(ivPickImage);
+
                 }
             }
         });
@@ -287,7 +296,7 @@ public class SignUpFragment extends BaseFragment implements DialogCallback{
                             userDetail.setEmail(etEmail.getText().toString());
                             userDetail.setName(etName.getText().toString());
                             userDetail.setId(signUpResponse.getId());
-                            userDetail.setPhone(etName.getText().toString());
+                            userDetail.setPhone(etPhone.getText().toString());
 
                             Gson gson=new Gson();
                             String userData=gson.toJson(userDetail, User.class);
@@ -412,44 +421,49 @@ public class SignUpFragment extends BaseFragment implements DialogCallback{
         }
     }
 
-    public static class CircleTransform extends BitmapTransformation {
-
-        public CircleTransform(Context context) {
-            super(context);
-        }
-
-        @Override protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-            return circleCrop(pool, toTransform);
-        }
-
-        private static Bitmap circleCrop(BitmapPool pool, Bitmap source) {
-            if (source == null) return null;
-
-            int size = Math.min(source.getWidth(), source.getHeight());
-            int x = (source.getWidth() - size) / 2;
-            int y = (source.getHeight() - size) / 2;
-
-            // TODO this could be acquired from the pool too
-            Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);
-
-            Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);
-            if (result == null) {
-                result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-            }
-
-            Canvas canvas = new Canvas(result);
-            Paint paint = new Paint();
-            paint.setShader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
-            paint.setAntiAlias(true);
-            float r = size / 2f;
-            canvas.drawCircle(r, r, r, paint);
-            return result;
-        }
-
-        @Override public String getId() {
-            return getClass().getName();
-        }
-    }
+//    public static class CircleTransform extends BitmapTransformation {
+//
+//        public CircleTransform(Context context) {
+//            super(context);
+//        }
+//
+//        @Override protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+//            return circleCrop(pool, toTransform);
+//        }
+//
+//        private static Bitmap circleCrop(BitmapPool pool, Bitmap source) {
+//            if (source == null) return null;
+//
+//            int size = Math.min(source.getWidth(), source.getHeight());
+//            int x = (source.getWidth() - size) / 2;
+//            int y = (source.getHeight() - size) / 2;
+//
+//            // TODO this could be acquired from the pool too
+//            Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);
+//
+//            Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);
+//            if (result == null) {
+//                result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+//            }
+//
+//            Canvas canvas = new Canvas(result);
+//            Paint paint = new Paint();
+//            paint.setShader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
+//            paint.setAntiAlias(true);
+//            float r = size / 2f;
+//            canvas.drawCircle(r, r, r, paint);
+//            return result;
+//        }
+//
+//        @Override public String getId() {
+//            return getClass().getName();
+//        }
+//
+//        @Override
+//        public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+//
+//        }
+//    }
 
     private String convertToByteArray(String imageFilePath){
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.makan.R;
 import com.makan.app.activity.PropertyDetailActivity;
+import com.makan.app.app.AppState;
 import com.makan.app.app.WebConstant;
 import com.makan.app.callback.PropertyAdapterWishListOperationCallback;
 import com.makan.app.model.Property;
@@ -36,7 +37,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class HorizontalCellViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice,tvDescription;
+        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice,tvDescription,tvBathrrom;
         public ImageView ivThumbnail,ivWishList;
         private CardView cardView;
 
@@ -47,6 +48,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tvBedCount = (TextView) view.findViewById(R.id.tvBed);
             tvArea = (TextView) view.findViewById(R.id.tvArea);
             tvPrice = (TextView) view.findViewById(R.id.tvPrice);
+            tvBathrrom = (TextView)view.findViewById(R.id.tvBathrrom);
             tvDescription=(TextView) view.findViewById(R.id.tvDescription);
             ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
             ivWishList=(ImageView)view.findViewById(R.id.ivWishList);
@@ -56,7 +58,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class VerticalCellViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice,tvDescription;
+        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice,tvDescription,tvBath;
         public ImageView ivThumbnail,ivWishList;
 
         public VerticalCellViewHolder(View view) {
@@ -66,9 +68,11 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tvBedCount = (TextView) view.findViewById(R.id.tvBed);
             tvArea = (TextView) view.findViewById(R.id.tvArea);
             tvPrice = (TextView) view.findViewById(R.id.tvPrice);
+            tvBath = (TextView)view.findViewById(R.id.tvBath);
             tvDescription=(TextView) view.findViewById(R.id.tvDescription);
             ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
             ivWishList=(ImageView)view.findViewById(R.id.ivWishList);
+
         }
     }
 
@@ -96,6 +100,8 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             case STYLE_HORIZONTAL_LIST_CELL:
 
+
+
                 itemView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.custom_cell_home, parent, false);
 
@@ -121,7 +127,10 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 horizontalCellViewHolder.tvPrice.setText(" "+property.getPrice()+" OMR");
                 horizontalCellViewHolder.tvAddress.setText(property.getAddress());
                 horizontalCellViewHolder.tvArea.setText(property.getArea()+" Sqft");
-                horizontalCellViewHolder.tvBedCount.setText(property.getBedCount()+" Bedrooms");
+                horizontalCellViewHolder.tvBedCount.setText(property.getBedCount()+" nos");
+                horizontalCellViewHolder.tvBathrrom.setText(property.getBathCount()+" nos");
+
+
 
                 if(propertyList!=null&&propertyList.size()==1){
 
@@ -153,13 +162,19 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 verticalCellViewHolder.tvTitle.setText(property.getTitle());
                 verticalCellViewHolder.tvPrice.setText(" "+property.getPrice()+" OMR");
                 verticalCellViewHolder.tvAddress.setText(property.getAddress());
-                verticalCellViewHolder.tvArea.setText(property.getArea()+" Sqft");
-                //verticalCellViewHolder.tvDescription.setText(property.getDescription());
+                verticalCellViewHolder.tvArea.setText(property.getArea()+"\n" +"Sqft");
+                verticalCellViewHolder.tvBedCount.setText(property.getBedCount()+"\n" +"Bedroom");
+                verticalCellViewHolder.tvBath.setText(property.getBathCount()+"\n" +"Bathroom");
 
-                if(property.getFavourite().equalsIgnoreCase("1")){
-                    verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_fav_filled));
-                }else{
-                    verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.favourite));
+//                verticalCellViewHolder.tvDescription.setText(property.getDescription()+"");
+
+                if (AppState.getInstance().getUserId() != null && AppState.getInstance().getUserId().length() > 0) {
+
+                    if (property.getFavourite().equalsIgnoreCase("1")) {
+                        verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_fav_filled));
+                    } else {
+                        verticalCellViewHolder.ivWishList.setImageDrawable(activity.getResources().getDrawable(R.drawable.favourite));
+                    }
                 }
 
 
@@ -182,6 +197,7 @@ public class PropertyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(propertyAdapterWishListOperationCallback!=null){
                             propertyAdapterWishListOperationCallback.onWishListClicked(property,position);
                         }
+                        notifyDataSetChanged();
 
                     }
                 });

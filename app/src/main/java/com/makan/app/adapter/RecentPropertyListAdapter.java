@@ -29,7 +29,7 @@ public class RecentPropertyListAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class HorizontalCellViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice;
+        public TextView tvTitle, tvAddress,tvBedCount,tvArea,tvPrice,tvBathroom;
         public ImageView ivThumbnail;
 
         public HorizontalCellViewHolder(View view) {
@@ -39,6 +39,7 @@ public class RecentPropertyListAdapter extends RecyclerView.Adapter<RecyclerView
             tvBedCount = (TextView) view.findViewById(R.id.tvBed);
             tvArea = (TextView) view.findViewById(R.id.tvArea);
             tvPrice = (TextView) view.findViewById(R.id.tvPrice);
+            tvBathroom = (TextView) view.findViewById(R.id.tvBathrrom);
             ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
         }
     }
@@ -56,6 +57,7 @@ public class RecentPropertyListAdapter extends RecyclerView.Adapter<RecyclerView
             tvArea = (TextView) view.findViewById(R.id.tvArea);
             tvPrice = (TextView) view.findViewById(R.id.tvPrice);
             ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
+
         }
     }
 
@@ -96,13 +98,25 @@ public class RecentPropertyListAdapter extends RecyclerView.Adapter<RecyclerView
             case STYLE_HORIZONTAL_LIST_CELL:
                 RecentPropertyListAdapter.HorizontalCellViewHolder horizontalCellViewHolder=(RecentPropertyListAdapter.HorizontalCellViewHolder)holder;
                 property = propertyList.get(position);
-                Glide.with(mContext).load(WebConstant.BASE_IMAGE_URL+property.getImage()).into(horizontalCellViewHolder.ivThumbnail);
+                Glide.with(mContext).load(WebConstant.BASE_IMAGE_URL+property.getImage()).error(R.drawable.dummyimage).into(horizontalCellViewHolder.ivThumbnail);
 
                 horizontalCellViewHolder.tvTitle.setText(property.getPropertyName());
                 horizontalCellViewHolder.tvAddress.setText(property.getLocation());
-                horizontalCellViewHolder.tvArea.setText(String.valueOf(property.getPlotArea()+" Sqft"));
-                horizontalCellViewHolder.tvBedCount.setText(String.valueOf(property.getRooms()+" Bedrooms"));
+                horizontalCellViewHolder.tvArea.setText(String.valueOf(property.getPlotArea()));
+
+                if (String.valueOf(property.getBed_count()).equals("null") ||String.valueOf(property.getBed_count()).equals("")){
+                    horizontalCellViewHolder.tvBedCount.setText("0");
+                }else {
+                    horizontalCellViewHolder.tvBedCount.setText(String.valueOf(property.getBed_count()));
+                }
+
                 horizontalCellViewHolder.tvPrice.setText(String.valueOf(property.getPrice()+" OMR"));
+
+                if (String.valueOf(property.getBathroom_count()).equals("null") ||String.valueOf(property.getBathroom_count()).equals("")){
+                    horizontalCellViewHolder.tvBathroom.setText("0");
+                }else {
+                    horizontalCellViewHolder.tvBathroom.setText(String.valueOf(property.getBathroom_count()));
+                }
 
                 horizontalCellViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

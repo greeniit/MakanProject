@@ -24,12 +24,14 @@ import android.widget.TextView;
 import com.github.guilhe.rangeseekbar.SeekBarRangedView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.libraries.places.api.model.Place;
 import com.makan.R;
 import com.makan.app.activity.MapActivity;
 import com.makan.app.activity.PropertyListActivity;
+import com.makan.app.app.WebConstant;
 import com.makan.app.core.Codes;
+import com.makan.app.preference.PrefKey;
+import com.makan.app.preference.PreferenceManager;
 import com.makan.app.util.Utility;
 import com.makan.app.web.WebServiceManager;
 import com.makan.app.web.pojo.FilterSearchRequest;
@@ -50,7 +52,6 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
     private TextView tvPriceMin, tvPriceMax, tvAreaMin, tvAreaMax;
     private LinearLayout llBuy, llRent;
     private TextView tvBuy, tvRent;
-    private View viewBorderBuy, viewBorderRent;
     private Button btnSearch, btnMapSearch;
     private EditText etLocationSearch;
     private Place selectedPlace = null;
@@ -67,7 +68,7 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_filter, container, false);
+        rootView = inflater.inflate(R.layout.filiter_fragment_old, container, false);
         initialiseComponents(rootView);
         setToolBar();
         setListeners();
@@ -90,8 +91,6 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
         llRent = (LinearLayout) view.findViewById(R.id.llRent);
         tvBuy = (TextView) view.findViewById(R.id.tvBuy);
         tvRent = (TextView) view.findViewById(R.id.tvRent);
-        viewBorderBuy = (View) view.findViewById(R.id.viewBorderBuy);
-        viewBorderRent = (View) view.findViewById(R.id.viewBorderRent);
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
         btnMapSearch = (Button) view.findViewById(R.id.btnMapSearch);
         etLocationSearch = (EditText) view.findViewById(R.id.etLocationSearch);
@@ -183,16 +182,16 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
             @Override
             public void onClick(View view) {
 
-                try {
-                    Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-                                    .build(getActivity());
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    // TODO: Handle the error.
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
-                }
+//                try {
+//                    Intent intent =
+//                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+//                                    .build(getActivity());
+//                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+//                } catch (GooglePlayServicesRepairableException e) {
+//                    // TODO: Handle the error.
+//                } catch (GooglePlayServicesNotAvailableException e) {
+//                    // TODO: Handle the error.
+//                }
 
             }
         });
@@ -321,38 +320,38 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
 
             case R.id.llBuy:
 
-                selectedType = 1;
-                viewBorderRent.setBackgroundColor(Color.TRANSPARENT);
-                tvRent.setTextColor(Color.BLACK);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    tvBuy.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
-                    viewBorderBuy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
-                } else {
-                    tvBuy.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    viewBorderBuy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                }
-
-                tvPriceMin.setText("OMR " + String.valueOf(priceMinBuy));
-                tvPriceMax.setText("OMR " + String.valueOf(priceMaxBuy));
-                tvAreaMin.setText(String.valueOf(areaMinBuy) + " Sqft");
-                tvAreaMax.setText(String.valueOf(areaMaxBuy) + " Sqft");
+//                selectedType = 1;
+//                viewBorderRent.setBackgroundColor(Color.TRANSPARENT);
+//                tvRent.setTextColor(Color.BLACK);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    tvBuy.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
+//                    viewBorderBuy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
+//                } else {
+//                    tvBuy.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+//                    viewBorderBuy.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+//                }
+//
+//                tvPriceMin.setText("OMR " + String.valueOf(priceMinBuy));
+//                tvPriceMax.setText("OMR " + String.valueOf(priceMaxBuy));
+//                tvAreaMin.setText(String.valueOf(areaMinBuy) + " Sqft");
+//                tvAreaMax.setText(String.valueOf(areaMaxBuy) + " Sqft");
 
                 break;
 
             case R.id.llRent:
 
-                selectedType = 2;
-                tvBuy.setTextColor(Color.BLACK);
-                viewBorderBuy.setBackgroundColor(Color.TRANSPARENT);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    tvRent.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
-                    viewBorderRent.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
-                } else {
-                    tvRent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    viewBorderRent.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                }
+//                selectedType = 2;
+//                tvBuy.setTextColor(Color.BLACK);
+//                viewBorderBuy.setBackgroundColor(Color.TRANSPARENT);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    tvRent.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
+//                    viewBorderRent.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, null));
+//                } else {
+//                    tvRent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+//                    viewBorderRent.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+//                }
 
 
                 break;
@@ -385,6 +384,7 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
 
         private String errorMessage;
         private GetCategoryResponse categoryResponse;
+        private BestDealsRequest bestDealsRequest;
 
         @Override
         protected void onPreExecute() {
@@ -400,7 +400,10 @@ public class FilterFragment extends BaseFragment implements CompoundButton.OnChe
 
             if (new Utility().isNetworkConnected(getActivity())) {
 
-                Response<GetCategoryResponse> response = WebServiceManager.getInstance().getCategories();
+                bestDealsRequest = new BestDealsRequest();
+                bestDealsRequest.setLanguage(new PreferenceManager().getValue(getActivity(), PrefKey.CURRENT_DATA));
+
+                Response<GetCategoryResponse> response = WebServiceManager.getInstance().getCategories(bestDealsRequest);
 
                 if (response != null && response.isSuccessful() && response.raw().code() == 200) {
 

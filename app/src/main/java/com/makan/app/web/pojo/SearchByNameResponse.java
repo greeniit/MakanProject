@@ -9,7 +9,7 @@ public class SearchByNameResponse {
 
     @SerializedName("property_list")
     @Expose
-    private List<P`ropertyList> propertyList = null;
+    private List<PropertyList> propertyList = null;
     @SerializedName("res")
     @Expose
     private Integer res;
